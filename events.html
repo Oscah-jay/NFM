@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Events - Newlife Fountain Ministries</title>
+    <link rel="stylesheet" href="./styles/events.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a href="#"> <img src="./Assets/images/logos/3.png" alt="logo" width="400px" height="400px"></a>
+            </div>
+            
+            <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+                <span class="toggle-icon"></span>
+            </button>
+            
+            <ul class="navbar-menu" id="navbarMenu">
+                <li class="navbar-item"><a href="./index.html" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="./aboutus.html" class="navbar-link">About Us</a></li>
+                <li class="navbar-item"><a href="./projects.html" class="navbar-link">Projects</a></li>
+                <li class="navbar-item"><a href="./sermons.html" class="navbar-link">Sermons</a></li>
+                <li class="navbar-item"><a href="./support.html" class="navbar-link">Support</a></li>
+                <li class="navbar-item"><a href="./contacts.html" class="navbar-link">Contact Us</a></li>
+                <li class="navbar-item">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Hero Section -->
+            <section class="section events-hero-section parallax-section" id="events-hero">
+                <div class="parallax-bg" style="background-image: url('./Assets/images/14\ new.jpg');"></div>
+                <div class="content-wrapper">
+                    <div class="hero-content fade-in">
+                        <h1 class="hero-title">Church Events</h1>
+                        <p class="hero-subtitle">Join us for worship, fellowship, and community service</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events Filter Section -->
+            <section class="section events-filter-section" id="events-filter">
+                <div class="content-wrapper">
+                    <div class="events-controls fade-in">
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                Grid
+                            </button>
+                            <button class="view-btn" data-view="calendar">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M3 10H21" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                Calendar
+                            </button>
+                        </div>
+                        
+                        <div class="search-filter">
+                            <div class="search-container">
+                                <input type="text" id="event-search" placeholder="Search events...">
+                                <button class="search-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="filter-container">
+                                <select id="category-filter">
+                                    <option value="all">All Categories</option>
+                                    <option value="worship">Worship</option>
+                                    <option value="fellowship">Fellowship</option>
+                                    <option value="outreach">Outreach</option>
+                                    <option value="youth">Youth</option>
+                                    <option value="children">Children</option>
+                                    <option value="prayer">Prayer</option>
+                                </select>
+                                
+                                <select id="month-filter">
+                                    <option value="all">All Months</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Event Section -->
+            <section class="section featured-event-section" id="featured-event">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Featured Event</h2>
+                    </div>
+                    
+                    <div class="featured-event-card fade-in delay-1">
+                        <div class="featured-event-image" style="background-image: url('./Assets/images/women1.jpg')">
+                            <div class="event-badge">Featured</div>
+                        </div>
+                        <div class="featured-event-content">
+                            <h3 class="featured-event-title">Annual Women Conference 2025</h3>
+                            <p class="featured-event-description">Join us for five days of worship, teaching, 
+                                and fellowship as we gather to be equipped and empowered for the year ahead. 
+                                Special guest speakers, worship sessions, and workshops for all women.</p>
+                            
+                            <div class="event-details-grid">
+                                <div class="event-detail">
+                                    <div class="detail-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M16 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M8 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M3 10H21" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Date</h4>
+                                        <p>June 24-28, 2025</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="event-detail">
+                                    <div class="detail-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Time</h4>
+                                        <p>9:00 AM - 5:00 PM</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="event-detail">
+                                    <div class="detail-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Location</h4>
+                                        <p>Main Church Auditorium</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="event-detail">
+                                    <div class="detail-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M23 21V19C22.9986 17.1771 21.765 15.5857 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M16 3.13C17.7699 3.58317 19.0078 5.17799 19.0078 7.005C19.0078 8.83201 17.7699 10.4268 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Organizer</h4>
+                                        <p>Women Leadership Team</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="featured-event-actions">
+                                <a href="#" class="primary-btn">Register Now</a>
+                                <a href="#" class="secondary-btn">Add to Calendar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events Grid Section -->
+            <section class="section events-grid-section" id="events-grid">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Upcoming Events</h2>
+                        <p class="section-subtitle">Join us for these upcoming activities and gatherings</p>
+                    </div>
+                    
+                    <div class="events-view-container">
+                        <!-- Grid View (Default) -->
+                        <div class="events-grid view-active" id="grid-view">
+                            <!-- Event Card 1 -->
+                            <div class="event-card fade-in delay-1" data-category="worship" data-month="10">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">15</span>
+                                        <span class="event-month">OCT</span>
+                                    </div>
+                                    <div class="event-category worship">Worship</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Youth Sunday Service</h3>
+                                    <p class="event-excerpt">Special service led by our youth ministry with music, 
+                                        testimonies, and a message from our youth pastor.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>10:30 AM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Main Church</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Card 2 -->
+                            <div class="event-card fade-in delay-1" data-category="outreach" data-month="10">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">22</span>
+                                        <span class="event-month">OCT</span>
+                                    </div>
+                                    <div class="event-category outreach">Outreach</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Community Outreach</h3>
+                                    <p class="event-excerpt">Join us as we serve our local community through 
+                                        food distribution, clothing donations, and prayer ministry.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>9:00 AM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Community Center</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Card 3 -->
+                            <div class="event-card fade-in delay-1" data-category="prayer" data-month="10">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">29</span>
+                                        <span class="event-month">OCT</span>
+                                    </div>
+                                    <div class="event-category prayer">Prayer</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Prayer & Worship Night</h3>
+                                    <p class="event-excerpt">An evening dedicated to extended worship and intercessory 
+                                        prayer for our church, community, and nation.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>6:30 PM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Main church</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Card 4 -->
+                            <div class="event-card fade-in delay-2" data-category="fellowship" data-month="11">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">5</span>
+                                        <span class="event-month">NOV</span>
+                                    </div>
+                                    <div class="event-category fellowship">Fellowship</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Volunteer Appreciation Dinner</h3>
+                                    <p class="event-excerpt">A special evening to honor and appreciate all our 
+                                        dedicated volunteers who serve in various ministries.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>6:00 PM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Main church</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Card 5 -->
+                            <div class="event-card fade-in delay-2" data-category="children" data-month="11">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">12</span>
+                                        <span class="event-month">NOV</span>
+                                    </div>
+                                    <div class="event-category children">Children</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Children's Ministry Fun Day</h3>
+                                    <p class="event-excerpt">A day filled with games, activities, Bible stories, 
+                                        and snacks for children ages 4-12.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>10:00 AM - 2:00 PM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Children's Building</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Card 6 -->
+                            <div class="event-card fade-in delay-2" data-category="youth" data-month="11">
+                                <div class="event-card-header">
+                                    <div class="event-date">
+                                        <span class="event-day">19</span>
+                                        <span class="event-month">NOV</span>
+                                    </div>
+                                    <div class="event-category youth">Youth</div>
+                                </div>
+                                <div class="event-card-body">
+                                    <h3 class="event-title">Youth Game Night</h3>
+                                    <p class="event-excerpt">An evening of fun, games, and fellowship for teenagers. 
+                                        Snacks and refreshments will be provided.
+                                    </p>
+                                    <div class="event-meta">
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span>7:00 PM - 9:30 PM</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 10C19 16 12 21 12 21C12 21 5 16 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Youth Center</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-card-footer">
+                                    <a href="#" class="event-details-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Calendar View -->
+                        <div class="events-calendar" id="calendar-view">
+                            <div class="calendar-header">
+                                <button class="calendar-nav prev-month">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <h3 class="current-month">October 2025</h3>
+                                <button class="calendar-nav next-month">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="calendar-grid">
+                                <div class="calendar-days">
+                                    <div class="day-name">Sun</div>
+                                    <div class="day-name">Mon</div>
+                                    <div class="day-name">Tue</div>
+                                    <div class="day-name">Wed</div>
+                                    <div class="day-name">Thu</div>
+                                    <div class="day-name">Fri</div>
+                                    <div class="day-name">Sat</div>
+                                </div>
+                                
+                                <div class="calendar-dates">
+                                    <!-- Calendar dates will be generated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="calendar-events">
+                                <h4 class="events-date">October 15, 2025</h4>
+                                <div class="calendar-event-list">
+                                    <div class="calendar-event-item">
+                                        <div class="event-time">10:30 AM</div>
+                                        <div class="event-content">
+                                            <h5 class="event-title">Youth Sunday Service</h5>
+                                            <div class="event-location">Main Sanctuary</div>
+                                        </div>
+                                        <a href="#" class="calendar-event-link">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="load-more-container fade-in">
+                        <button id="load-more-btn" class="load-more-btn">
+                            Load More Events
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Registration Section -->
+            <section class="section event-registration-section" id="event-registration">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Event Registration</h2>
+                        <p class="section-subtitle">Sign up for our upcoming events</p>
+                    </div>
+                    
+                    <div class="registration-container fade-in delay-1">
+                        <div class="registration-content">
+                            <h3 class="registration-title">Quick Registration</h3>
+                            <p class="registration-description">Fill out this form to register for any of our upcoming events. Our team will contact you with confirmation details.</p>
+                            
+                            <form class="registration-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="full-name">Full Name</label>
+                                        <input type="text" id="full-name" name="full-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-select">Select Event</label>
+                                        <select id="event-select" name="event" required>
+                                            <option value="">-- Select an Event --</option>
+                                            <option value="youth-sunday">Youth Sunday Service (Oct 15)</option>
+                                            <option value="community-outreach">Community Outreach (Oct 22)</option>
+                                            <option value="prayer-night">Prayer & Worship Night (Oct 29)</option>
+                                            <option value="volunteer-dinner">Volunteer Appreciation Dinner (Nov 5)</option>
+                                            <option value="children-fun-day">Children's Ministry Fun Day (Nov 12)</option>
+                                            <option value="youth-game-night">Youth Game Night (Nov 19)</option>
+                                            <option value="church-conference">Annual Church Conference (Nov 24-26)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Additional Information</label>
+                                    <textarea id="message" name="message" rows="4" placeholder="Any special requests or information we should know?"></textarea>
+                                </div>
+                                
+                                <div class="form-group form-checkbox">
+                                    <input type="checkbox" id="terms" name="terms" required>
+                                    <label for="terms">I agree to receive communications about this event</label>
+                                </div>
+                                
+                                <button type="submit" class="submit-btn">Register Now</button>
+                            </form>
+                        </div>
+                        
+                        <div class="registration-image" style="background-image: url('./Assets/images/register.jpg')"></div>
+                    </div>
+                </div>
+            </section>
+
+           
+
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </button>
+
+    <script src="./js/events.js"></script>
+    <script src="./js/navbar.js"></script>
+</body>
+</html>
+

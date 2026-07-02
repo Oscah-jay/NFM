@@ -1,0 +1,1064 @@
+/* Base styles and reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #193b0a;
+    background-color: #fff;
+}
+
+/* Container layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    margin-top: 140px;
+
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #193b0a;
+}
+
+.sidebar-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #193b0a;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin: 5px 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 20px;
+    color: #193b0a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-right: 3px solid transparent;
+}
+
+.sidebar-nav a:hover, 
+.sidebar-nav a.active {
+    color: #e1b62f;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-right-color: #8B4513;
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 40px;
+}
+
+.hero {
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: #193b0a;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero h2 {
+    font-size: 1rem;
+    color: #000;
+    font-weight: 400;
+    max-width: 800px;
+    margin-top: -10px ;
+    margin-bottom: 100px;
+}
+
+/*section1*/
+.content-section1 {
+    margin-bottom: 60px;
+    scroll-margin-top: 20px;
+    display: flex;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #193b0a;
+    margin-bottom: 20px;
+    font-weight: 600;
+    margin-top: 120px;
+    margin-bottom: -70px;
+}
+
+.content-section1 p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 800px;
+    margin-bottom: 20px;
+    margin-top: 100px;
+}
+
+.image-container1 {
+    margin: 30px 0;
+    max-width: 50%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-image1 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*section2*/
+.content-section {
+    margin-bottom: 60px;
+    scroll-margin-top: 20px; /* Ensures the section title is visible when scrolled to */
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    color: #193b0a;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    margin: 30px 0;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* Mission Section with Blurred Background */
+.mission-section {
+    position: relative;
+    padding: 80px 40px;
+    margin: 60px 0;
+    background-image: url('../Assets/images/14\ new.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    margin-top: -20px;
+    border-radius: 20px;
+}
+
+/* Blurred background overlay */
+.mission-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.mission-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 2;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.mission-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.3;
+}
+
+.cross-icon {
+    margin: 30px auto;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.mission-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.mission-card h3 {
+    font-size: 1.5rem;
+    color: #193b0a;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.mission-card p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.learn-more {
+    display: inline-flex;
+    align-items: center;
+    color: #193b0a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.learn-more:hover {
+    color: #e1b62f;
+}
+
+.arrow {
+    margin-left: 5px;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mission-section {
+        padding: 60px 20px;
+    }
+    
+    .mission-title {
+        font-size: 1.8rem;
+    }
+    
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mission-card {
+        max-width: 100%;
+    }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* What to Expect Section */
+.expect-section {
+    background-color: #121212;
+    color: #fff;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.expect-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.expect-header {
+    margin-bottom: 60px;
+    max-width: 800px;
+}
+
+.section-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.expect-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.expect-intro {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d0d0d0;
+    max-width: 700px;
+}
+
+.expect-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* Expect Item Styles */
+.expect-item {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+}
+
+.expect-item-content {
+    flex: 1;
+}
+
+.expect-item-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.expect-item-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+.expect-item-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.expect-item-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Latest Sermon Card */
+.latest-sermon {
+    margin: 40px 0;
+}
+
+.sermon-card {
+    display: flex;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.sermon-info {
+    flex: 2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sermon-meta {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.sermon-series, .sermon-date {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #193b0a;
+    font-weight: 600;
+}
+
+.sermon-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.sermon-speaker {
+    font-size: 1rem;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+}
+
+.sermon-button {
+    display: inline-block;
+    background-color: transparent;
+    color: #193b0a;
+    border: 2px solid #193b0a;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    max-width: 220px;
+}
+
+.sermon-button:hover {
+    background-color: #ffffff;
+    color: #e1b62f;
+}
+
+.sermon-image-container {
+    flex: 1;
+    position: relative;
+}
+
+.sermon-feature-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Worship Section with Overlay */
+.worship-highlight {
+    position: relative;
+    flex-direction: column;
+    height: 400px;
+}
+
+.full-width {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.full-width img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), transparent);
+    z-index: 2;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .expect-item {
+        flex-direction: column;
+    }
+    
+    .sermon-card {
+        flex-direction: column;
+    }
+    
+    .sermon-image-container {
+        height: 300px;
+    }
+    
+    .expect-title {
+        font-size: 2rem;
+    }
+    
+    .sermon-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .expect-section {
+        padding: 60px 0;
+    }
+    
+    .expect-header {
+        margin-bottom: 40px;
+    }
+    
+    .expect-title {
+        font-size: 1.8rem;
+    }
+    
+    .expect-item-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .sermon-info {
+        padding: 30px;
+    }
+    
+    .sermon-title {
+        font-size: 1.5rem;
+    }
+    
+    .worship-highlight {
+        height: 350px;
+    }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* NextGen Ministries Section */
+.ministries-section {
+    padding: 80px 0;
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
+
+.ministries-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.ministries-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e1b62f;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #193b0a;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Ministry Card Styles */
+.ministry-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+}
+
+.ministry-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.ministry-icon {
+    margin-bottom: 20px;
+    width: 80px;
+    height: 80px;
+}
+
+.ministry-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #193b0a;
+    margin-bottom: 15px;
+}
+
+.ministry-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 25px;
+    max-width: 600px;
+}
+
+.learn-more-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #193b0a;
+    border: 2px solid #193b0a;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    background-color: #e1b62f;
+    color: #fff;
+}
+
+/* Ministry Image Styles */
+.ministry-image-container {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 0 0 10px 10px;
+}
+
+.ministry-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%; /* Extra height for parallax effect */
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease-out;
+}
+
+.parallax-bg {
+    will-change: transform;
+}
+
+/* Background images for each ministry */
+.children-bg {
+    background-image: url('../Assets/images/kids.jpeg');
+    background-position: center 30%;
+    z-index: -2;
+}
+
+.youth-bg {
+    background-image: url('../Assets/images/gen.jpeg');
+    background-position: center 40%;
+}
+
+.young-adults-bg {
+    background-image: url('../Assets/images/1.jpeg');
+    background-position: center 50%;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+    color: #fff;
+    z-index: 2;
+}
+
+.overlay-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.overlay-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #193b0a;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.overlay-btn:hover {
+    background-color: #e1b62f;
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .ministry-card {
+        flex-direction: row;
+        height: 400px;
+    }
+    
+    .ministry-content {
+        width: 40%;
+        padding: 40px;
+        align-items: flex-start;
+        text-align: left;
+        justify-content: center;
+    }
+    
+    .ministry-image-container {
+        width: 60%;
+        height: auto;
+        border-radius: 0 10px 10px 0;
+    }
+    
+    /* Alternate layout for even cards */
+    .ministry-card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    
+    .ministry-card:nth-child(even) .ministry-image-container {
+        border-radius: 10px 0 0 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .ministries-section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .ministry-card {
+        margin-bottom: 60px;
+    }
+    
+    .ministry-content {
+        padding: 30px;
+    }
+    
+    .ministry-image-container {
+        height: 300px;
+    }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* Outreach Section */
+.outreach-section {
+    position: relative;
+    padding: 100px 0 80px;
+    overflow: hidden;
+}
+
+.parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: #f8f8f8;
+    background-image: linear-gradient(to bottom, rgba(248, 248, 248, 0.9), rgba(248, 248, 248, 0.95)), 
+                      url('/placeholder.svg?height=800&width=1200');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+    transform: translateZ(0);
+}
+
+.outreach-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.outreach-header {
+    margin-bottom: 60px;
+    max-width: 700px;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e1b62f;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #193b0a;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-top: 50px;
+}
+
+/* Stats Container */
+.stats-container {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.stats-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stats-icon {
+    color: #e1b62f;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.stats-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #193b0a;
+    margin-bottom: 10px;
+}
+
+.stats-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.stats-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Feature Image */
+.outreach-feature {
+    margin-bottom: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-image-container {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.feature-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-image: url('../Assets/images/w2.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.feature-image-container:hover .feature-image {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), transparent);
+    color: #fff;
+}
+
+.overlay-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Outreach Info */
+.outreach-info {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.outreach-info p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.serve-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #193b0a;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.serve-button:hover {
+    background-color: #e1b62f;
+    transform: translateY(-2px);
+}
+
+.serve-button svg {
+    transition: transform 0.3s ease;
+}
+
+.serve-button:hover svg {
+    transform: translateX(4px);
+}
+
+/* Animation Classes */
+[data-animation] {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animation="fade-in"].animated {
+    opacity: 1;
+}
+
+[data-animation="fade-up"].animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-animation="slide-up"].animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-animation="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-animation="slide-up"] {
+    transform: translateY(50px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .outreach-section {
+        padding: 70px 0 50px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .stats-container {
+        padding: 30px;
+    }
+    
+    .stats-number {
+        font-size: 2.5rem;
+    }
+    
+    .feature-image-container {
+        height: 300px;
+    }
+    
+    .overlay-title {
+        font-size: 1.5rem;
+    }
+}

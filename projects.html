@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | Ministry Impact</title>
+    <link rel="stylesheet" href="./styles/projects.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+
+  <header class="navbar-container">
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="#"> <img src="./Assets/images/logos/3.png" alt="logo" width="400px" height="400px"></a>
+        </div>
+        
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+            <span class="toggle-icon"></span>
+        </button>
+        
+        <ul class="navbar-menu" id="navbarMenu">
+            <li class="navbar-item"><a href="./index.html" class="navbar-link">Home</a></li>
+            <li class="navbar-item"><a href="./aboutus.html" class="navbar-link">About Us</a></li>
+            <li class="navbar-item"><a href="#" class="navbar-link active">Projects</a></li>
+            <li class="navbar-item"><a href="./sermons.html" class="navbar-link">Sermons</a></li>
+            <li class="navbar-item"><a href="./support.html" class="navbar-link">Support</a></li>
+            <li class="navbar-item"><a href="./contacts.html" class="navbar-link">Contact Us</a></li>
+            <li class="navbar-item">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-content">
+                <div class="logo">
+                    <h3>Newlife Fountain</h3>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link active">Overview</a></li>
+                    <li><a href="#featured-projects" class="nav-link">Featured Projects</a></li>
+                    <li><a href="#local-outreach" class="nav-link">Local Outreach</a></li>
+                    <li><a href="#global-missions" class="nav-link">Global Missions</a></li>
+                    <li><a href="#get-involved" class="nav-link">Get Involved</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section class="hero parallax-section" id="hero">
+                <div class="parallax-bg hero-bg"></div>
+                <div class="content-wrapper">
+                    <h1 class="fade-in">Making a difference through strategic projects</h1>
+                    <p class="fade-in delay-1">
+                        Through the generosity of our church family, we're able to support initiatives that bring hope, 
+                        healing, and transformation to communities locally and around the world. Explore our current 
+                        projects and discover how you can be part of the impact.
+                    </p>
+                    <div class="hero-stats fade-in delay-2">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="5">0</span>
+                            <span class="stat-label">Active Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="3">0</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="125000">0</span>
+                            <span class="stat-label">Lives Impacted</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-categories" id="categories">
+                <div class="content-wrapper1">
+                    <div class="category-filters">
+                        <button class="category-btn active" data-filter="all">All Projects</button>
+                        <button class="category-btn" data-filter="local">Local</button>
+                        <button class="category-btn" data-filter="global">Global</button>
+                        <button class="category-btn" data-filter="education">Education</button>
+                        <button class="category-btn" data-filter="humanitarian">Humanitarian</button>
+                        <button class="category-btn" data-filter="evangelism">Evangelism</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="featured-projects">
+                <div class="content-wrapper">
+                    <h2 class="section-title">Featured Projects</h2>
+                    
+                    <div class="featured-grid">
+                        <div class="featured-project fade-in" data-category="local education">
+                            <div class="project-image-container parallax-container">
+                                <div class="project-image" style="background-image: url('./Assets/images/kids.jpeg')"></div>
+                                <div class="project-overlay">
+                                    <span class="project-category">Local • Education</span>
+                                    <h3 class="project-title">School Supplies Initiative</h3>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <p>Providing essential school supplies to underprivileged students in our 
+                                  community, ensuring they have the tools they need to succeed academically.
+                                </p>
+                                <div class="project-meta">
+                                    <span class="project-stat"><strong>300</strong> Needy Students Served</span>
+                                    <a href="#" class="project-link">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="featured-project fade-in delay-1" data-category="global humanitarian">
+                            <div class="project-image-container parallax-container">
+                                <div class="project-image" style="background-image: url('./Assets/images/water.-sanitation.-tap.jpg')"></div>
+                                <div class="project-overlay">
+                                    <span class="project-category">Global • Humanitarian</span>
+                                    <h3 class="project-title">Clean Water Project</h3>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <p>Building wells and water filtration systems in communities without access 
+                                  to clean water, reducing waterborne illness and improving quality of life.
+                                </p>
+                                <div class="project-meta">
+                                    <span class="project-stat"><strong>27</strong> Wells Completed</span>
+                                    <a href="#" class="project-link">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="featured-project fade-in delay-2" data-category="local evangelism">
+                            <div class="project-image-container parallax-container">
+                                <div class="project-image" style="background-image: url('./Assets/images/w1.jpg')"></div>
+                                <div class="project-overlay">
+                                    <span class="project-category">Local • Evangelism</span>
+                                    <h3 class="project-title">Community Outreach Events</h3>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <p>Hosting regular community events that provide practical help while creating 
+                                  opportunities to share the gospel in a welcoming environment.
+                                </p>
+                                <div class="project-meta">
+                                    <span class="project-stat"><strong>700+</strong> Attendees</span>
+                                    <a href="#" class="project-link">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section project-detail-section" id="local-outreach">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Local Outreach</h2>
+                        <p class="section-subtitle">Making a difference in our own backyard</p>
+                    </div>
+                    
+                    <div class="project-detail fade-in">
+                        <div class="project-detail-media parallax-container">
+                            <div class="project-detail-image" style="background-image: url('./Assets/images/w3.jpeg')"></div>
+                            <h3 class="media-overlay-title">Homeless Support Network</h3>
+                        </div>
+                        <div class="project-detail-content">
+                            <div class="project-detail-text">
+                                <p>Our Homeless Support Network provides meals, shelter, counseling, and job 
+                                  training to individuals experiencing homelessness in our city. Through 
+                                  partnerships with local businesses and government agencies, we're creating 
+                                  pathways to stable housing and employment.
+                                </p>
+                                <ul class="project-highlights">
+                                    <li>Served over 5,000 meals in the past year</li>
+                                    <li>Provided temporary shelter to 200+ individuals</li>
+                                    <li>Helped 230 people secure permanent housing</li>
+                                    <li>Connected 180 individuals with stable employment</li>
+                                </ul>
+                            </div>
+                            <div class="project-detail-stats">
+                                <div class="detail-stat">
+                                    <span class="stat-number" data-count="50">50</span>
+                                    <span class="stat-description">program participants report improved quality 
+                                      of life
+                                    </span>
+                                </div>
+                                <a href="#" class="cta-button">Support This Project</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-detail fade-in">
+                        <div class="project-detail-media parallax-container">
+                            <div class="project-detail-image" style="background-image: url('./Assets/images/w2.jpg')"></div>
+                            <h3 class="media-overlay-title">Food & Resource Center</h3>
+                        </div>
+                        <div class="project-detail-content">
+                            <div class="project-detail-text">
+                                <p>Our Food & Resource Center provides nutritious food, household essentials, 
+                                  and support services to families facing food insecurity. Beyond meeting immediate 
+                                  needs, we connect families with resources for long-term stability.
+                                </p>
+                                <ul class="project-highlights">
+                                    <li>Distributing 5,000+ pounds of food monthly</li>
+                                    <li>Serving 50+ families each week</li>
+                                    <li>Offering nutrition education and cooking classes</li>
+                                    <li>Providing referrals to additional community resources</li>
+                                </ul>
+                            </div>
+                            <div class="project-detail-stats">
+                                <div class="detail-stat">
+                                    <span class="stat-number" data-count="35">35</span>
+                                    <span class="stat-description">increase in families served since last year</span>
+                                </div>
+                                <a href="#" class="cta-button">Support This Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section project-detail-section" id="global-missions">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Global Missions</h2>
+                        <p class="section-subtitle">Extending our reach around the world</p>
+                    </div>
+                    
+                    <div class="project-detail fade-in">
+                        <div class="project-detail-media parallax-container">
+                            <div class="project-detail-image" style="background-image: url('./Assets/images/24.jpeg')"></div>
+                            <h3 class="media-overlay-title">Education Centers in East Africa</h3>
+                        </div>
+                        <div class="project-detail-content">
+                            <div class="project-detail-text">
+                                <p>We're building and supporting education centers in underserved communities across 
+                                  East Africa, providing quality education, nutritious meals, and healthcare to 
+                                  children who would otherwise lack access to these essentials.
+                                </p>
+                                <ul class="project-highlights">
+                                    <li>5 education centers established across 3 countries</li>
+                                    <li>Over 600 students receiving education</li>
+                                    <li>Teacher training programs improving educational quality</li>
+                                    <li>Community involvement ensuring sustainability</li>
+                                </ul>
+                            </div>
+                            <div class="project-detail-stats">
+                                <div class="detail-stat">
+                                    <span class="stat-number" data-count="30">30</span>
+                                    <span class="stat-description"> students continue to secondary education</span>
+                                </div>
+                                <a href="#" class="cta-button">Support This Project</a>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <section class="section project-detail-section" id="next-gen">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Next Generation</h2>
+                        <p class="section-subtitle">Investing in children and youth</p>
+                    </div>
+                    
+                    <div class="project-detail fade-in">
+                        <div class="project-detail-media parallax-container">
+                            <div class="project-detail-image" style="background-image: url('./Assets/images/youth.jpeg')"></div>
+                            <h3 class="media-overlay-title">Youth Leadership Development</h3>
+                        </div>
+                        <div class="project-detail-content">
+                            <div class="project-detail-text">
+                                <p>Our Youth Leadership Development program equips teenagers and young 
+                                  adults with the skills, character, and spiritual foundation to become 
+                                  effective leaders in their schools, communities, and future careers.
+                                </p>
+                                <ul class="project-highlights">
+                                    <li>Weekly leadership training sessions</li>
+                                    <li>Mentorship from experienced leaders</li>
+                                    <li>Service projects providing hands-on experience</li>
+                                    <li>Annual leadership conference and retreats</li>
+                                </ul>
+                            </div>
+                            <div class="project-detail-stats">
+                                <div class="detail-stat">
+                                    <span class="stat-number" data-count="350">350+</span>
+                                    <span class="stat-description">youth actively participating in leadership 
+                                      development
+                                    </span>
+                                </div>
+                                <a href="#" class="cta-button">Support This Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section testimonials-section">
+                <div class="content-wrapper">
+                    <h2 class="section-title">Stories of Impact</h2>
+                    
+                    <div class="testimonials-slider fade-in">
+                        <div class="testimonial-slide active">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">"The food program didn't just provide meals for my family 
+                                  during a difficult time—they connected me with resources that helped me find a job 
+                                  and get back on my feet. They treated me with dignity and gave me hope when I needed 
+                                  it most."
+                                </p>
+                                <div class="testimonial-author">
+                                    <span class="author-name">Sarah W.</span>
+                                    <span class="author-location">Local Outreach Recipient</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">"Before the education center came to our village, I 
+                                  had no hope for my future. Now I'm the first in my family to graduate , 
+                                  and I'm studying to become a teacher so I can give back to my community."
+                                </p>
+                                <div class="testimonial-author">
+                                    <span class="author-name">Daniel K.</span>
+                                    <span class="author-location">Education Program Graduate</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">"Volunteering with the homeless outreach program has 
+                                  completely changed my perspective. I came to serve others, but I've received so 
+                                  much more in return—meaningful relationships and a deeper understanding of our 
+                                  shared humanity."
+                                </p>
+                                <div class="testimonial-author">
+                                    <span class="author-name">Roselyne W.</span>
+                                    <span class="author-location">Volunteer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-controls">
+                            <button class="testimonial-arrow prev">&#8592;</button>
+                            <div class="testimonial-dots">
+                                <span class="dot active" data-slide="0"></span>
+                                <span class="dot" data-slide="1"></span>
+                                <span class="dot" data-slide="2"></span>
+                            </div>
+                            <button class="testimonial-arrow next">&#8594;</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section get-involved-section" id="get-involved">
+                <div class="content-wrapper">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">Get Involved</h2>
+                        <p class="section-subtitle">Join us in making a difference</p>
+                    </div>
+                    
+                    <div class="involvement-options">
+                        <div class="involvement-card fade-in">
+                            <div class="involvement-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path></svg>
+                            </div>
+                            <h3>Give</h3>
+                            <p>Your financial support makes these projects possible. Give a one-time gift or 
+                              become a monthly partner to sustain our ongoing work.
+                            </p>
+                            <a href="#" class="involvement-link">Donate Now</a>
+                        </div>
+                        
+                        <div class="involvement-card fade-in delay-1">
+                            <div class="involvement-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <h3>Volunteer</h3>
+                            <p>Contribute your time and talents to make a hands-on difference. We have 
+                              opportunities for all skill sets and availability.
+                            </p>
+                            <a href="#" class="involvement-link">Find Opportunities</a>
+                        </div>
+                        
+                        <div class="involvement-card fade-in delay-2">
+                            <div class="involvement-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <h3>Go</h3>
+                            <p>Join a short-term mission trip to experience our work firsthand and 
+                              make a direct impact in communities around the country.</p>
+                            <a href="#" class="involvement-link">Upcoming Trips</a>
+                        </div>
+                        
+                        <div class="involvement-card fade-in delay-3">
+                            <div class="involvement-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                            </div>
+                            <h3>Advocate</h3>
+                            <p>Use your voice and influence to raise awareness about these causes. Share our 
+                              stories and invite others to join the mission.
+                            </p>
+                            <a href="#" class="involvement-link">Advocacy Resources</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container fade-in">
+                        <h3>Contact Our Projects Team</h3>
+                        <p>Have questions or want to learn more about a specific project? Fill out the form 
+                          below and a team member will reach out to you.
+                        </p>
+                        <form class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-interest">Project of Interest</label>
+                                <select id="project-interest">
+                                    <option value="">Select a project</option>
+                                    <option value="homeless">Homeless Support Network</option>
+                                    <option value="food-pantry">Food & Resource Center</option>
+                                    <option value="education">Education Centers in East Africa</option>
+                                    <option value="youth">Youth Leadership Development</option>
+                                    <option value="other">Other/General Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="./js/projects.js"></script>
+    <script src="./js/navbar.js"></script>
+</body>
+</html>
