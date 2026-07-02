@@ -522,6 +522,238 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Strip Section - Progress Bar Animation
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Animate progress bar on page load
+  const progressBar = document.querySelector('.progress-bar-fill');
+  
+  if (progressBar) {
+    // Trigger animation by ensuring the element is in the DOM first
+    setTimeout(() => {
+      progressBar.style.transition = 'width 1.2s ease-out';
+    }, 100);
+  }
+
+  // Intersection Observer for scroll-triggered animation
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const progressBar = entry.target.querySelector('.progress-bar-fill');
+        if (progressBar && !progressBar.classList.contains('animated')) {
+          progressBar.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      }
+    });
+  }, observerOptions);
+
+  const stripSection = document.querySelector('.strip-section');
+  if (stripSection) {
+    observer.observe(stripSection);
+  }
+});
+
+// Optional: Add click handlers for badges or other interactions
+document.addEventListener('DOMContentLoaded', function() {
+  const badge = document.querySelector('.campaign-badge');
+  
+  if (badge) {
+    badge.addEventListener('click', function() {
+      console.log('Healthcare campaign selected');
+      // Add your custom logic here
+    });
+
+    badge.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  }
+});
+
+// Charity Services Section JavaScript
+
+// Get quote button functionality
+const quoteBtn = document.getElementById('quoteBtn');
+
+if (quoteBtn) {
+    quoteBtn.addEventListener('click', () => {
+        // Replace with your actual quote/contact page URL
+        console.log('Support Our Mission clicked');
+        window.location.href = './support.html';
+        // Or open a modal, form, etc.
+    });
+
+    // Keyboard accessibility for button
+    quoteBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            quoteBtn.click();
+        }
+    });
+}
+
+// Intersection Observer for scroll-based animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = entry.target.dataset.animation || 'fadeInUp 0.8s ease-out forwards';
+        }
+    });
+}, observerOptions);
+
+// Observe service cards for animation on scroll
+const charityServices = document.getElementById('charityServices');
+if (charityServices) {
+    const cards = charityServices.querySelectorAll('.service-card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.animation = `fadeInUp 0.8s ease-out ${0.3 + index * 0.1}s forwards`;
+    });
+}
+
+// Gallery Carousel Functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const galleryTrack = document.getElementById('galleryTrack');
+  const prevBtn = document.getElementById('galleryPrevBtn');
+  const nextBtn = document.getElementById('galleryNextBtn');
+  
+  let currentPosition = 0;
+  let itemWidth = 0;
+  let gap = 24;
+  let visibleItems = 2;
+  let totalItems = 0;
+
+  // Initialize gallery
+  function initGallery() {
+    const items = galleryTrack.querySelectorAll('.gallery-item');
+    totalItems = items.length;
+    
+    if (items.length > 0) {
+      itemWidth = items[0].offsetWidth;
+    }
+    
+    updateResponsiveness();
+  }
+
+  // Update responsiveness based on screen size
+  function updateResponsiveness() {
+    const screenWidth = window.innerWidth;
+    
+    if (screenWidth <= 480) {
+      visibleItems = 1;
+      gap = 12;
+    } else if (screenWidth <= 768) {
+      visibleItems = 1;
+      gap = 16;
+    } else if (screenWidth <= 1024) {
+      visibleItems = 2;
+      gap = 20;
+    } else {
+      visibleItems = 2;
+      gap = 24;
+    }
+
+    // Recalculate item width
+    const items = galleryTrack.querySelectorAll('.gallery-item');
+    if (items.length > 0) {
+      itemWidth = items[0].offsetWidth;
+    }
+
+    // Reset position if needed
+    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
+    if (currentPosition > maxScroll) {
+      currentPosition = maxScroll;
+      updateGalleryPosition();
+    }
+
+    updateButtonStates();
+  }
+
+  // Update gallery position
+  function updateGalleryPosition() {
+    const offset = -currentPosition;
+    galleryTrack.style.transform = `translateX(${offset}px)`;
+  }
+
+  // Update button states
+  function updateButtonStates() {
+    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
+    
+    prevBtn.disabled = currentPosition === 0;
+    nextBtn.disabled = currentPosition >= maxScroll;
+    
+    prevBtn.style.opacity = currentPosition === 0 ? '0.5' : '1';
+    nextBtn.style.opacity = currentPosition >= maxScroll ? '0.5' : '1';
+  }
+
+  // Scroll to next
+  function scrollNext() {
+    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
+    const nextPosition = Math.min(
+      currentPosition + (itemWidth + gap),
+      maxScroll
+    );
+    
+    if (nextPosition !== currentPosition) {
+      currentPosition = nextPosition;
+      updateGalleryPosition();
+      updateButtonStates();
+    }
+  }
+
+  // Scroll to previous
+  function scrollPrev() {
+    const prevPosition = Math.max(0, currentPosition - (itemWidth + gap));
+    
+    if (prevPosition !== currentPosition) {
+      currentPosition = prevPosition;
+      updateGalleryPosition();
+      updateButtonStates();
+    }
+  }
+
+  // Event listeners
+  nextBtn.addEventListener('click', scrollNext);
+  prevBtn.addEventListener('click', scrollPrev);
+
+  // Handle keyboard navigation
+  nextBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollNext();
+    }
+  });
+
+  prevBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollPrev();
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    updateResponsiveness();
+  });
+
+  // Initialize on load
+  initGallery();
+  updateButtonStates();
+});
   
   
   
