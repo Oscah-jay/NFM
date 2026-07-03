@@ -754,6 +754,155 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallery();
   updateButtonStates();
 });
+
+// Testimonials Data
+const testimonials = [
+  {
+    id: 1,
+    name: 'Gertrude Bartell',
+    title: 'Lead Brand Coordinator',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    text: 'By turning away from fleeting pleasures and embracing pain, Saidul was born—a complete being, a great explorer of truth, and a master-builder of meaning.',
+    rating: 5
+  },
+  {
+    id: 2,
+    name: 'Sarah Johnson',
+    title: 'Community Manager',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    text: 'The organization transformed our community. Their dedication and compassion have made a real difference in so many lives. Truly inspiring work.',
+    rating: 5
+  },
+  {
+    id: 3,
+    name: 'Michael Chen',
+    title: 'Program Director',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
+    text: 'Working with this foundation has been a privilege. Their impact extends far beyond what numbers can show. A true beacon of hope.',
+    rating: 5
+  },
+  {
+    id: 4,
+    name: 'Amanda Rodriguez',
+    title: 'Education Specialist',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    text: 'Their commitment to excellence and human dignity is unwavering. Every interaction reflects their deep passion for creating positive change.',
+    rating: 5
+  }
+];
+
+// Initialize
+let currentIndex = 0;
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const testimonialImage = document.getElementById('testimonialImage');
+const authorAvatar = document.getElementById('authorAvatar');
+const authorName = document.getElementById('authorName');
+const authorTitle = document.getElementById('authorTitle');
+const testimonialText = document.getElementById('testimonialText');
+
+// Update testimonial display
+function updateTestimonial(index) {
+  const testimonial = testimonials[index];
+  
+  // Update image
+  testimonialImage.style.opacity = '0';
+  setTimeout(() => {
+    testimonialImage.src = testimonial.image;
+    testimonialImage.style.opacity = '1';
+  }, 150);
+
+  // Update card content with fade animation
+  const card = document.querySelector('.testimonial-card');
+  card.style.opacity = '0';
+  
+  setTimeout(() => {
+    authorAvatar.src = testimonial.avatar;
+    authorName.textContent = testimonial.name;
+    authorTitle.textContent = testimonial.title;
+    testimonialText.textContent = testimonial.text;
+    card.style.opacity = '1';
+  }, 150);
+
+  // Update button states
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex === testimonials.length - 1;
+}
+
+// Next testimonial
+function nextTestimonial() {
+  if (currentIndex < testimonials.length - 1) {
+    currentIndex++;
+    updateTestimonial(currentIndex);
+  }
+}
+
+// Previous testimonial
+function prevTestimonial() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateTestimonial(currentIndex);
+  }
+}
+
+// Event listeners
+nextBtn.addEventListener('click', nextTestimonial);
+prevBtn.addEventListener('click', prevTestimonial);
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') {
+    nextTestimonial();
+  } else if (e.key === 'ArrowLeft') {
+    prevTestimonial();
+  }
+});
+
+// Touch/swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+const testimonialsSection = document.getElementById('testimonialsSection');
+
+testimonialsSection.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+}, false);
+
+testimonialsSection.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, false);
+
+function handleSwipe() {
+  if (touchStartX - touchEndX > 50) {
+    nextTestimonial();
+  }
+  if (touchEndX - touchStartX > 50) {
+    prevTestimonial();
+  }
+}
+
+// Add CSS transition for smooth fades
+const style = document.createElement('style');
+style.textContent = `
+  #testimonialImage,
+  .testimonial-card {
+    transition: opacity 0.3s ease;
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize on load
+updateTestimonial(currentIndex);
   
   
   
