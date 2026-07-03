@@ -903,6 +903,119 @@ document.head.appendChild(style);
 
 // Initialize on load
 updateTestimonial(currentIndex);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.getElementById('causesCarousel');
+  const prevBtn = document.getElementById('causesPrev');
+  const nextBtn = document.getElementById('causesNext');
+  const cards = document.querySelectorAll('.cause-card');
+  const donateButtons = document.querySelectorAll('.cause-donate-btn');
+
+  if (!carousel || !prevBtn || !nextBtn) return;
+
+  // Calculate single card width
+  function getCardWidth() {
+    const cardElement = document.querySelector('.cause-card');
+    if (cardElement) {
+      return cardElement.offsetWidth;
+    }
+    return carousel.clientWidth;
+  }
+
+  // Update button states
+  function updateButtons() {
+    const scrollLeft = carousel.scrollLeft;
+    const scrollWidth = carousel.scrollWidth;
+    const clientWidth = carousel.clientWidth;
+
+    prevBtn.disabled = scrollLeft <= 0;
+    nextBtn.disabled = scrollLeft >= scrollWidth - clientWidth - 10;
+  }
+
+  // Scroll carousel by one card
+  function scroll(direction) {
+    const cardWidth = getCardWidth();
+    const gap = 30; // Gap between cards
+    const scrollAmount = cardWidth + gap;
+
+    if (direction === 'next') {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    } else {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
+
+    // Update buttons after a short delay to account for smooth scrolling
+    setTimeout(updateButtons, 300);
+  }
+
+  // Event listeners
+  prevBtn.addEventListener('click', () => scroll('prev'));
+  nextBtn.addEventListener('click', () => scroll('next'));
+
+  carousel.addEventListener('scroll', updateButtons);
+  window.addEventListener('resize', updateButtons);
+
+  // Donate button handlers
+  donateButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const cause = btn.getAttribute('data-cause');
+      handleDonate(cause);
+    });
+
+    // Keyboard support
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const cause = btn.getAttribute('data-cause');
+        handleDonate(cause);
+      }
+    });
+  });
+
+  // Donation handler
+  function handleDonate(cause) {
+    window.location.href = `support.html?cause=${cause}`;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+    }
+  });
+
+  // Touch/Swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  carousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextBtn.click();
+      } else {
+        prevBtn.click();
+      }
+    }
+  }
+
+  // Initial button state
+  setTimeout(updateButtons, 100);
+});
+
   
   
   
