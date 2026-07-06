@@ -1,10 +1,10 @@
-function toggleSidebar() {
-    var sidebar = document.getElementById("sidebar");
-    if (sidebar.style.display === "block") {
-        sidebar.style.display = "none";
-    } else {
-        sidebar.style.display = "block";
-    }
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
 }
 
 const $list=document.querySelectorAll('li');
@@ -1016,7 +1016,81 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(updateButtons, 100);
 });
 
+// Updates Section Functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+  const readMoreLinks = document.querySelectorAll('.read-more-link');
+  const viewAllLink = document.querySelector('.view-all-link');
+
+  // Handle Read More links
+  readMoreLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const articleTitle = this.closest('.update-card').querySelector('.update-card-title').textContent;
+      console.log('[v0] Read More clicked for:', articleTitle);
+      // Replace with your actual article page URL
+      // window.location.href = `/article/${articleTitle.toLowerCase().replace(/\s+/g, '-')}`;
+    });
+
+    // Keyboard accessibility
+    link.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+  // Handle View All Resources link
+  viewAllLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('[v0] View all resources clicked');
+    // Replace with your actual resources page URL
+    // window.location.href = '/resources';
+  });
+
+  viewAllLink.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this.click();
+    }
+  });
+
+  // Intersection Observer for scroll animation
+  const updateCards = document.querySelectorAll('.update-card');
   
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  updateCards.forEach(card => {
+    observer.observe(card);
+  });
+
+  // Add fade-in animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
   
   
   

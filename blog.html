@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Latest Updates</title>
+    <link rel="stylesheet" href="./styles/blog.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+
+    <header class="navbar-container">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a href="#"> <img src="./Assets/images/logos/3.png" alt="logo" width="200px" height="200px"></a>
+                </div>
+                
+                <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+                    <span class="toggle-icon"></span>
+                </button>
+                
+                <ul class="navbar-menu" id="navbarMenu">
+                    <li class="navbar-item"><a href="./index.html" class="navbar-link">Home</a></li>
+                    <li class="navbar-item"><a href="./aboutus.html" class="navbar-link">About Us</a></li>
+                    <li class="navbar-item"><a href="./projects.html" class="navbar-link">Projects</a></li>
+                    <li class="navbar-item"><a href="./sermons.html" class="navbar-link">Sermons</a></li>
+                    <li class="navbar-item"><a href="./support.html" class="navbar-link">Support</a></li>
+                    <li class="navbar-item"><a href="./contacts.html" class="navbar-link">Contact Us</a></li>
+                    <li class="navbar-item"><a href="#" class="navbar-link active">Blog</a></li>
+                </ul>
+            </nav>
+        </header>
+
+    <main class="blog-section">
+        <div class="blog-container">
+            <!-- Left Sidebar -->
+            <aside class="blog-sidebar">
+                <h2 class="sidebar-title">Latest updates from NFM</h2>
+                
+                <!-- Search Box -->
+                <div class="search-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search articles..."
+                        aria-label="Search blog articles"
+                    />
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+
+                <!-- Categories Filter -->
+                <div class="filter-section">
+                    <h3 class="filter-title">Categories</h3>
+                    <div class="categories-list" id="categoriesList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Clear Filters -->
+                <button id="clearFilters" class="clear-filters-btn" style="display: none;">
+                    Clear all filters
+                </button>
+            </aside>
+
+            <!-- Right Content Area -->
+            <div class="blog-content">
+                <!-- Results info -->
+                <div class="results-info">
+                    <p id="resultsCount">Showing all articles</p>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+
+                <!-- Load More Button -->
+                <button id="loadMoreBtn" class="load-more-btn">Load More Articles</button>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <!-- Populated by JavaScript -->
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <p>No articles found matching your criteria.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/blog.js"></script>
+    <script src="./js/navbar.js"></script>
+</body>
+</html>
