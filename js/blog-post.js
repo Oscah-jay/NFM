@@ -1,4 +1,12 @@
-// Sample blog posts data - same as in blog-page-improved.js
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
+}
+
 const blogPosts = [
     {
         id: 1,

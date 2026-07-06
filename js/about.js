@@ -1,3 +1,12 @@
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Get all navigation links
     const navLinks = document.querySelectorAll('.nav-link');

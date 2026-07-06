@@ -1,3 +1,11 @@
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Remove EmailJS initialization since we're using Web3Forms
     // Animate cards on page load

@@ -1,3 +1,11 @@
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const body = document.querySelector('body');
