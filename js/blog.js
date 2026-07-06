@@ -154,7 +154,7 @@ function initializeFilters() {
         <span class="category-count">(${count})</span>
       </label>
     `;
-  });
+  }).join('');
 }
 
 // Setup event listeners
@@ -217,9 +217,7 @@ function setupEventListeners() {
     if (e.target.classList.contains('read-more-link')) {
       e.preventDefault();
       const postSlug = e.target.dataset.slug;
-      // Replace with your actual blog post page URL
-      // window.location.href = `/blog/${postSlug}`;
-      console.log('[v0] Read More clicked for:', postSlug);
+      window.location.href = `./blog-post.html?slug=${postSlug}`;
     }
   });
 }
