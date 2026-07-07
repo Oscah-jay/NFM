@@ -1091,6 +1091,88 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   document.head.appendChild(style);
 });
+
+// Counter animation function
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    const startTime = Date.now();
+
+    function update() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function for smooth animation
+        const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+
+        const current = Math.floor(start + increment * duration * easeOutQuad / 16);
+        element.textContent = formatNumber(current);
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = formatNumber(target);
+        }
+    }
+
+    update();
+}
+
+// Format number with commas
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// Intersection Observer for scroll-triggered animations
+function initializeCounterAnimation() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    entry.target.dataset.animated = 'true';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5,
+            rootMargin: '0px'
+        });
+
+        statNumbers.forEach(number => observer.observe(number));
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        statNumbers.forEach(number => {
+            const target = parseInt(number.dataset.target);
+            animateCounter(number, target);
+        });
+    }
+}
+
+// Keyboard accessibility
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        const focusedElement = document.activeElement;
+        if (focusedElement.classList.contains('stat-card')) {
+            focusedElement.focus();
+        }
+    }
+});
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    initializeCounterAnimation();
+});
+
+// Also initialize if script loads after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCounterAnimation);
+} else {
+    initializeCounterAnimation();
+}
   
   
   
