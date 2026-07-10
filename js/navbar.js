@@ -1,6 +1,3 @@
-// Navigation toggle
-const navbarToggle = document.getElementById('navbarToggle');
-const navbarMenu = document.getElementById('navbarMenu');
 
 const navbarToggle = document.getElementById("navbarToggle");
 const navbarMenu = document.getElementById("navbarMenu");

@@ -418,6 +418,7 @@ icon, .text{
     position: relative;
     width: 100%;
     height: 100vh;
+    top: 30px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -1481,6 +1482,7 @@ icon, .text{
     position: absolute;
     bottom: 0;
     left: 0;
+    top: 170px;
     width: 300px;
     height: 300px;
     background-color: #1b7070;
@@ -1548,8 +1550,8 @@ icon, .text{
     }
 
     .decorative-curve {
-        width: 200px;
-        height: 200px;
+        width: 350px;
+        height: 350px;
     }
 }
 
@@ -3014,6 +3016,10 @@ icon, .text{
         flex-direction: column;
         max-width: 100%;
         margin-bottom: 120px;
+    }
+
+    .hero-section {
+        top: -10px;
     }
     
     .about-content {
