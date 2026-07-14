@@ -20,6 +20,10 @@ body {
 
 }
 
+p{
+    text-align: justify;
+}
+
 /* Sidebar styles */
 .sidebar {
     width: 250px;
@@ -91,6 +95,7 @@ body {
     max-width: 800px;
     margin-top: -10px ;
     margin-bottom: 100px;
+    text-align: justify;
 }
 
 /*section1*/
@@ -98,6 +103,7 @@ body {
     margin-bottom: 60px;
     scroll-margin-top: 20px;
     display: flex;
+    text-align: justify;
 }
 
 h2 {
