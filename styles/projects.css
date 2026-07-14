@@ -6,6 +6,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+p{
+    text-align: justify;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -590,6 +594,7 @@ body {
 .involvement-card p {
     margin-bottom: 1.5rem;
     color: #666;
+    text-align: center;
 }
 
 .involvement-link {
@@ -846,6 +851,10 @@ body {
   @media (max-width: 768px) {
     .parallax-bg {
       background-attachment: scroll;
+    }
+
+    .involvement-options {
+      grid-template-columns: 1fr;
     }
   }
   

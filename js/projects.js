@@ -11,15 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.querySelector('body');
     const sidebar = document.querySelector('.sidebar');
     
-    // Create mobile toggle button
-    const mobileToggle = document.createElement('button');
-    mobileToggle.classList.add('mobile-toggle');
-    mobileToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-    body.appendChild(mobileToggle);
-    
-    mobileToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-    });
     
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(event) {
