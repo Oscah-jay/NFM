@@ -1,3 +1,27 @@
+const navbarToggle = document.getElementById("navbarToggle");
+const navbarMenu = document.getElementById("navbarMenu");
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener("click", () => {
+        navbarMenu.classList.toggle("active");
+    });
+}
+
+const $list=document.querySelectorAll('li');
+
+function activeLink() {
+    $list.forEach(($li) => {
+        $li.classList.remove('active')
+    });
+    this.classList.add('active');
+}
+$list.forEach(($li) => {
+    $li.addEventListener(
+        'click',
+         activeLink,
+         );
+});
+
 // Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
