@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giving Section</title>
+    <title>Giving | Support Our Ministry</title>
     <link rel="stylesheet" href="./styles/support.css">
     <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- M-Pesa SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 <body>
 
-  <header class="navbar-container">
+<header class="navbar-container">
     <nav class="navbar">
         <div class="navbar-logo">
-            <a href="#"> <img src="./Assets/images/logos/3.png" alt="logo" width="200px" height="200px"></a>
+            <a href="#"><img src="./Assets/images/logos/3.png" alt="logo" width="200px" height="200px"></a>
         </div>
         
         <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
@@ -24,245 +29,421 @@
             <li class="navbar-item"><a href="./aboutus.html" class="navbar-link">About Us</a></li>
             <li class="navbar-item"><a href="./projects.html" class="navbar-link">Projects</a></li>
             <li class="navbar-item"><a href="./care.html" class="navbar-link">Care</a></li>
-            <li class="navbar-item"><a href="#" class="navbar-link active">Support</a></li>
+            <li class="navbar-item"><a href="#" class="navbar-link">Support</a></li>
             <li class="navbar-item"><a href="./contacts.html" class="navbar-link">Contact Us</a></li>
-            <li class="navbar-item"><a href="./blog.html" class="navbar-link">Blog</a></li>
-            
         </ul>
     </nav>
 </header>
 
 <div class="container">
-  <nav class="sidebar">
-      <div class="sidebar-content">
-          <div class="logo">
-              <h3>Newlife Fountain</h3>
-          </div>
-          <ul class="nav-links">
-              <li><a href="#about" class="nav-link active">About</a></li>
-              <li><a href="#giving-options" class="nav-link">Giving options</a></li>
-              <li><a href="#your-impact" class="nav-link">Your impact</a></li>
-              <li><a href="#resources" class="nav-link">Resources</a></li>
-              <li><a href="#faqs" class="nav-link">FAQs</a></li>
-          </ul>
-      </div>
-  </nav>
+    <nav class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo">
+                <h3>Giving</h3>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active">Overview</a></li>
+                <li><a href="#payment-section" class="nav-link">Make a Donation</a></li>
+                <li><a href="#impact" class="nav-link">Your Impact</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
 
-
-  <main class="main-content">
-      <section class="hero parallax-section" id="about">
-          <div class="parallax-bg"></div>
-          <div class="content-wrapper">
-              <h1 class="fade-in">Discover how God moves through your giving.</h1>
-              <p class="fade-in delay-1">
-                Your tithes and offerings to Newlife Fountain Ministries are more than a donation—they 
-                are a catalyst for transformation. Through your generosity, we share God's love, strengthen 
-                global missions, and serve communities through impactful outreach.
-              </p>
-          </div>
-      </section>
-
-      <section class="section" id="giving-options">
-          <div class="content-wrapper">
-              <h2 class="section-title">Choose how you want to give</h2>
-              
-              <div class="tabs-container fade-in delay-1">
-                  <div class="tabs">
-                      <button class="tab-btn active" data-tab="mobile">Mobile Transfer</button>
-                      <button class="tab-btn" data-tab="bank">PayBill</button>
-                  </div>
-                  
-                  <div class="tab-content active" id="bank-content">
-                      <p>Give using your checking account, debit, or credit card. For giving outside Kenya, 
-                        please click <a href="#" class="inline-link">here</a>.</p>
-                      <div class="giving-form">
-                          <div class="form-group">
-                              <label for="amount">Amount</label>
-                              <input type="text" id="amount" placeholder="$0.00">
-                          </div>
-                          <button class="give-btn">Give Now</button>
-                      </div>
-                  </div>
-                  
-                  <div class="tab-content" id="mobile-content">
-                      <p>Support our ministry with mobile transfer donations.</p>
-                      <div class="mobile-options">
-                          <button class="mobile-btn">Mpesa</button>
-                          <button class="mobile-btn">Airtel</button>
-                          <button class="mobile-btn">Other</button>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="additional-options fade-in">
-                  <h2 class="section-title">Additional giving options</h2>
-                  <div class="options-grid">
-                      <div class="option-card">
-                          <div class="option-icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-                          </div>
-                          <h3>Give in person</h3>
-                          <p>You can give in person at any of our <a href="#" class="inline-link">locations</a> 
-                            during the weekend worship experience.</p>
-                      </div>
-                      <div class="option-card">
-                          <div class="option-icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                          </div>
-                          <h3>Pledge Commitments</h3>
-                          <p>Your commitment matters. Pledge to give and help us continue our 
-                            mission of faith, outreach, and service through sending us an email through
-                            <a href="mailto:support@newlifefountainministries.church" 
-                            class="inline-link">support@newlifefountainministries.church</a>
-                          </p>
-                      </div>
-                      <div class="option-card">
-                          <div class="option-icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8.83a2 2 0 0 0-.59-1.42L12 2h-6Z"></path><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M10 4h1"></path></svg>
-                          </div>
-                          <h3>Non-cash gift</h3>
-                          <p>If you have any other assets (farm products, Clothes, Animal products, etc.) you 
-                            would like to donate, please email <a href="mailto:support@newlifefountainministries.church" 
-                            class="inline-link">support@newlifefountainministries.church</a>
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <section class="section" id="your-impact">
-        <div class="content-wrapper">
-            <h2 class="section-title">Experience the impact of your giving.</h2>
-            <p class="impact-intro">
-                Your giving enables our ministry to extend the love of Christ in tangible ways, reaching out to our
-                community and beyond. Through your generosity, we're able to support ministries that transform lives
-                and bring hope to those in need.
-            </p>
-            
-            <div class="impact-stories">
-                <div class="impact-story fade-in">
-                    <div class="impact-image-container parallax-container">
-                        <div class="impact-image" style="background-image: url('./Assets/images/14\ new.jpg')"></div>
-                        <h3 class="impact-overlay-title">God is moving and we are growing</h3>
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero parallax-section" id="hero">
+            <div class="parallax-bg hero-bg"></div>
+            <div class="content-wrapper">
+                <h1 class="fade-in">Transform Lives Through Generosity</h1>
+                <p class="fade-in delay-1">
+                    Your gift empowers our ministry to provide spiritual guidance, practical care, and hope to those in need. 
+                    Every contribution makes a tangible difference in our community.
+                </p>
+                <div class="hero-stats fade-in delay-2">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="250000">0</span>
+                        <span class="stat-label">Raised This Year</span>
                     </div>
-                    <div class="impact-content">
-                        <p>
-                            Through your faithful giving, we've been able to expand our reach and welcome more 
-                            people into our church family. We've seen incredible growth in our weekend services, 
-                            online community, and discipleship programs.
-                        </p>
-                        <p>
-                            Your generosity allows us to invest in technology, facilities, and resources that 
-                            create meaningful worship experiences and foster spiritual growth for people at 
-                            every stage of their faith journey.
-                        </p>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1500">0</span>
+                        <span class="stat-label">People Helped</span>
                     </div>
-                </div>
-                
-                <div class="impact-story fade-in delay-1">
-                    <div class="impact-image-container parallax-container">
-                        <div class="impact-image" style="background-image: url('./Assets/images/w3.jpeg')"></div>
-                        <h3 class="impact-overlay-title">Impacting the needs of people both locally and globally</h3>
-                    </div>
-                    <div class="impact-content">
-                        <p>
-                            Your generosity enables us to respond to urgent needs in our community through 
-                            outreach programs, food pantries, and support services for vulnerable populations. 
-                            Locally, we've partnered with schools, shelters, and community organizations to make a 
-                            tangible difference.
-                        </p>
-                        <p>
-                            Locally, we support missions and humanitarian efforts that bring clean water, education, 
-                            healthcare, and the message of Christ's love to communities around the world.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="impact-story fade-in delay-2">
-                    <div class="impact-image-container parallax-container">
-                        <div class="impact-image" style="background-image: url('./Assets/images/w1.jpg')"></div>
-                        <h3 class="impact-overlay-title">Bringing the hope of Jesus to the lost</h3>
-                    </div>
-                    <div class="impact-content">
-                        <p>
-                            Through your support, we've been able to share the life-changing message of Jesus with 
-                            thousands of people who might never have heard it otherwise. From our online ministry 
-                            reaching people in over 20 countries to our local evangelism efforts, lives are being transformed.
-                        </p>
-                        <p>
-                            Your giving funds innovative outreach initiatives, special events, and resources that help people 
-                            discover the hope and purpose found in a relationship with Christ.
-                        </p>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="98">0</span>
+                        <span class="stat-label">% Goes to Ministry</span>
                     </div>
                 </div>
             </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section" id="resources">
-          <div class="content-wrapper">
-              <h2 class="section-title">Resources</h2>
-              <div class="resources-grid">
-                  <div class="resource-card fade-in">
-                    <img src="./Assets/images/giving.png" alt="giving pdf img">
-                      <h3>Giving Guide</h3>
-                      <p>Learn about biblical principles of generosity</p>
-                      <a href="./Assets/files/10-Principles-for-Christian-Giving.pdf" class="resource-link">Download PDF</a>
-                  </div>
-                  <div class="resource-card fade-in delay-1">
-                    <img src="./Assets/images/annualrpt.png" alt="rpt image">
-                      <h3>Annual Report</h3>
-                      <p>See how your giving made a difference last year</p>
-                      <a href="./Assets/files/Newlife Fountain Ministries report.pdf" class="resource-link">View Report</a>
-                  </div>
-              </div>
-          </div>
-      </section>
+        <!-- Payment Section -->
+        <section class="section payment-section" id="payment-section">
+            <div class="content-wrapper">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Make Your Gift</h2>
+                    <p class="section-subtitle">Choose your preferred payment method</p>
+                </div>
 
-      <section class="section" id="faqs">
-          <div class="content-wrapper">
-              <h2 class="section-title">Frequently Asked Questions</h2>
-              <div class="accordion">
-                  <div class="accordion-item fade-in">
-                      <div class="accordion-header">
-                          <h3>What is a tithe?</h3>
-                          <span class="accordion-icon">+</span>
-                      </div>
-                      <div class="accordion-content">
-                          <p>A tithe is giving the first 10% of your income back to God through the local church. It's an act of worship and obedience that acknowledges God as the provider of all we have.</p>
-                      </div>
-                  </div>
-                  <div class="accordion-item fade-in delay-1">
-                      <div class="accordion-header">
-                          <h3>How is my giving used?</h3>
-                          <span class="accordion-icon">+</span>
-                      </div>
-                      <div class="accordion-content">
-                          <p>Your giving supports our church's ministries, outreach programs, missions, facilities, and staff who work to fulfill our mission of reaching people and building lives.</p>
-                      </div>
-                  </div>
-                  <div class="accordion-item fade-in delay-2">
-                      <div class="accordion-header">
-                          <h3>Is my giving tax-deductible?</h3>
-                          <span class="accordion-icon">+</span>
-                      </div>
-                      <div class="accordion-content">
-                          <p>No, all donations to our church are not tax-deductible. 
-                            Your donations and givings tailored are tailored towards 
-                          supporting the ministry's activities and outreach programs 
-                        hence are not tax-deductible but when sending through mobile 
-                      transfers the relevant charges are applied
-                         </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-  </main>
+                <!-- Payment Method Tabs -->
+                <div class="payment-tabs fade-in">
+                    <button class="tab-button active" data-tab="local">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                        Local Payment
+                    </button>
+                    <button class="tab-button" data-tab="international">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        International Payment
+                    </button>
+                </div>
+
+                <!-- Payment Forms Container -->
+                <div class="payment-container fade-in delay-1">
+                    
+                    <!-- Local Payment Tab -->
+                    <div class="payment-tab active" id="local-tab">
+                        <div class="payment-methods-grid">
+                            <!-- M-Pesa -->
+                            <div class="payment-method-card" data-method="mpesa">
+                                <div class="method-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                                        <path fill="#aed580" d="M31.003,7.001l-0.001-5.5c0-0.828,0.672-1.5,1.5-1.5	c0.828,0,1.5,0.672,1.5,1.5v5.5H31.003z"></path><path fill="#aed580" d="M14.964,47.999h18.073c0.533,0,0.965-0.432,0.965-0.965V4.964c0-0.533-0.432-0.965-0.965-0.965	H14.964c-0.533,0-0.965,0.432-0.965,0.965v42.07C13.999,47.567,14.431,47.999,14.964,47.999z"></path><path fill="#fff" fill-rule="evenodd" d="M17.739,29.001h12.524c0.962,0,1.741-0.78,1.741-1.741V10.743	c0-0.962-0.78-1.741-1.741-1.741H17.739c-0.962,0-1.741,0.78-1.741,1.741V27.26C15.997,28.222,16.777,29.001,17.739,29.001z" clip-rule="evenodd"></path><path fill="#9b2310" fill-rule="evenodd" d="M12.001,22.001	c3.643-0.7,5.865-2.448,7-5c1.135,2.552,3.357,4.3,7,5H12.001z" clip-rule="evenodd"></path><path fill="#e60023" fill-rule="evenodd" d="M12.001,22.001	c4.273,0.867,6.476,1,11,1c5.076,0,11.712-1.939,14-6l-9-4C24.039,18.139,21.863,22.001,12.001,22.001z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3>M-Pesa</h3>
+                                <p class="payment-description">Fast and secure mobile money transfer</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+
+                            <!-- Airtel Money -->
+                            <div class="payment-method-card" data-method="airtel">
+                                <div class="method-icon">
+                                    <img src="Assets/icons/airtel.svg" alt="">
+                                </div>
+                                <h3>Airtel Money</h3>
+                                <p class="payment-description">Mobile money via Airtel network</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+                        </div>
+
+                        <!-- Local Payment Form -->
+                        <form class="payment-form" id="localPaymentForm" style="display: none;">
+                            <div class="form-section">
+                                <h3 id="selectedMethodTitle">M-Pesa Payment</h3>
+                                
+                                <div class="form-group">
+                                    <label for="donorName">Full Name *</label>
+                                    <input type="text" id="donorName" name="donorName" required placeholder="Enter your full name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="donorPhone">Phone Number *</label>
+                                    <input type="tel" id="donorPhone" name="donorPhone" required placeholder="254712345678">
+                                    <small>Include country code (e.g., 254 for Kenya)</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="donorEmail">Email Address *</label>
+                                    <input type="email" id="donorEmail" name="donorEmail" required placeholder="your@email.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="donationAmount">Donation Amount (KES) *</label>
+                                    <div class="amount-input">
+                                        <input type="number" id="donationAmount" name="donationAmount" required min="50" placeholder="Enter amount" value="500">
+                                    </div>
+                                    <small>Minimum amount: KES 50</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="donationPurpose">Donation Purpose</label>
+                                    <select id="donationPurpose" name="donationPurpose">
+                                        <option value="">Select a purpose (optional)</option>
+                                        <option value="general">General Fund</option>
+                                        <option value="care">Care Ministry</option>
+                                        <option value="outreach">Community Outreach</option>
+                                        <option value="prayer">Prayer Support</option>
+                                        <option value="building">Building Fund</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="anonymousGift" name="anonymousGift">
+                                        Make this an anonymous gift
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="recurringGift" name="recurringGift">
+                                        Make this a monthly recurring donation
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn-donate btn-primary">Complete Payment</button>
+                                <button type="button" class="btn-cancel" onclick="cancelPayment()">Back</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- International Payment Tab -->
+                    <div class="payment-tab" id="international-tab">
+                        <div class="payment-methods-grid">
+                            <!-- Card Payment -->
+                            <div class="payment-method-card" data-method="card">
+                                <div class="method-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                                    <path fill="#1565C0" d="M45,35c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V13c0-2.209,1.791-4,4-4h34c2.209,0,4,1.791,4,4V35z"></path><path fill="#FFF" d="M15.186 19l-2.626 7.832c0 0-.667-3.313-.733-3.729-1.495-3.411-3.701-3.221-3.701-3.221L10.726 30v-.002h3.161L18.258 19H15.186zM17.689 30L20.56 30 22.296 19 19.389 19zM38.008 19h-3.021l-4.71 11h2.852l.588-1.571h3.596L37.619 30h2.613L38.008 19zM34.513 26.328l1.563-4.157.818 4.157H34.513zM26.369 22.206c0-.606.498-1.057 1.926-1.057.928 0 1.991.674 1.991.674l.466-2.309c0 0-1.358-.515-2.691-.515-3.019 0-4.576 1.444-4.576 3.272 0 3.306 3.979 2.853 3.979 4.551 0 .291-.231.964-1.888.964-1.662 0-2.759-.609-2.759-.609l-.495 2.216c0 0 1.063.606 3.117.606 2.059 0 4.915-1.54 4.915-3.752C30.354 23.586 26.369 23.394 26.369 22.206z"></path><path fill="#FFC107" d="M12.212,24.945l-0.966-4.748c0,0-0.437-1.029-1.573-1.029c-1.136,0-4.44,0-4.44,0S10.894,20.84,12.212,24.945z"></path>
+                                    </svg>                                
+                                </div>
+                                <h3>Credit/Debit Card</h3>
+                                <p class="payment-description">Visa, Mastercard, American Express</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+
+                            <!-- Apple Pay -->
+                            <div class="payment-method-card" data-method="applepay">
+                                <div class="method-icon">
+                                    <img src="Assets/icons/apple-pay.svg" alt="">
+                                </div>
+                                <h3>Apple Pay</h3>
+                                <p class="payment-description">Quick and secure payment</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+
+                            <!-- Google Pay -->
+                            <div class="payment-method-card" data-method="googlepay">
+                                <div class="method-icon">
+                                    <img src="Assets/icons/google-pay.svg" alt="">
+                                </div>
+                                <h3>Google Pay</h3>
+                                <p class="payment-description">Fast payment with Google Account</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+
+                            <!-- PayPal -->
+                            <div class="payment-method-card" data-method="paypal">
+                                <div class="method-icon">
+                                    <img src="Assets/icons/paypal.svg" alt="">
+                                </div>
+                                <h3>PayPal</h3>
+                                <p class="payment-description">Pay safely with your PayPal account</p>
+                                <button class="select-method-btn">Select</button>
+                            </div>
+                        </div>
+
+                        <!-- International Payment Form -->
+                        <form class="payment-form" id="internationalPaymentForm" style="display: none;">
+                            <div class="form-section">
+                                <h3 id="selectedMethodTitleIntl">Card Payment</h3>
+                                
+                                <div class="form-group">
+                                    <label for="intlDonorName">Full Name *</label>
+                                    <input type="text" id="intlDonorName" name="intlDonorName" required placeholder="Enter your full name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="intlDonorEmail">Email Address *</label>
+                                    <input type="email" id="intlDonorEmail" name="intlDonorEmail" required placeholder="your@email.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="intlDonationAmount">Donation Amount (USD) *</label>
+                                    <div class="amount-input">
+                                        <input type="number" id="intlDonationAmount" name="intlDonationAmount" required min="1" placeholder="Enter amount" value="50">
+                                    </div>
+                                    <small>Minimum amount: USD $1</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="intlDonationPurpose">Donation Purpose</label>
+                                    <select id="intlDonationPurpose" name="intlDonationPurpose">
+                                        <option value="">Select a purpose (optional)</option>
+                                        <option value="general">General Fund</option>
+                                        <option value="care">Care Ministry</option>
+                                        <option value="outreach">Community Outreach</option>
+                                        <option value="prayer">Prayer Support</option>
+                                        <option value="building">Building Fund</option>
+                                    </select>
+                                </div>
+
+                                <!-- Stripe Card Element -->
+                                <div class="form-group" id="card-element-container" style="display: none;">
+                                    <label>Card Details *</label>
+                                    <div id="card-element" class="card-element"></div>
+                                    <div id="card-errors" class="error-message"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="intlAnonymousGift" name="intlAnonymousGift">
+                                        Make this an anonymous gift
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="intlRecurringGift" name="intlRecurringGift">
+                                        Make this a monthly recurring donation
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn-donate btn-primary">Complete Payment</button>
+                                <button type="button" class="btn-cancel" onclick="cancelPaymentIntl()">Back</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="section impact-section" id="impact">
+            <div class="content-wrapper">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Your Impact</h2>
+                    <p class="section-subtitle">See how your generosity transforms lives</p>
+                </div>
+
+                <div class="impact-grid fade-in">
+                    <div class="impact-card">
+                        <div class="impact-amount">$5</div>
+                        <p class="impact-description">Provides emergency food for a family</p>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-amount">$25</div>
+                        <p class="impact-description">Supports one counseling session</p>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-amount">$50</div>
+                        <p class="impact-description">Sponsors a care package</p>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-amount">$100</div>
+                        <p class="impact-description">Supports a family in crisis for a week</p>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-amount">$250</div>
+                        <p class="impact-description">Enables specialized prayer ministry</p>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-amount">$500</div>
+                        <p class="impact-description">Provides comprehensive care for a month</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section faq-section" id="faq">
+            <div class="content-wrapper">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Common questions about giving</p>
+                </div>
+
+                <div class="faq-container fade-in">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is my donation secure?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>Yes, absolutely. We use industry-standard encryption and Stripe payment processing to ensure your information is secure. Your payment data is encrypted using PCI DSS compliance standards.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I make a recurring donation?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>Yes! You can set up a monthly recurring donation. Simply check the "Make this a monthly recurring donation" option during checkout. You can manage or cancel your recurring donation at any time.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is my donation tax-deductible?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>Yes. We are a registered nonprofit organization. You will receive a receipt via email that can be used for tax purposes. Please consult with your tax advisor regarding deductibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What percentage goes to ministry programs?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>98% of donations go directly to ministry programs and community care. We keep administrative costs minimal to maximize impact. Detailed financial reports are available upon request.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I donate anonymously?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>Yes! You can check the "Make this an anonymous gift" option during checkout. We will not share your name publicly, though we will send a receipt to your email for your records.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How will I know my donation was received?</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            <p>You will receive an instant email confirmation with your donation receipt, transaction ID, and impact summary. For recurring donations, you'll receive monthly receipts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="content-wrapper">
+                <div class="cta-content fade-in">
+                    <h2>Ready to Make a Difference?</h2>
+                    <p>Your generosity empowers our ministry to continue serving our community with compassion and faith.</p>
+                    <button class="btn-primary btn-large" onclick="scrollToPayment()">Donate Now</button>
+                </div>
+            </div>
+        </section>
+    </main>
 </div>
 
-    <script src="./js/support.js"></script>
-    <script src="./js/navbar.js"></script>
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content success-modal">
+        <div class="modal-icon success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h2>Donation Successful!</h2>
+        <p id="successMessage">Thank you for your generous gift. A receipt has been sent to your email.</p>
+        <button class="btn-primary" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" id="errorModal">
+    <div class="modal-content error-modal">
+        <div class="modal-icon error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </div>
+        <h2>Payment Failed</h2>
+        <p id="errorMessage">There was an issue processing your donation. Please try again.</p>
+        <button class="btn-primary" onclick="closeErrorModal()">Try Again</button>
+    </div>
+</div>
+
+<script src="./js/support.js"></script>
 </body>
 </html>

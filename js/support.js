@@ -1,218 +1,486 @@
-const navbarToggle = document.getElementById("navbarToggle");
-const navbarMenu = document.getElementById("navbarMenu");
+// Initialize Stripe (replace with your actual publishable key)
+const stripe = Stripe('pk_test_51234567890abcdef'); // Replace with your Stripe publishable key
+let cardElement = null;
 
-if (navbarToggle && navbarMenu) {
-    navbarToggle.addEventListener("click", () => {
-        navbarMenu.classList.toggle("active");
-    });
-}
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const body = document.querySelector('body');
-    const sidebar = document.querySelector('.sidebar');
-    
-    // Create mobile toggle button
-    const mobileToggle = document.createElement('button');
-    mobileToggle.classList.add('mobile-toggle');
-    mobileToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-    body.appendChild(mobileToggle);
-    
-    mobileToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-    });
-    
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-        const isClickInsideSidebar = sidebar.contains(event.target);
-        const isClickOnToggle = mobileToggle.contains(event.target);
-        
-        if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-        }
-    });
-    
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            btn.classList.add('active');
-            const tabId = btn.getAttribute('data-tab');
-            document.getElementById(`${tabId}-content`).classList.add('active');
+// DOM Elements
+const localTab = document.getElementById('local-tab');
+const internationalTab = document.getElementById('international-tab');
+const localForm = document.getElementById('localPaymentForm');
+const internationalForm = document.getElementById('internationalPaymentForm');
+const successModal = document.getElementById('successModal');
+const errorModal = document.getElementById('errorModal');
+
+let currentPaymentMethod = 'mpesa';
+let currentInternationalMethod = 'card';
+let isLocalPaymentShowing = false;
+let isInternationalPaymentShowing = false;
+
+// Initialize Stripe Card Element for International Tab
+function initStripeCard() {
+    if (!cardElement) {
+        const elements = stripe.elements();
+        cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#333',
+                    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                },
+                invalid: {
+                    color: '#dc2626',
+                },
+            },
         });
-    });
-    
-    // Accordion functionality
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    
-    accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
         
-        header.addEventListener('click', () => {
-            // Toggle active class on clicked item
-            item.classList.toggle('active');
+        const cardContainer = document.getElementById('card-element');
+        if (cardContainer) {
+            cardElement.mount('#card-element');
             
-            // Close other accordion items (optional)
-            accordionItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
+            cardElement.on('change', (event) => {
+                const displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
                 }
             });
-        });
-    });
-    
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Get the target section
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            // Scroll to the target section
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-            
-            // Close sidebar on mobile after clicking a link
-            if (window.innerWidth < 993) {
-                sidebar.classList.remove('active');
-            }
-            
-            // Update active link
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-    
-    // Parallax effect
-    window.addEventListener('scroll', function() {
-        const parallaxBgs = document.querySelectorAll('.parallax-bg');
+        }
+    }
+}
+
+// Tab Switching
+document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
         
-        parallaxBgs.forEach(bg => {
-            const scrollPosition = window.pageYOffset;
-            const parentSection = bg.parentElement;
-            const sectionTop = parentSection.offsetTop;
-            const sectionHeight = parentSection.offsetHeight;
+        const tab = button.dataset.tab;
+        
+        if (tab === 'local') {
+            localTab.style.display = 'block';
+            internationalTab.style.display = 'none';
+            resetPaymentSelection();
+            isLocalPaymentShowing = false;
+            isInternationalPaymentShowing = false;
+        } else {
+            localTab.style.display = 'none';
+            internationalTab.style.display = 'block';
+            resetPaymentSelection();
+            isLocalPaymentShowing = false;
+            isInternationalPaymentShowing = false;
+            setTimeout(() => initStripeCard(), 100);
+        }
+    });
+});
+
+// Payment Method Selection - Local
+document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('#local-tab .payment-method-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        currentPaymentMethod = card.dataset.method;
+        const methodName = card.querySelector('h3').textContent;
+        document.getElementById('selectedMethodTitle').textContent = methodName + ' Payment';
+        
+        showLocalPaymentForm();
+    });
+});
+
+// Payment Method Selection - International
+document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('#international-tab .payment-method-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        currentInternationalMethod = card.dataset.method;
+        const methodName = card.querySelector('h3').textContent;
+        document.getElementById('selectedMethodTitleIntl').textContent = methodName + ' Payment';
+        
+        // Show/hide card element based on method
+        const cardContainer = document.getElementById('card-element-container');
+        if (currentInternationalMethod === 'card') {
+            cardContainer.style.display = 'block';
+            initStripeCard();
+        } else {
+            cardContainer.style.display = 'none';
+        }
+        
+        showInternationalPaymentForm();
+    });
+});
+
+function showLocalPaymentForm() {
+    document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
+        card.style.display = 'none';
+    });
+    localForm.style.display = 'block';
+    isLocalPaymentShowing = true;
+}
+
+function showInternationalPaymentForm() {
+    document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
+        card.style.display = 'none';
+    });
+    internationalForm.style.display = 'block';
+    isInternationalPaymentShowing = true;
+}
+
+function resetPaymentSelection() {
+    document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
+        card.classList.remove('selected');
+        card.style.display = 'block';
+    });
+    document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
+        card.classList.remove('selected');
+        card.style.display = 'block';
+    });
+    localForm.style.display = 'none';
+    internationalForm.style.display = 'none';
+    isLocalPaymentShowing = false;
+    isInternationalPaymentShowing = false;
+}
+
+function cancelPayment() {
+    resetPaymentSelection();
+    document.querySelector('.tab-button.active').click();
+}
+
+function cancelPaymentIntl() {
+    resetPaymentSelection();
+    document.querySelector('.tab-button.active').click();
+}
+
+// Local Payment Form Submission
+localForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('donorName').value;
+    const phone = document.getElementById('donorPhone').value;
+    const email = document.getElementById('donorEmail').value;
+    const amount = document.getElementById('donationAmount').value;
+    const purpose = document.getElementById('donationPurpose').value;
+    const anonymous = document.getElementById('anonymousGift').checked;
+    const recurring = document.getElementById('recurringGift').checked;
+    
+    // Validate inputs
+    if (!name || !phone || !email || !amount) {
+        showError('Please fill in all required fields');
+        return;
+    }
+    
+    // Validate phone number format
+    if (!/^\d{10,}$/.test(phone.replace(/\D/g, ''))) {
+        showError('Please enter a valid phone number');
+        return;
+    }
+    
+    if (amount < 50) {
+        showError('Minimum donation amount is KES 50');
+        return;
+    }
+    
+    // Simulate payment processing
+    try {
+        const paymentData = {
+            method: currentPaymentMethod,
+            name: anonymous ? 'Anonymous' : name,
+            email: email,
+            phone: phone,
+            amount: amount,
+            currency: 'KES',
+            purpose: purpose || 'general',
+            recurring: recurring,
+            timestamp: new Date().toISOString(),
+        };
+        
+        console.log('[v0] Processing local payment:', paymentData);
+        
+        // Simulate API call to your backend
+        await simulatePaymentProcessing(paymentData);
+        
+        showSuccessModal(`Your donation of KES ${amount} via ${currentPaymentMethod.toUpperCase()} has been received. A receipt has been sent to ${email}`);
+        localForm.reset();
+        resetPaymentSelection();
+        
+    } catch (error) {
+        console.error('[v0] Payment error:', error);
+        showError('Payment processing failed. Please try again.');
+    }
+});
+
+// International Payment Form Submission
+internationalForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('intlDonorName').value;
+    const email = document.getElementById('intlDonorEmail').value;
+    const amount = document.getElementById('intlDonationAmount').value;
+    const purpose = document.getElementById('intlDonationPurpose').value;
+    const anonymous = document.getElementById('intlAnonymousGift').checked;
+    const recurring = document.getElementById('intlRecurringGift').checked;
+    
+    // Validate inputs
+    if (!name || !email || !amount) {
+        showError('Please fill in all required fields');
+        return;
+    }
+    
+    if (amount < 1) {
+        showError('Minimum donation amount is USD $1');
+        return;
+    }
+    
+    try {
+        if (currentInternationalMethod === 'card') {
+            // Use Stripe for card payment
+            const {token, error} = await stripe.createToken(cardElement);
             
-            // Only apply parallax if section is in view
-            if (scrollPosition > sectionTop - window.innerHeight && 
-                scrollPosition < sectionTop + sectionHeight) {
-                const speed = 0.5; // Adjust for faster/slower parallax
-                const yPos = (scrollPosition - sectionTop) * speed;
-                bg.style.transform = `translateY(${yPos}px)`;
+            if (error) {
+                console.error('[v0] Stripe error:', error);
+                showError(error.message);
+                return;
+            }
+            
+            const paymentData = {
+                method: 'card',
+                name: anonymous ? 'Anonymous' : name,
+                email: email,
+                amount: amount,
+                currency: 'USD',
+                purpose: purpose || 'general',
+                recurring: recurring,
+                stripeToken: token.id,
+                timestamp: new Date().toISOString(),
+            };
+            
+            console.log('[v0] Processing Stripe card payment:', paymentData);
+            await simulatePaymentProcessing(paymentData);
+            
+        } else if (currentInternationalMethod === 'applepay' || currentInternationalMethod === 'googlepay') {
+            // Simulate Apple Pay / Google Pay
+            const paymentData = {
+                method: currentInternationalMethod,
+                name: anonymous ? 'Anonymous' : name,
+                email: email,
+                amount: amount,
+                currency: 'USD',
+                purpose: purpose || 'general',
+                recurring: recurring,
+                timestamp: new Date().toISOString(),
+            };
+            
+            console.log(`[v0] Processing ${currentInternationalMethod} payment:`, paymentData);
+            await simulatePaymentProcessing(paymentData);
+            
+        } else if (currentInternationalMethod === 'paypal') {
+            // Simulate PayPal
+            const paymentData = {
+                method: 'paypal',
+                name: anonymous ? 'Anonymous' : name,
+                email: email,
+                amount: amount,
+                currency: 'USD',
+                purpose: purpose || 'general',
+                recurring: recurring,
+                timestamp: new Date().toISOString(),
+            };
+            
+            console.log('[v0] Processing PayPal payment:', paymentData);
+            await simulatePaymentProcessing(paymentData);
+        }
+        
+        showSuccessModal(`Your donation of USD $${amount} via ${currentInternationalMethod.toUpperCase()} has been received. A receipt has been sent to ${email}`);
+        internationalForm.reset();
+        resetPaymentSelection();
+        
+    } catch (error) {
+        console.error('[v0] Payment error:', error);
+        showError('Payment processing failed. Please try again.');
+    }
+});
+
+// Simulate Payment Processing (replace with actual API call)
+function simulatePaymentProcessing(paymentData) {
+    return new Promise((resolve, reject) => {
+        // Simulate network delay
+        setTimeout(() => {
+            // In production, this would call your backend API
+            // POST to /api/donations or similar endpoint
+            
+            // Random success/failure for demo (remove in production)
+            if (Math.random() > 0.95) {
+                reject(new Error('Simulated payment failure'));
+            } else {
+                // Here you would send paymentData to your backend
+                console.log('[v0] Payment processed successfully:', paymentData);
+                resolve({success: true});
+            }
+        }, 2000);
+    });
+}
+
+// Modal Functions
+function showSuccessModal(message) {
+    document.getElementById('successMessage').textContent = message;
+    successModal.classList.add('active');
+}
+
+function showErrorModal(message) {
+    document.getElementById('errorMessage').textContent = message;
+    errorModal.classList.add('active');
+}
+
+function showError(message) {
+    showErrorModal(message);
+}
+
+function closeModal() {
+    successModal.classList.remove('active');
+}
+
+function closeErrorModal() {
+    errorModal.classList.remove('active');
+}
+
+// Scroll to Payment Section
+function scrollToPayment() {
+    document.getElementById('payment-section').scrollIntoView({behavior: 'smooth'});
+}
+
+// Counter Animation for Stats
+function animateCounter() {
+    const counters = document.querySelectorAll('[data-count]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.dataset.count);
+                let current = 0;
+                
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 30);
+                
+                observer.unobserve(counter);
             }
         });
     });
     
-    // Scroll animations
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    // Initial check for elements in viewport on page load
-    checkFadeElements();
-    
-    // Check elements on scroll
-    window.addEventListener('scroll', checkFadeElements);
-    
-    function checkFadeElements() {
-        fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150; // Adjust this value to change when elements become visible
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('visible');
-            } else {
-                element.classList.remove('visible');
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        
+        // Close other items
+        document.querySelectorAll('.faq-item').forEach(faqItem => {
+            if (faqItem !== item) {
+                faqItem.querySelector('.faq-answer').style.display = 'none';
+                faqItem.querySelector('.faq-question').classList.remove('active');
             }
+        });
+        
+        // Toggle current item
+        question.classList.toggle('active');
+        if (answer.style.display === 'none') {
+            answer.style.display = 'block';
+        } else {
+            answer.style.display = 'none';
+        }
+    });
+});
+
+// Fade-in animations on scroll
+function handleScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, {threshold: 0.1});
+    
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    animateCounter();
+    handleScrollAnimations();
+    
+    // Navbar functionality
+    const navbarToggle = document.getElementById('navbarToggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+    
+    if (navbarToggle) {
+        navbarToggle.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
         });
     }
     
-    // Update active nav link based on scroll position
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section');
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            if (window.pageYOffset >= sectionTop - 200 && 
-                window.pageYOffset < sectionTop + sectionHeight - 200) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
+    // Close menu when link clicked
+    document.querySelectorAll('.navbar-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navbarMenu.classList.remove('active');
         });
     });
 });
 
-// Add this to your existing script.js file, inside the DOMContentLoaded event listener
-
-// Enhanced parallax effect for impact images
-const impactContainers = document.querySelectorAll('.impact-image-container');
-
-function handleImpactParallax() {
-    impactContainers.forEach(container => {
-        const image = container.querySelector('.impact-image');
-        const containerRect = container.getBoundingClientRect();
-        const containerCenter = containerRect.top + containerRect.height / 2;
-        const windowCenter = window.innerHeight / 2;
-        const distanceFromCenter = containerCenter - windowCenter;
+// Sidebar Navigation Active State
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const id = section.id;
         
-        // Calculate parallax amount based on distance from center of viewport
-        const parallaxAmount = distanceFromCenter * 0.1;
-        
-        // Apply parallax effect if container is in viewport
-        if (containerRect.top < window.innerHeight && containerRect.bottom > 0) {
-            image.style.transform = `translateY(${parallaxAmount}px)`;
+        if (rect.top <= 300 && rect.bottom > 300) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     });
+});
+
+// Security Best Practices
+// Never log sensitive data in production
+function logPaymentSecurely(data) {
+    const sanitized = {
+        method: data.method,
+        amount: data.amount,
+        currency: data.currency,
+        timestamp: data.timestamp,
+        // Never include card details, tokens, or phone numbers in logs
+    };
+    console.log('[v0] Payment processed:', sanitized);
 }
 
-// Call on scroll and on initial load
-window.addEventListener('scroll', handleImpactParallax);
-handleImpactParallax();
+// Validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
-// Add smooth reveal animation for impact stories
-const impactStories = document.querySelectorAll('.impact-story');
-
-const impactObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Add a slight rotation effect when coming into view
-            entry.target.style.transform = 'translateY(0) rotate(0deg)';
-            entry.target.style.opacity = '1';
-        } else {
-            entry.target.classList.remove('visible');
-            // Reset the transform when out of view
-            entry.target.style.transform = 'translateY(50px) rotate(1deg)';
-            entry.target.style.opacity = '0';
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-});
-
-impactStories.forEach(story => {
-    // Set initial state
-    story.style.transform = 'translateY(50px) rotate(1deg)';
-    story.style.opacity = '0';
-    story.style.transition = 'transform 0.8s ease-out, opacity 0.8s ease-out';
-    
-    // Observe the story
-    impactObserver.observe(story);
-});
+// Sanitize input to prevent XSS
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
