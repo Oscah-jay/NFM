@@ -1,346 +1,234 @@
-// Initialize Stripe (replace with your actual publishable key)
-const stripe = Stripe('pk_test_51234567890abcdef'); // Replace with your Stripe publishable key
-let cardElement = null;
+// Paystack Configuration
+const PAYSTACK_PUBLIC_KEY = 'pk_live_YOUR_PAYSTACK_PUBLIC_KEY'; // Replace with your actual Paystack public key
+const PAYSTACK_SCRIPT = 'https://js.paystack.co/v1/inline.js';
 
 // DOM Elements
-const localTab = document.getElementById('local-tab');
-const internationalTab = document.getElementById('international-tab');
-const localForm = document.getElementById('localPaymentForm');
-const internationalForm = document.getElementById('internationalPaymentForm');
+const donationForm = document.getElementById('donationForm');
 const successModal = document.getElementById('successModal');
 const errorModal = document.getElementById('errorModal');
 
-let currentPaymentMethod = 'mpesa';
-let currentInternationalMethod = 'card';
-let isLocalPaymentShowing = false;
-let isInternationalPaymentShowing = false;
+// Load Paystack script
+function loadPaystackScript() {
+    const script = document.createElement('script');
+    script.src = PAYSTACK_SCRIPT;
+    script.async = true;
+    document.body.appendChild(script);
+}
 
-// Initialize Stripe Card Element for International Tab
-function initStripeCard() {
-    if (!cardElement) {
-        const elements = stripe.elements();
-        cardElement = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#333',
-                    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+// Validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Sanitize input to prevent XSS
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+
+// Initialize Paystack Payment
+function initiatePaystackPayment(donationData) {
+    if (typeof PaystackPop === 'undefined') {
+        showError('Payment system is loading. Please try again.');
+        return;
+    }
+
+    const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: donationData.email,
+        amount: donationData.amount * 100, // Paystack expects amount in kobo (cents)
+        currency: 'KES',
+        ref: 'DONATION_' + Math.floor(Math.random() * 1000000000 + 1), // Unique transaction reference
+        metadata: {
+            donor_name: donationData.name,
+            donation_purpose: donationData.purpose,
+            donation_type: donationData.donationType,
+            is_anonymous: donationData.isAnonymous,
+            custom_fields: [
+                {
+                    display_name: 'Donation Purpose',
+                    variable_name: 'donation_purpose',
+                    value: donationData.purpose || 'General Fund'
                 },
-                invalid: {
-                    color: '#dc2626',
-                },
-            },
-        });
-        
-        const cardContainer = document.getElementById('card-element');
-        if (cardContainer) {
-            cardElement.mount('#card-element');
-            
-            cardElement.on('change', (event) => {
-                const displayError = document.getElementById('card-errors');
-                if (event.error) {
-                    displayError.textContent = event.error.message;
-                } else {
-                    displayError.textContent = '';
+                {
+                    display_name: 'Donation Type',
+                    variable_name: 'donation_type',
+                    value: donationData.donationType
                 }
-            });
-        }
-    }
-}
-
-// Tab Switching
-document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-        button.classList.add('active');
-        
-        const tab = button.dataset.tab;
-        
-        if (tab === 'local') {
-            localTab.style.display = 'block';
-            internationalTab.style.display = 'none';
-            resetPaymentSelection();
-            isLocalPaymentShowing = false;
-            isInternationalPaymentShowing = false;
-        } else {
-            localTab.style.display = 'none';
-            internationalTab.style.display = 'block';
-            resetPaymentSelection();
-            isLocalPaymentShowing = false;
-            isInternationalPaymentShowing = false;
-            setTimeout(() => initStripeCard(), 100);
+            ]
+        },
+        onClose: function() {
+            console.log('[v0] Payment window closed');
+            showError('Payment cancelled. Please try again.');
+        },
+        onSuccess: function(response) {
+            console.log('[v0] Payment successful:', response.reference);
+            handlePaymentSuccess(response, donationData);
         }
     });
-});
 
-// Payment Method Selection - Local
-document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
-    card.addEventListener('click', () => {
-        document.querySelectorAll('#local-tab .payment-method-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        
-        currentPaymentMethod = card.dataset.method;
-        const methodName = card.querySelector('h3').textContent;
-        document.getElementById('selectedMethodTitle').textContent = methodName + ' Payment';
-        
-        showLocalPaymentForm();
-    });
-});
-
-// Payment Method Selection - International
-document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
-    card.addEventListener('click', () => {
-        document.querySelectorAll('#international-tab .payment-method-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        
-        currentInternationalMethod = card.dataset.method;
-        const methodName = card.querySelector('h3').textContent;
-        document.getElementById('selectedMethodTitleIntl').textContent = methodName + ' Payment';
-        
-        // Show/hide card element based on method
-        const cardContainer = document.getElementById('card-element-container');
-        if (currentInternationalMethod === 'card') {
-            cardContainer.style.display = 'block';
-            initStripeCard();
-        } else {
-            cardContainer.style.display = 'none';
-        }
-        
-        showInternationalPaymentForm();
-    });
-});
-
-function showLocalPaymentForm() {
-    document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
-        card.style.display = 'none';
-    });
-    localForm.style.display = 'block';
-    isLocalPaymentShowing = true;
+    handler.openIframe();
 }
 
-function showInternationalPaymentForm() {
-    document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
-        card.style.display = 'none';
-    });
-    internationalForm.style.display = 'block';
-    isInternationalPaymentShowing = true;
+// Handle successful payment
+function handlePaymentSuccess(response, donationData) {
+    // Verify payment on backend
+    verifyPaystackPayment(response.reference, donationData);
 }
 
-function resetPaymentSelection() {
-    document.querySelectorAll('#local-tab .payment-method-card').forEach(card => {
-        card.classList.remove('selected');
-        card.style.display = 'block';
-    });
-    document.querySelectorAll('#international-tab .payment-method-card').forEach(card => {
-        card.classList.remove('selected');
-        card.style.display = 'block';
-    });
-    localForm.style.display = 'none';
-    internationalForm.style.display = 'none';
-    isLocalPaymentShowing = false;
-    isInternationalPaymentShowing = false;
-}
-
-function cancelPayment() {
-    resetPaymentSelection();
-    document.querySelector('.tab-button.active').click();
-}
-
-function cancelPaymentIntl() {
-    resetPaymentSelection();
-    document.querySelector('.tab-button.active').click();
-}
-
-// Local Payment Form Submission
-localForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('donorName').value;
-    const phone = document.getElementById('donorPhone').value;
-    const email = document.getElementById('donorEmail').value;
-    const amount = document.getElementById('donationAmount').value;
-    const purpose = document.getElementById('donationPurpose').value;
-    const anonymous = document.getElementById('anonymousGift').checked;
-    const recurring = document.getElementById('recurringGift').checked;
-    
-    // Validate inputs
-    if (!name || !phone || !email || !amount) {
-        showError('Please fill in all required fields');
-        return;
-    }
-    
-    // Validate phone number format
-    if (!/^\d{10,}$/.test(phone.replace(/\D/g, ''))) {
-        showError('Please enter a valid phone number');
-        return;
-    }
-    
-    if (amount < 50) {
-        showError('Minimum donation amount is KES 50');
-        return;
-    }
-    
-    // Simulate payment processing
+// Verify payment with backend
+async function verifyPaystackPayment(reference, donationData) {
     try {
-        const paymentData = {
-            method: currentPaymentMethod,
-            name: anonymous ? 'Anonymous' : name,
-            email: email,
-            phone: phone,
-            amount: amount,
-            currency: 'KES',
-            purpose: purpose || 'general',
-            recurring: recurring,
-            timestamp: new Date().toISOString(),
+        const verificationData = {
+            reference: reference,
+            amount: donationData.amount,
+            email: donationData.email,
+            donor_name: donationData.name,
+            donation_purpose: donationData.purpose,
+            donation_type: donationData.donationType,
+            is_anonymous: donationData.isAnonymous,
+            timestamp: new Date().toISOString()
         };
-        
-        console.log('[v0] Processing local payment:', paymentData);
-        
-        // Simulate API call to your backend
-        await simulatePaymentProcessing(paymentData);
-        
-        showSuccessModal(`Your donation of KES ${amount} via ${currentPaymentMethod.toUpperCase()} has been received. A receipt has been sent to ${email}`);
-        localForm.reset();
-        resetPaymentSelection();
-        
-    } catch (error) {
-        console.error('[v0] Payment error:', error);
-        showError('Payment processing failed. Please try again.');
-    }
-});
 
-// International Payment Form Submission
-internationalForm.addEventListener('submit', async (e) => {
+        console.log('[v0] Verifying payment:', reference);
+
+        // In production, call your backend API to verify the payment
+        // const response = await fetch('/api/donations/verify', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRF-Token': document.querySelector('[name="csrf-token"]')?.content || ''
+        //     },
+        //     body: JSON.stringify(verificationData)
+        // });
+
+        // For now, simulate successful verification
+        await simulateBackendVerification(verificationData);
+
+        showSuccessModal(`Your donation of KES ${donationData.amount.toLocaleString()} has been received successfully! A receipt has been sent to ${donationData.email}`);
+        donationForm.reset();
+
+    } catch (error) {
+        console.error('[v0] Verification error:', error);
+        showError('Payment verification failed. Please contact support with reference: ' + reference);
+    }
+}
+
+// Simulate backend verification (remove in production)
+function simulateBackendVerification(data) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('[v0] Payment verified and stored:', data);
+            // Send thank you email (in production)
+            sendThankYouEmail(data);
+            resolve();
+        }, 1000);
+    });
+}
+
+// Send thank you email (backend function)
+function sendThankYouEmail(donationData) {
+    // In production, this would be called by your backend API
+    console.log('[v0] Sending thank you email to:', donationData.email);
+    
+    // Backend should send email with:
+    // - Donation receipt
+    // - Tax certificate (if applicable)
+    // - Impact statement
+    // - Thank you message
+}
+
+// Donation Form Submission
+donationForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const name = document.getElementById('intlDonorName').value;
-    const email = document.getElementById('intlDonorEmail').value;
-    const amount = document.getElementById('intlDonationAmount').value;
-    const purpose = document.getElementById('intlDonationPurpose').value;
-    const anonymous = document.getElementById('intlAnonymousGift').checked;
-    const recurring = document.getElementById('intlRecurringGift').checked;
-    
+
+    const name = sanitizeInput(document.getElementById('donorName').value.trim());
+    const email = document.getElementById('donorEmail').value.trim();
+    const amount = parseInt(document.getElementById('donationAmount').value);
+    const purpose = document.getElementById('donationPurpose').value;
+    const donationType = document.querySelector('input[name="donationType"]:checked').value;
+    const isAnonymous = document.getElementById('anonymousGift').checked;
+
     // Validate inputs
     if (!name || !email || !amount) {
         showError('Please fill in all required fields');
         return;
     }
-    
-    if (amount < 1) {
-        showError('Minimum donation amount is USD $1');
+
+    if (!isValidEmail(email)) {
+        showError('Please enter a valid email address');
         return;
     }
-    
-    try {
-        if (currentInternationalMethod === 'card') {
-            // Use Stripe for card payment
-            const {token, error} = await stripe.createToken(cardElement);
-            
-            if (error) {
-                console.error('[v0] Stripe error:', error);
-                showError(error.message);
-                return;
-            }
-            
-            const paymentData = {
-                method: 'card',
-                name: anonymous ? 'Anonymous' : name,
-                email: email,
-                amount: amount,
-                currency: 'USD',
-                purpose: purpose || 'general',
-                recurring: recurring,
-                stripeToken: token.id,
-                timestamp: new Date().toISOString(),
-            };
-            
-            console.log('[v0] Processing Stripe card payment:', paymentData);
-            await simulatePaymentProcessing(paymentData);
-            
-        } else if (currentInternationalMethod === 'applepay' || currentInternationalMethod === 'googlepay') {
-            // Simulate Apple Pay / Google Pay
-            const paymentData = {
-                method: currentInternationalMethod,
-                name: anonymous ? 'Anonymous' : name,
-                email: email,
-                amount: amount,
-                currency: 'USD',
-                purpose: purpose || 'general',
-                recurring: recurring,
-                timestamp: new Date().toISOString(),
-            };
-            
-            console.log(`[v0] Processing ${currentInternationalMethod} payment:`, paymentData);
-            await simulatePaymentProcessing(paymentData);
-            
-        } else if (currentInternationalMethod === 'paypal') {
-            // Simulate PayPal
-            const paymentData = {
-                method: 'paypal',
-                name: anonymous ? 'Anonymous' : name,
-                email: email,
-                amount: amount,
-                currency: 'USD',
-                purpose: purpose || 'general',
-                recurring: recurring,
-                timestamp: new Date().toISOString(),
-            };
-            
-            console.log('[v0] Processing PayPal payment:', paymentData);
-            await simulatePaymentProcessing(paymentData);
-        }
-        
-        showSuccessModal(`Your donation of USD $${amount} via ${currentInternationalMethod.toUpperCase()} has been received. A receipt has been sent to ${email}`);
-        internationalForm.reset();
-        resetPaymentSelection();
-        
-    } catch (error) {
-        console.error('[v0] Payment error:', error);
-        showError('Payment processing failed. Please try again.');
-    }
-});
 
-// Simulate Payment Processing (replace with actual API call)
-function simulatePaymentProcessing(paymentData) {
-    return new Promise((resolve, reject) => {
-        // Simulate network delay
-        setTimeout(() => {
-            // In production, this would call your backend API
-            // POST to /api/donations or similar endpoint
-            
-            // Random success/failure for demo (remove in production)
-            if (Math.random() > 0.95) {
-                reject(new Error('Simulated payment failure'));
-            } else {
-                // Here you would send paymentData to your backend
-                console.log('[v0] Payment processed successfully:', paymentData);
-                resolve({success: true});
-            }
-        }, 2000);
+    if (amount < 100) {
+        showError('Minimum donation amount is KES 100');
+        return;
+    }
+
+    if (amount > 10000000) {
+        showError('Maximum donation amount is KES 10,000,000');
+        return;
+    }
+
+    // Prepare donation data
+    const donationData = {
+        name: isAnonymous ? 'Anonymous Donor' : name,
+        email: email,
+        amount: amount,
+        currency: 'KES',
+        purpose: purpose || 'general',
+        donationType: donationType,
+        isAnonymous: isAnonymous,
+        timestamp: new Date().toISOString()
+    };
+
+    console.log('[v0] Initiating Paystack payment:', {
+        amount: donationData.amount,
+        email: donationData.email,
+        purpose: donationData.purpose,
+        donationType: donationData.donationType
     });
-}
+
+    // Initiate Paystack payment
+    initiatePaystackPayment(donationData);
+});
 
 // Modal Functions
 function showSuccessModal(message) {
-    document.getElementById('successMessage').textContent = message;
-    successModal.classList.add('active');
+    if (successModal) {
+        const messageEl = successModal.querySelector('p') || document.createElement('p');
+        messageEl.textContent = message;
+        if (!successModal.querySelector('p')) {
+            successModal.querySelector('.modal-content').appendChild(messageEl);
+        }
+        successModal.classList.add('active');
+    }
 }
 
 function showErrorModal(message) {
-    document.getElementById('errorMessage').textContent = message;
-    errorModal.classList.add('active');
+    if (errorModal) {
+        const messageEl = errorModal.querySelector('p') || document.createElement('p');
+        messageEl.textContent = message;
+        if (!errorModal.querySelector('p')) {
+            errorModal.querySelector('.modal-content').appendChild(messageEl);
+        }
+        errorModal.classList.add('active');
+    }
 }
 
 function showError(message) {
+    console.error('[v0] Error:', message);
     showErrorModal(message);
 }
 
 function closeModal() {
-    successModal.classList.remove('active');
+    if (successModal) successModal.classList.remove('active');
 }
 
 function closeErrorModal() {
-    errorModal.classList.remove('active');
+    if (errorModal) errorModal.classList.remove('active');
 }
 
 // Scroll to Payment Section
@@ -417,6 +305,7 @@ function handleScrollAnimations() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    loadPaystackScript();
     animateCounter();
     handleScrollAnimations();
     
@@ -459,28 +348,293 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Security Best Practices
-// Never log sensitive data in production
-function logPaymentSecurely(data) {
-    const sanitized = {
-        method: data.method,
-        amount: data.amount,
-        currency: data.currency,
-        timestamp: data.timestamp,
-        // Never include card details, tokens, or phone numbers in logs
+// ============================================
+// PAYSTACK CONFIGURATION
+// ============================================
+const PAYSTACK_PUBLIC_KEY = 'pk_live_YOUR_PAYSTACK_PUBLIC_KEY'; // Replace with your actual Paystack public key
+const PAYSTACK_SCRIPT = 'https://js.paystack.co/v1/inline.js';
+
+// ============================================
+// DOM ELEMENTS
+// ============================================
+const paymentForm = document.getElementById('paymentForm');
+const supportPurpose = document.getElementById('supportPurpose');
+const frequencySection = document.getElementById('frequencySection');
+const startingSection = document.getElementById('startingSection');
+const amountInput = document.getElementById('amountInput');
+const donationTypeInput = document.getElementById('donationType');
+const frequencyInput = document.getElementById('frequency');
+const donationStartDate = document.getElementById('donationStartDate');
+const successModal = document.getElementById('successModal');
+const errorModal = document.getElementById('errorModal');
+
+// ============================================
+// STATE MANAGEMENT
+// ============================================
+let currentDonationType = 'one-time';
+let currentFrequency = 'weekly';
+let currentAmount = 0;
+
+// ============================================
+// LOAD PAYSTACK SCRIPT
+// ============================================
+function loadPaystackScript() {
+    const script = document.createElement('script');
+    script.src = PAYSTACK_SCRIPT;
+    script.async = true;
+    script.onerror = () => {
+        console.warn('[v0] Paystack script failed to load. Payments may not work.');
     };
-    console.log('[v0] Payment processed:', sanitized);
+    document.body.appendChild(script);
 }
 
-// Validate email format
+// ============================================
+// SUPPORT TYPE BUTTON LOGIC
+// ============================================
+document.querySelectorAll('.type-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        const donationType = btn.dataset.type;
+        currentDonationType = donationType;
+        donationTypeInput.value = donationType;
+
+        // Show/Hide frequency and starting sections ONLY for recurring
+        if (donationType === 'recurring') {
+            frequencySection.classList.add('show');
+            startingSection.classList.add('show');
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            donationStartDate.value = today;
+        } else {
+            // Hide for one-time donations
+            frequencySection.classList.remove('show');
+            startingSection.classList.remove('show');
+        }
+    });
+});
+
+// ============================================
+// FREQUENCY BUTTON LOGIC
+// ============================================
+document.querySelectorAll('.freq-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        currentFrequency = btn.dataset.frequency;
+        frequencyInput.value = currentFrequency;
+    });
+});
+
+// ============================================
+// AMOUNT INPUT LOGIC
+// ============================================
+// Handle amount input changes
+amountInput.addEventListener('change', (e) => {
+    let value = parseFloat(e.target.value) || 0;
+    if (value < 0) value = 0;
+    currentAmount = parseFloat(value.toFixed(2));
+    amountInput.value = currentAmount.toFixed(2);
+});
+
+amountInput.addEventListener('blur', (e) => {
+    let value = parseFloat(e.target.value) || 0;
+    if (value < 0) value = 0;
+    currentAmount = parseFloat(value.toFixed(2));
+    amountInput.value = currentAmount.toFixed(2);
+});
+
+// Set initial value
+currentAmount = 0;
+amountInput.value = '0.00';
+
+// ============================================
+// VALIDATION
+// ============================================
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Sanitize input to prevent XSS
-function sanitizeInput(input) {
-    const div = document.createElement('div');
-    div.textContent = input;
-    return div.innerHTML;
+// ============================================
+// PAYSTACK PAYMENT
+// ============================================
+function initiatePaystackPayment() {
+    // Check if Paystack is loaded
+    if (typeof PaystackPop === 'undefined') {
+        console.log('[v0] Paystack not loaded yet, retrying...');
+        setTimeout(initiatePaystackPayment, 500);
+        return;
+    }
+
+    // For demo purposes, using a test email
+    // In production, collect actual donor email
+    const email = 'donor@charity.org';
+    const amount = Math.round(currentAmount * 100); // Convert to cents
+
+    console.log('[v0] Initiating Paystack payment with:', {
+        amount: amount,
+        email: email,
+        type: currentDonationType,
+        frequency: currentFrequency,
+        purpose: supportPurpose.value
+    });
+
+    const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: amount,
+        currency: 'KES',
+        ref: 'DONATION_' + Math.floor(Math.random() * 1000000000 + 1),
+        metadata: {
+            donation_type: currentDonationType,
+            frequency: currentFrequency,
+            purpose: supportPurpose.value || 'general',
+            starting_date: currentDonationType === 'recurring' ? donationStartDate.value : null
+        },
+        onClose: function() {
+            console.log('[v0] Payment window closed');
+        },
+        onSuccess: function(response) {
+            console.log('[v0] Payment successful:', response.reference);
+            handlePaymentSuccess(response);
+        }
+    });
+
+    handler.openIframe();
 }
+
+// ============================================
+// HANDLE PAYMENT SUCCESS
+// ============================================
+function handlePaymentSuccess(response) {
+    // In production, verify the payment with your backend
+    console.log('[v0] Processing payment:', response.reference);
+    
+    // Simulate backend verification
+    setTimeout(() => {
+        const donationTypeText = currentDonationType === 'recurring' ? 'recurring ' : '';
+        const message = `Your ${donationTypeText}donation of $${currentAmount.toFixed(2)} has been processed successfully!\n\nReference: ${response.reference}`;
+        showSuccessModal(message);
+        
+        // Reset form
+        paymentForm.reset();
+        amountInput.value = '0.00';
+        currentAmount = 0;
+        currentDonationType = 'one-time';
+        currentFrequency = 'weekly';
+        
+        // Reset UI
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-type="one-time"]').classList.add('active');
+        frequencySection.classList.remove('show');
+        startingSection.classList.remove('show');
+    }, 1000);
+}
+
+// ============================================
+// FORM SUBMISSION
+// ============================================
+paymentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    console.log('[v0] Form submitted. Current amount:', currentAmount);
+
+    // Validate amount - amount is required and must be greater than 0
+    if (!amountInput.value || amountInput.value === '' || amountInput.value === '0.00') {
+        showError('Donation amount is required. Please enter an amount greater than 0.');
+        amountInput.focus();
+        return;
+    }
+
+    if (currentAmount < 0.01) {
+        showError('Donation amount must be greater than 0. Please enter a valid amount.');
+        amountInput.focus();
+        return;
+    }
+
+    // Validate purpose
+    if (!supportPurpose.value) {
+        showError('Please select a support purpose');
+        supportPurpose.focus();
+        return;
+    }
+
+    // Validate starting date for recurring donations
+    if (currentDonationType === 'recurring' && !donationStartDate.value) {
+        showError('Please select a starting date for recurring donation');
+        donationStartDate.focus();
+        return;
+    }
+
+    console.log('[v0] All validations passed. Initiating Paystack payment:', {
+        amount: currentAmount,
+        type: currentDonationType,
+        frequency: currentFrequency,
+        purpose: supportPurpose.value
+    });
+
+    // Initiate Paystack payment
+    initiatePaystackPayment();
+});
+
+// ============================================
+// MODAL FUNCTIONS
+// ============================================
+function showSuccessModal(message) {
+    document.getElementById('successMessage').textContent = message;
+    successModal.classList.add('active');
+}
+
+function showErrorModal(message) {
+    document.getElementById('errorMessage').textContent = message;
+    errorModal.classList.add('active');
+}
+
+function closeModal() {
+    successModal.classList.remove('active');
+}
+
+function closeErrorModal() {
+    errorModal.classList.remove('active');
+}
+
+function showError(message) {
+    console.error('[v0] Error:', message);
+    showErrorModal(message);
+}
+
+// ============================================
+// CLOSE MODALS ON BACKGROUND CLICK
+// ============================================
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+});
+
+// ============================================
+// INITIALIZE ON PAGE LOAD
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    loadPaystackScript();
+    
+    // Set default starting date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('startingDate').value = today;
+});
+

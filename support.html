@@ -79,225 +79,101 @@
         </section>
 
         <!-- Payment Section -->
-        <section class="section payment-section" id="payment-section">
-            <div class="content-wrapper">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Make Your Gift</h2>
-                    <p class="section-subtitle">Choose your preferred payment method</p>
-                </div>
+        <div class="payment-container">
+        <!-- Amount Display -->
+        <div class="amount-display">
+            <div class="amount">
+                <span class="currency">$</span><input type="number" id="amountInput" min="0.01" step="0.01" value="0.00" placeholder="0.00" required>
+            </div>
+        </div>
 
-                <!-- Payment Method Tabs -->
-                <div class="payment-tabs fade-in">
-                    <button class="tab-button active" data-tab="local">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-                        Local Payment
+        <!-- Payment Form -->
+        <form id="paymentForm">
+            <!-- Support Purpose -->
+            <div class="form-group">
+                <label for="supportPurpose">Support Purpose</label>
+                <select id="supportPurpose" required>
+                    <option value="">Select a purpose</option>
+                    <option value="general">General Fund</option>
+                    <option value="education">Education Programs</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="emergency">Emergency Relief</option>
+                    <option value="community">Community Development</option>
+                </select>
+            </div>
+
+            <!-- Support Type -->
+            <div class="form-group">
+                <label>Support Type</label>
+                <div class="button-group">
+                    <button type="button" class="type-btn active" data-type="one-time">
+                        <span class="icon">👤</span>
+                        <span>Give one time</span>
                     </button>
-                    <button class="tab-button" data-tab="international">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        International Payment
+                    <button type="button" class="type-btn" data-type="recurring">
+                        <span class="icon">♻️</span>
+                        <span>Set up Recurring</span>
                     </button>
-                </div>
-
-                <!-- Payment Forms Container -->
-                <div class="payment-container fade-in delay-1">
-                    
-                    <!-- Local Payment Tab -->
-                    <div class="payment-tab active" id="local-tab">
-                        <div class="payment-methods-grid">
-                            <!-- M-Pesa -->
-                            <div class="payment-method-card" data-method="mpesa">
-                                <div class="method-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                        <path fill="#aed580" d="M31.003,7.001l-0.001-5.5c0-0.828,0.672-1.5,1.5-1.5	c0.828,0,1.5,0.672,1.5,1.5v5.5H31.003z"></path><path fill="#aed580" d="M14.964,47.999h18.073c0.533,0,0.965-0.432,0.965-0.965V4.964c0-0.533-0.432-0.965-0.965-0.965	H14.964c-0.533,0-0.965,0.432-0.965,0.965v42.07C13.999,47.567,14.431,47.999,14.964,47.999z"></path><path fill="#fff" fill-rule="evenodd" d="M17.739,29.001h12.524c0.962,0,1.741-0.78,1.741-1.741V10.743	c0-0.962-0.78-1.741-1.741-1.741H17.739c-0.962,0-1.741,0.78-1.741,1.741V27.26C15.997,28.222,16.777,29.001,17.739,29.001z" clip-rule="evenodd"></path><path fill="#9b2310" fill-rule="evenodd" d="M12.001,22.001	c3.643-0.7,5.865-2.448,7-5c1.135,2.552,3.357,4.3,7,5H12.001z" clip-rule="evenodd"></path><path fill="#e60023" fill-rule="evenodd" d="M12.001,22.001	c4.273,0.867,6.476,1,11,1c5.076,0,11.712-1.939,14-6l-9-4C24.039,18.139,21.863,22.001,12.001,22.001z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <h3>M-Pesa</h3>
-                                <p class="payment-description">Fast and secure mobile money transfer</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-
-                            <!-- Airtel Money -->
-                            <div class="payment-method-card" data-method="airtel">
-                                <div class="method-icon">
-                                    <img src="Assets/icons/airtel.svg" alt="">
-                                </div>
-                                <h3>Airtel Money</h3>
-                                <p class="payment-description">Mobile money via Airtel network</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-                        </div>
-
-                        <!-- Local Payment Form -->
-                        <form class="payment-form" id="localPaymentForm" style="display: none;">
-                            <div class="form-section">
-                                <h3 id="selectedMethodTitle">M-Pesa Payment</h3>
-                                
-                                <div class="form-group">
-                                    <label for="donorName">Full Name *</label>
-                                    <input type="text" id="donorName" name="donorName" required placeholder="Enter your full name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="donorPhone">Phone Number *</label>
-                                    <input type="tel" id="donorPhone" name="donorPhone" required placeholder="254712345678">
-                                    <small>Include country code (e.g., 254 for Kenya)</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="donorEmail">Email Address *</label>
-                                    <input type="email" id="donorEmail" name="donorEmail" required placeholder="your@email.com">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="donationAmount">Donation Amount (KES) *</label>
-                                    <div class="amount-input">
-                                        <input type="number" id="donationAmount" name="donationAmount" required min="50" placeholder="Enter amount" value="500">
-                                    </div>
-                                    <small>Minimum amount: KES 50</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="donationPurpose">Donation Purpose</label>
-                                    <select id="donationPurpose" name="donationPurpose">
-                                        <option value="">Select a purpose (optional)</option>
-                                        <option value="general">General Fund</option>
-                                        <option value="care">Care Ministry</option>
-                                        <option value="outreach">Community Outreach</option>
-                                        <option value="prayer">Prayer Support</option>
-                                        <option value="building">Building Fund</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="anonymousGift" name="anonymousGift">
-                                        Make this an anonymous gift
-                                    </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="recurringGift" name="recurringGift">
-                                        Make this a monthly recurring donation
-                                    </label>
-                                </div>
-
-                                <button type="submit" class="btn-donate btn-primary">Complete Payment</button>
-                                <button type="button" class="btn-cancel" onclick="cancelPayment()">Back</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- International Payment Tab -->
-                    <div class="payment-tab" id="international-tab">
-                        <div class="payment-methods-grid">
-                            <!-- Card Payment -->
-                            <div class="payment-method-card" data-method="card">
-                                <div class="method-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                    <path fill="#1565C0" d="M45,35c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V13c0-2.209,1.791-4,4-4h34c2.209,0,4,1.791,4,4V35z"></path><path fill="#FFF" d="M15.186 19l-2.626 7.832c0 0-.667-3.313-.733-3.729-1.495-3.411-3.701-3.221-3.701-3.221L10.726 30v-.002h3.161L18.258 19H15.186zM17.689 30L20.56 30 22.296 19 19.389 19zM38.008 19h-3.021l-4.71 11h2.852l.588-1.571h3.596L37.619 30h2.613L38.008 19zM34.513 26.328l1.563-4.157.818 4.157H34.513zM26.369 22.206c0-.606.498-1.057 1.926-1.057.928 0 1.991.674 1.991.674l.466-2.309c0 0-1.358-.515-2.691-.515-3.019 0-4.576 1.444-4.576 3.272 0 3.306 3.979 2.853 3.979 4.551 0 .291-.231.964-1.888.964-1.662 0-2.759-.609-2.759-.609l-.495 2.216c0 0 1.063.606 3.117.606 2.059 0 4.915-1.54 4.915-3.752C30.354 23.586 26.369 23.394 26.369 22.206z"></path><path fill="#FFC107" d="M12.212,24.945l-0.966-4.748c0,0-0.437-1.029-1.573-1.029c-1.136,0-4.44,0-4.44,0S10.894,20.84,12.212,24.945z"></path>
-                                    </svg>                                
-                                </div>
-                                <h3>Credit/Debit Card</h3>
-                                <p class="payment-description">Visa, Mastercard, American Express</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-
-                            <!-- Apple Pay -->
-                            <div class="payment-method-card" data-method="applepay">
-                                <div class="method-icon">
-                                    <img src="Assets/icons/apple-pay.svg" alt="">
-                                </div>
-                                <h3>Apple Pay</h3>
-                                <p class="payment-description">Quick and secure payment</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-
-                            <!-- Google Pay -->
-                            <div class="payment-method-card" data-method="googlepay">
-                                <div class="method-icon">
-                                    <img src="Assets/icons/google-pay.svg" alt="">
-                                </div>
-                                <h3>Google Pay</h3>
-                                <p class="payment-description">Fast payment with Google Account</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-
-                            <!-- PayPal -->
-                            <div class="payment-method-card" data-method="paypal">
-                                <div class="method-icon">
-                                    <img src="Assets/icons/paypal.svg" alt="">
-                                </div>
-                                <h3>PayPal</h3>
-                                <p class="payment-description">Pay safely with your PayPal account</p>
-                                <button class="select-method-btn">Select</button>
-                            </div>
-                        </div>
-
-                        <!-- International Payment Form -->
-                        <form class="payment-form" id="internationalPaymentForm" style="display: none;">
-                            <div class="form-section">
-                                <h3 id="selectedMethodTitleIntl">Card Payment</h3>
-                                
-                                <div class="form-group">
-                                    <label for="intlDonorName">Full Name *</label>
-                                    <input type="text" id="intlDonorName" name="intlDonorName" required placeholder="Enter your full name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="intlDonorEmail">Email Address *</label>
-                                    <input type="email" id="intlDonorEmail" name="intlDonorEmail" required placeholder="your@email.com">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="intlDonationAmount">Donation Amount (USD) *</label>
-                                    <div class="amount-input">
-                                        <input type="number" id="intlDonationAmount" name="intlDonationAmount" required min="1" placeholder="Enter amount" value="50">
-                                    </div>
-                                    <small>Minimum amount: USD $1</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="intlDonationPurpose">Donation Purpose</label>
-                                    <select id="intlDonationPurpose" name="intlDonationPurpose">
-                                        <option value="">Select a purpose (optional)</option>
-                                        <option value="general">General Fund</option>
-                                        <option value="care">Care Ministry</option>
-                                        <option value="outreach">Community Outreach</option>
-                                        <option value="prayer">Prayer Support</option>
-                                        <option value="building">Building Fund</option>
-                                    </select>
-                                </div>
-
-                                <!-- Stripe Card Element -->
-                                <div class="form-group" id="card-element-container" style="display: none;">
-                                    <label>Card Details *</label>
-                                    <div id="card-element" class="card-element"></div>
-                                    <div id="card-errors" class="error-message"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="intlAnonymousGift" name="intlAnonymousGift">
-                                        Make this an anonymous gift
-                                    </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="intlRecurringGift" name="intlRecurringGift">
-                                        Make this a monthly recurring donation
-                                    </label>
-                                </div>
-
-                                <button type="submit" class="btn-donate btn-primary">Complete Payment</button>
-                                <button type="button" class="btn-cancel" onclick="cancelPaymentIntl()">Back</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Frequency Section (Hidden by default) -->
+            <div class="frequency-section" id="frequencySection">
+                <label>Frequency</label>
+                <div class="frequency-options">
+                    <button type="button" class="freq-btn active" data-frequency="weekly">
+                        Every week
+                    </button>
+                    <button type="button" class="freq-btn" data-frequency="biweekly">
+                        Every 2 weeks
+                    </button>
+                    <button type="button" class="freq-btn" data-frequency="monthly">
+                        Every month
+                    </button>
+                </div>
+            </div>
+
+            <!-- Starting Date Section (Hidden by default) -->
+            <div class="starting-section" id="startingSection">
+                <label for="donationStartDate">Starting</label>
+                <div class="date-input-wrapper">
+                    <input type="date" id="donationStartDate">
+                    <div class="date-icon">📅</div>
+                </div>
+            </div>
+
+            <!-- Hidden inputs for form submission -->
+            <input type="hidden" id="donationType" value="one-time">
+            <input type="hidden" id="frequency" value="weekly">
+
+            <!-- Donate Button -->
+            <button type="submit" class="donate-btn">
+                <span class="donate-icon">💳</span>
+                <span>Donate</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>Payment Successful!</h2>
+            <p id="successMessage">Your donation has been processed successfully. Thank you for your generosity!</p>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <div class="error-icon">✕</div>
+            <h2>Payment Failed</h2>
+            <p id="errorMessage">An error occurred while processing your payment. Please try again.</p>
+            <button class="close-btn" onclick="closeErrorModal()">Close</button>
+        </div>
+    </div>
+
 
         <!-- Impact Section -->
         <section class="section impact-section" id="impact">
