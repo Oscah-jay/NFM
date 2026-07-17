@@ -173,101 +173,7 @@ body {
     background-color: #fff;
 }
 
-/* Payment Form */
-.payment-form {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
 
-.payment-form h3 {
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
-}
-
-.form-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-group input,
-.form-group select {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #193b0a;
-    box-shadow: 0 0 0 3px rgba(25, 59, 10, 0.1);
-}
-
-.form-group small {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 0.25rem;
-}
-
-.form-group input[type="checkbox"] {
-    width: auto;
-    margin-right: 0.5rem;
-    cursor: pointer;
-}
-
-.form-group label input[type="checkbox"] {
-    display: flex;
-    align-items: center;
-}
-
-.amount-input {
-    position: relative;
-}
-
-.amount-input input {
-    padding-left: 1.5rem;
-}
-
-.amount-input::before {
-    content: '$';
-    position: absolute;
-    left: 0.75rem;
-    top: 0.75rem;
-    color: #666;
-    font-weight: 600;
-}
-
-.error-message {
-    color: #dc2626;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-/* Radio and Checkbox Styles */
-.form-group input[type="radio"] {
-    width: auto;
-    margin-right: 0.5rem;
-    cursor: pointer;
-}
 
 /* Buttons */
 .btn-donate {
@@ -361,58 +267,6 @@ body {
     font-size: 1rem;
 }
 
-/* FAQ Section */
-.faq-section {
-    background-color: #fff;
-}
-
-.faq-container {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 1.5rem 0;
-}
-
-.faq-item:last-child {
-    border-bottom: none;
-}
-
-.faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    transition: all 0.3s ease;
-}
-
-.faq-question:hover {
-    color: #e1b62f;
-}
-
-.faq-question svg {
-    transition: transform 0.3s ease;
-}
-
-.faq-question.active svg {
-    transform: rotate(180deg);
-}
-
-.faq-answer {
-    color: #666;
-    margin-top: 1rem;
-    line-height: 1.8;
-}
-
 /* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, #f3f4f6 0%, #ede9fe 100%);
@@ -462,161 +316,6 @@ body {
 
 .btn-donate-now:active {
     transform: scale(0.98);
-}
-
-/* Modal Overlay Styles */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto;
-}
-
-.modal-overlay.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-container {
-    background: white;
-    border-radius: 16px;
-    padding: 2.5rem;
-    max-width: 500px;
-    width: 90%;
-    margin: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.3s ease;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 1rem;
-}
-
-.modal-header h2 {
-    color: #333;
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #999;
-    transition: color 0.3s ease;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-close:hover {
-    color: #333;
-}
-
-.donation-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    text-align: center;
-    max-width: 400px;
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 2rem;
-}
-
-.modal-icon.success {
-    background-color: #d1fae5;
-    color: #059669;
-}
-
-.modal-icon.error {
-    background-color: #fee2e2;
-    color: #dc2626;
-}
-
-.modal-content h2 {
-    color: #333;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.modal-content p {
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.modal-content button {
-    padding: 0.75rem 2rem;
 }
 
 /* Animation Classes */
@@ -743,376 +442,605 @@ body {
     }
 }
 
-.payment-container {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    margin-left: 12rem;
-    margin-bottom: 3rem;
-}
 
-/* Amount Display */
-.amount-display {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 40px 30px;
-    background: linear-gradient(135deg, rgba(30, 58, 31, 0.05) 0%, rgba(30, 58, 31, 0.02) 100%);
-    border-radius: 12px;
-}
-
-.amount-display .amount {
-    font-size: 56px;
-    font-weight: bold;
-    color: #1e3a1f;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 8px;
-}
-
-.amount-display .currency {
-    font-size: 32px;
-    margin-right: 5px;
-    font-weight: 600;
-}
-
-.amount-display #amountInput {
-    font-size: 56px;
-    font-weight: bold;
-    color: #1e3a1f;
-    border: none;
-    background: transparent;
-    text-align: center;
-    width: 200px;
-    padding: 0;
-    font-family: inherit;
-    max-width: 100%;
-}
-
-/* Remove number input spinner buttons */
-.amount-display #amountInput::-webkit-outer-spin-button,
-.amount-display #amountInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.amount-display #amountInput[type=number] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-
-.amount-display #amountInput:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(30, 58, 31, 0.1);
-}
-
-.amount-display #amountInput:invalid {
-    color: #d32f2f;
-}
-
-.amount-display #amountInput::placeholder {
-    color: #ccc;
-}
-
-/* Error state indicator */
-.amount-display.error #amountInput {
-    color: #d32f2f;
-}
-
-.amount-display.error {
-    background: linear-gradient(135deg, rgba(211, 47, 47, 0.05) 0%, rgba(211, 47, 47, 0.02) 100%);
-}
-
-/* Form Section */
-.form-section {
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
+.container {
+    max-width: 1200px;
+    margin-bottom: 0;
+    padding: 0 20px;
     display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
+    
+}
+
+/* Header */
+.header {
+    background: #193b0a;
+    color: white;
+    padding: 60px 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
     margin-bottom: 10px;
 }
 
-.form-group select,
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.2s;
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-.form-group select:focus,
-.form-group input:focus {
-    outline: none;
-    border-color: #1e3a1f;
-    box-shadow: 0 0 0 3px rgba(30, 58, 31, 0.1);
+/* Main Content */
+.main-content2 {
+    padding: 60px 0;
 }
 
-/* Support Type Buttons */
-.button-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 10px;
+/* Impact Section */
+.impact-section {
+    margin-bottom: 80px;
 }
 
-.type-btn {
-    padding: 14px 20px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    background: white;
-    color: #333;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.type-btn:hover {
-    border-color: #1e3a1f;
-    background: #f9f9f9;
-}
-
-.type-btn.active {
-    background: #1e3a1f;
-    color: white;
-    border-color: #1e3a1f;
-}
-
-.type-btn .icon {
-    font-size: 18px;
-}
-
-/* Frequency Section */
-.frequency-section,
-.starting-section {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.frequency-section.show,
-.starting-section.show {
-    opacity: 1;
-    max-height: 200px;
-    pointer-events: auto;
-    margin-bottom: 25px;
-}
-
-.frequency-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.freq-btn {
-    padding: 12px 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    background: white;
-    color: #333;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.impact-section h2 {
     text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--text-color);
 }
 
-.freq-btn:hover {
-    border-color: #1e3a1f;
-    background: #f9f9f9;
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.freq-btn.active {
-    background: #1e3a1f;
+.impact-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-5px);
+}
+
+.impact-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.impact-text {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+/* Donation CTA */
+.donation-cta {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.btn-donate-now {
+    background: #193b0a;
     color: white;
-    border-color: #1e3a1f;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    margin-top: -50px;
+    height: 50px;
+    text-align: center;
+    width: max-content;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3);
+    transition: all 0.3s ease;
 }
 
-/* Starting Date Section */
-.starting-section {
+.btn-donate-now:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4);
+    color:#193b0a;
+    background: #e1b62f;
+}
+
+.btn-donate-now:active {
+    transform: scale(0.98);
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-top: 60px;
+    padding: 40px;
+    background: var(--white);
+    border-radius: 12px;
+}
+
+.faq-section h2 {
+    font-size: 1.8rem;
     margin-bottom: 30px;
 }
 
-.date-input-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.date-input-wrapper input {
-    flex: 1;
-}
-
-.date-icon {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f0f0f0;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-/* Donate Button */
-.donate-btn {
+.faq-question {
     width: 100%;
-    padding: 16px;
-    background: #1e3a1f;
-    color: white;
+    padding: 18px;
+    background: var(--bg-light);
     border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
-.donate-btn:hover {
-    background: #163029;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(30, 58, 31, 0.3);
+.faq-question:hover {
+    background: #f0f0f0;
 }
 
-.donate-btn:active {
-    transform: translateY(0);
+.faq-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
 }
 
-.donate-btn.loading {
-    opacity: 0.7;
-    cursor: not-allowed;
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
 }
 
-.donate-icon {
-    font-size: 18px;
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: var(--white);
 }
 
-/* Modals */
-.modal {
-    display: none;
+.faq-item.active .faq-answer {
+    max-height: 200px;
+}
+
+.faq-answer p {
+    padding: 18px;
+    color: var(--text-light);
+}
+
+/* Modal Overlay */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1000;
+    display: flex;
     align-items: center;
     justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
 }
 
-.modal.active {
-    display: flex;
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 3;
+    background: #193b0a;
 }
 
 .modal-content {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 400px;
-    text-align: center;
+    background: var(--white);
+    border-radius: 16px;
+    max-width: 550px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
     animation: slideUp 0.3s ease;
 }
 
 @keyframes slideUp {
     from {
+        transform: translateY(50px);
         opacity: 0;
-        transform: translateY(20px);
     }
     to {
-        opacity: 1;
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
-.modal-content h2 {
-    margin-bottom: 15px;
-    color: #1e3a1f;
-    font-size: 22px;
-}
-
-.modal-content p {
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-.modal-content .close-btn {
-    background: #1e3a1f;
-    color: white;
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
     border: none;
-    padding: 12px 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: #e1b62f;
+}
+
+/* Amount Section */
+.amount-section {
+    background: linear-gradient(135deg, #2d5016 0%, var(--primary-green) 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.amount-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.amount-input-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.currency-symbol {
+    font-size: 2.5rem;
+    opacity: 0.9;
+}
+
+.amount-input {
+    width: 200px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 0;
+    outline: none;
+}
+
+.amount-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"].amount-input {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Donation Form */
+.donation-form {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: rgb(196, 195, 195);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+/* Button Group */
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.type-btn {
+    padding: 12px;
+    border: 2px solid grey;
+    background: var(--white);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.type-btn:hover {
+    border-color: var(--primary-green);
+    background: #f5f5f5;
+    color: #193b0a;
+}
+
+.type-btn.active {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-light) 100%);
+    color: white;
+    border-color: #e1b62f;
+    box-shadow: 0 4px 12px rgba(27, 94, 32, 0.3);
+}
+
+.type-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Frequency Buttons */
+.frequency-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.freq-btn {
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--white);
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
     font-weight: 600;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
+    color: rgb(171, 171, 171);
+    font-size: 0.9rem;
 }
 
-.modal-content .close-btn:hover {
-    background: #163029;
+.freq-btn:hover {
+    border-color: var(--primary-green);
+    background: #f5f5f5;
+    color: #193b0a;
+}
+
+.freq-btn.active {
+    background: var(--primary-green);
+    color: white;
+    border: 1px solid #e1b62f;
+    font-size: 1rem;
+}
+
+/* Date Input */
+.date-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Checkbox */
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.checkbox-label {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Primary Donate Button */
+.btn-donate-primary {
+    width: 100%;
+    padding: 14px;
+    background: #d1b761;
+    color: #193b0a;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-donate-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4);
+    background-color: #e1b62f;
+}
+
+.btn-donate-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-donate-primary svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Hidden Class */
+.hidden {
+    display: none !important;
+}
+
+/* Success Modal */
+.success-modal {
+    text-align: center;
+    padding: 40px;
+    display: none;
 }
 
 .success-icon {
-    font-size: 48px;
+    width: 60px;
+    height: 60px;
+    background: #4caf50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+}
+
+.success-modal h2 {
+    color: var(--text-color);
     margin-bottom: 15px;
+}
+
+.success-modal p {
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+/* Error Modal */
+.error-modal {
+    text-align: center;
+    padding: 40px;
+    display: none;
 }
 
 .error-icon {
-    font-size: 48px;
+    width: 60px;
+    height: 60px;
+    background: #f44336;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+}
+
+.error-modal h2 {
+    color: var(--text-color);
     margin-bottom: 15px;
-    color: #e74c3c;
+}
+
+.error-modal p {
+    color: var(--text-light);
+    margin-bottom: 25px;
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-    .payment-container {
-        padding: 25px;
-        margin-left: 0;
-        margin-bottom: 0;
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
     }
 
-    .amount-display {
-        padding: 20px 0;
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .amount-display .amount {
-        font-size: 42px;
-    }
-
-    .frequency-options {
+    .frequency-buttons {
         grid-template-columns: 1fr;
+    }
+
+    .amount-input-wrapper {
+        font-size: 2.5rem;
+    }
+
+    .currency-symbol {
+        font-size: 1.8rem;
+    }
+
+    .amount-input {
+        width: 120px;
+        font-size: 2.5rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        border-radius: 12px;
+    }
+
+    .donation-form {
+        padding: 20px;
     }
 
     .button-group {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 40px 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-card {
+        padding: 20px;
+    }
+
+    .btn-donate-now {
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+
+    .faq-item{
+        text-align: left;
+    }
+    .faq-question{
+        text-align: left;
+    }
+
+
 }

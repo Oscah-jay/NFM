@@ -44,7 +44,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#hero" class="nav-link active">Overview</a></li>
-                <li><a href="#payment-section" class="nav-link">Make a Donation</a></li>
+                <li><a href="#container" class="nav-link">Make a Donation</a></li>
                 <li><a href="#impact" class="nav-link">Your Impact</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
             </ul>
@@ -78,99 +78,192 @@
             </div>
         </section>
 
-        <!-- Payment Section -->
-        <div class="payment-container">
-        <!-- Amount Display -->
-        <div class="amount-display">
-            <div class="amount">
-                <span class="currency">$</span><input type="number" id="amountInput" min="0.01" step="0.01" value="0.00" placeholder="0.00" required>
+        <section class="container" id="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Support Our Ministry</h1>
+                <p>Your generous gift makes a difference in the lives of those we serve</p>
             </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content2">
+
+            <!-- Donation Button -->
+            <section class="donation-cta">
+                <button class="btn-donate-now" onclick="openDonationModal()">Donate Now</button>
+            </section>
+        </main>
+    </section>
+
+    <!-- Donation Modal -->
+    <div class="modal-overlay" id="donationModal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeDonationModal()">&times;</button>
+
+            <!-- Amount Banner -->
+            <div class="amount-section">
+                <div class="amount-banner">
+                    <div class="amount-input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            id="donationAmountInput" 
+                            class="amount-input" 
+                            placeholder="0.00"
+                            min="1"
+                            step="0.01"
+                            oninput="formatAmountDisplay()"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section -->
+            <form id="donationForm" class="donation-form" onsubmit="handleDonationSubmit(event)">
+                
+                <!-- Support Purpose -->
+                <div class="form-group">
+                    <label for="supportPurpose">Support Purpose</label>
+                    <select id="supportPurpose" required>
+                        <option value="">Select a purpose</option>
+                        <option value="general">General Fund</option>
+                        <option value="care">Care Ministry</option>
+                        <option value="outreach">Community Outreach</option>
+                        <option value="prayer">Prayer Support</option>
+                        <option value="building">Building Fund</option>
+                    </select>
+                </div>
+
+                <!-- Support Type -->
+                <div class="form-group">
+                    <label>Support Type</label>
+                    <div class="button-group">
+                        <button 
+                            type="button" 
+                            class="type-btn active" 
+                            data-type="onetime"
+                            onclick="setDonationType('onetime')"
+                        >
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Give one time
+                        </button>
+                        <button 
+                            type="button" 
+                            class="type-btn" 
+                            data-type="recurring"
+                            onclick="setDonationType('recurring')"
+                        >
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M4.22 19.78l4.24-4.24m5.08 0l4.24 4.24"></path>
+                            </svg>
+                            Set up Recurring
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frequency (Hidden by default) -->
+                <div id="frequencySection" class="form-group hidden">
+                    <label>Frequency</label>
+                    <div class="frequency-buttons">
+                        <button 
+                            type="button" 
+                            class="freq-btn" 
+                            data-frequency="week"
+                            onclick="setFrequency('week')"
+                        >
+                            Every week
+                        </button>
+                        <button 
+                            type="button" 
+                            class="freq-btn" 
+                            data-frequency="biweekly"
+                            onclick="setFrequency('biweekly')"
+                        >
+                            Every 2 weeks
+                        </button>
+                        <button 
+                            type="button" 
+                            class="freq-btn active" 
+                            data-frequency="month"
+                            onclick="setFrequency('month')"
+                        >
+                            Every month
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Starting Date (Hidden by default) -->
+                <div id="startingSection" class="form-group hidden">
+                    <label>Starting</label>
+                    <input 
+                        type="date" 
+                        id="startingDate" 
+                        class="date-input"
+                    >
+                </div>
+
+                <!-- Donor Information -->
+                <div class="form-group">
+                    <label for="donorName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="donorName" 
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="donorEmail">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="donorEmail" 
+                        placeholder="your@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group checkbox">
+                    <input 
+                        type="checkbox" 
+                        id="anonymousGift"
+                    >
+                    <label for="anonymousGift" class="checkbox-label">Make this an anonymous gift</label>
+                </div>
+
+                <!-- Donate Button -->
+                <button type="submit" class="btn-donate-primary">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 1C6.48 1 2 5.48 2 11s4.48 10 10 10 10-4.48 10-10S17.52 1 12 1zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 7 15.5 7 14 7.67 14 8.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 7 8.5 7 7 7.67 7 8.5 7.67 10 8.5 10zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path>
+                    </svg>
+                    Donate
+                </button>
+            </form>
         </div>
-
-        <!-- Payment Form -->
-        <form id="paymentForm">
-            <!-- Support Purpose -->
-            <div class="form-group">
-                <label for="supportPurpose">Support Purpose</label>
-                <select id="supportPurpose" required>
-                    <option value="">Select a purpose</option>
-                    <option value="general">General Fund</option>
-                    <option value="education">Education Programs</option>
-                    <option value="healthcare">Healthcare</option>
-                    <option value="emergency">Emergency Relief</option>
-                    <option value="community">Community Development</option>
-                </select>
-            </div>
-
-            <!-- Support Type -->
-            <div class="form-group">
-                <label>Support Type</label>
-                <div class="button-group">
-                    <button type="button" class="type-btn active" data-type="one-time">
-                        <span class="icon">👤</span>
-                        <span>Give one time</span>
-                    </button>
-                    <button type="button" class="type-btn" data-type="recurring">
-                        <span class="icon">♻️</span>
-                        <span>Set up Recurring</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Frequency Section (Hidden by default) -->
-            <div class="frequency-section" id="frequencySection">
-                <label>Frequency</label>
-                <div class="frequency-options">
-                    <button type="button" class="freq-btn active" data-frequency="weekly">
-                        Every week
-                    </button>
-                    <button type="button" class="freq-btn" data-frequency="biweekly">
-                        Every 2 weeks
-                    </button>
-                    <button type="button" class="freq-btn" data-frequency="monthly">
-                        Every month
-                    </button>
-                </div>
-            </div>
-
-            <!-- Starting Date Section (Hidden by default) -->
-            <div class="starting-section" id="startingSection">
-                <label for="donationStartDate">Starting</label>
-                <div class="date-input-wrapper">
-                    <input type="date" id="donationStartDate">
-                    <div class="date-icon">📅</div>
-                </div>
-            </div>
-
-            <!-- Hidden inputs for form submission -->
-            <input type="hidden" id="donationType" value="one-time">
-            <input type="hidden" id="frequency" value="weekly">
-
-            <!-- Donate Button -->
-            <button type="submit" class="donate-btn">
-                <span class="donate-icon">💳</span>
-                <span>Donate</span>
-            </button>
-        </form>
     </div>
 
     <!-- Success Modal -->
-    <div class="modal" id="successModal">
-        <div class="modal-content">
+    <div class="modal-overlay hidden" id="successModal">
+        <div class="modal-content success-modal">
             <div class="success-icon">✓</div>
             <h2>Payment Successful!</h2>
-            <p id="successMessage">Your donation has been processed successfully. Thank you for your generosity!</p>
-            <button class="close-btn" onclick="closeModal()">Close</button>
+            <p id="successMessage">Thank you for your generous donation.</p>
+            <button class="btn-donate-primary" onclick="closeSuccessModal()">Close</button>
         </div>
     </div>
 
     <!-- Error Modal -->
-    <div class="modal" id="errorModal">
-        <div class="modal-content">
+    <div class="modal-overlay" id="errorModal">
+        <div class="modal-content error-modal">
             <div class="error-icon">✕</div>
             <h2>Payment Failed</h2>
-            <p id="errorMessage">An error occurred while processing your payment. Please try again.</p>
-            <button class="close-btn" onclick="closeErrorModal()">Close</button>
+            <p id="errorMessage">Something went wrong. Please try again.</p>
+            <button class="btn-donate-primary" onclick="closeErrorModal()">Try Again</button>
         </div>
     </div>
 
