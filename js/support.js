@@ -475,3 +475,26 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('[v0] Giving page initialization complete');
 });
+
+
+function goToNextStep() {
+    const amountInput = document.getElementById("donationAmountInput");
+    const error = document.getElementById("amountError");
+
+    if (amountInput.value.trim() === "" || Number(amountInput.value) <= 0) {
+        error.textContent = "Please enter a donation amount.";
+
+        amountInput.focus();
+        amountInput.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        return;
+    }
+
+    error.textContent = "";
+
+    // Move to the next step
+    nextStep();
+}

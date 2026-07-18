@@ -735,6 +735,13 @@ input[type="number"].amount-input {
     -moz-appearance: textfield;
 }
 
+.error-message {
+    color: #e53935;
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
 /* Donation Form */
 .donation-form {
     padding: 30px;
