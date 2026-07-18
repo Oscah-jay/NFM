@@ -4,7 +4,7 @@
 
 // Configuration
 const PAYSTACK_CONFIG = {
-    PUBLIC_KEY: 'pk_live_YOUR_PAYSTACK_PUBLIC_KEY',
+    PUBLIC_KEY: 'pk_test_745a86335b6e3a7bd1861b7531505c64fc3ddbf7',
     SCRIPT_URL: 'https://js.paystack.co/v1/inline.js'
 };
 
@@ -243,7 +243,7 @@ function handleDonationSubmit(event) {
 }
 
 function initializePaystackPayment() {
-    console.log('[v0] Initiating Paystack payment:', {
+    console.log('Initiating Paystack payment:', {
         amount: donationState.amount,
         email: donationState.email,
         type: donationState.type,
@@ -276,7 +276,7 @@ function openPaystackCheckout() {
             starting_date: donationState.startingDate
         },
         onClose: function() {
-            console.log('[v0] Payment window closed');
+            console.log('Payment window closed');
         },
         onSuccess: function(response) {
             console.log('[v0] Payment successful:', response.reference);
@@ -288,7 +288,7 @@ function openPaystackCheckout() {
 }
 
 function handlePaymentSuccess(response) {
-    console.log('[v0] Processing successful payment');
+    console.log('Processing successful payment');
     
     const donationData = {
         reference: response.reference,
@@ -308,7 +308,7 @@ function handlePaymentSuccess(response) {
 }
 
 function verifyPayment(reference, donationData) {
-    console.log('[v0] Verifying payment reference:', reference);
+    console.log('Verifying payment reference:', reference);
     
     // TODO: Implement backend verification
     // const response = await fetch('/api/donations/verify', {
