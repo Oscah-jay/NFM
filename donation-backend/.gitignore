@@ -1,0 +1,13 @@
+# Environment variables
+.env
+
+# Optional environment files
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs
+logs
+*.log

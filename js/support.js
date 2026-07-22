@@ -293,7 +293,7 @@ function handlePaymentSuccess(response) {
     const donationData = {
         reference: response.reference,
         amount: donationState.amount,
-        currency: 'KES',
+        currency: 'USD',
         email: donationState.email,
         name: donationState.anonymous ? 'Anonymous Donor' : donationState.name,
         purpose: donationState.purpose,
