@@ -1,11 +1,12 @@
 // ============================================
-// PAYSTACK GIVING PAGE - CLEAN & UNIFIED JS
+// PAYSTACK GIVING PAGE - BACKEND INTEGRATED
 // ============================================
 
 // Configuration
-const PAYSTACK_CONFIG = {
+const API_CONFIG = {
+    BACKEND_URL: 'http://localhost:5000', // Change to your deployed backend URL in production
     PUBLIC_KEY: 'pk_test_745a86335b6e3a7bd1861b7531505c64fc3ddbf7',
-    SCRIPT_URL: 'https://js.paystack.co/v1/inline.js'
+    PAYSTACK_SCRIPT_URL: 'https://js.paystack.co/v1/inline.js'
 };
 
 // State Management
@@ -19,6 +20,9 @@ let donationState = {
     anonymous: false,
     startingDate: ''
 };
+
+// Loading state
+let isProcessing = false;
 
 // ============================================
 // UTILITY FUNCTIONS
@@ -42,6 +46,15 @@ function formatAmountDisplay() {
     const input = document.getElementById('donationAmountInput');
     const value = parseFloat(input.value) || 0;
     donationState.amount = value;
+}
+
+function setLoadingState(loading) {
+    isProcessing = loading;
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.disabled = loading;
+        submitBtn.textContent = loading ? 'Processing...' : 'Donate Now';
+    }
 }
 
 // ============================================
@@ -74,7 +87,13 @@ function showSuccessModal(donationData) {
     const message = document.getElementById('successMessage');
     
     if (modal && message) {
-        message.textContent = `Thank you for your donation of KES ${donationData.amount.toLocaleString()}! A confirmation email has been sent to ${donationData.email}.`;
+        const donorName = donationData.anonymous ? 'Anonymous' : donationData.name;
+        message.innerHTML = `
+            <h3>Thank You!</h3>
+            <p>Your donation of <strong>KES ${donationData.amount.toLocaleString()}</strong> has been received successfully.</p>
+            <p>A confirmation email has been sent to <strong>${donationData.email}</strong>.</p>
+            <p>Reference: <code>${donationData.reference}</code></p>
+        `;
         modal.classList.add('active');
         
         setTimeout(() => {
@@ -95,7 +114,10 @@ function showErrorModal(errorMessage) {
     const message = document.getElementById('errorMessage');
     
     if (modal && message) {
-        message.textContent = errorMessage || 'An error occurred. Please try again.';
+        message.innerHTML = `
+            <h3>Error</h3>
+            <p>${errorMessage || 'An error occurred. Please try again.'}</p>
+        `;
         modal.classList.add('active');
     }
 }
@@ -179,8 +201,8 @@ function setFrequency(frequency) {
 function validateForm() {
     const errors = [];
     
-    if (!donationState.amount || donationState.amount < 0.01) {
-        errors.push('Please enter a donation amount');
+    if (!donationState.amount || donationState.amount < 10) {
+        errors.push('Minimum donation amount is KES 10');
     }
     
     const purpose = document.getElementById('supportPurpose').value;
@@ -228,6 +250,10 @@ function validateForm() {
 function handleDonationSubmit(event) {
     event.preventDefault();
     
+    if (isProcessing) {
+        return;
+    }
+    
     const errors = validateForm();
     
     if (errors.length > 0) {
@@ -238,48 +264,96 @@ function handleDonationSubmit(event) {
     closeDonationModal();
     
     setTimeout(() => {
-        initializePaystackPayment();
+        initializeDonation();
     }, 300);
 }
 
-function initializePaystackPayment() {
-    console.log('Initiating Paystack payment:', {
-        amount: donationState.amount,
-        email: donationState.email,
-        type: donationState.type,
-        purpose: donationState.purpose
-    });
+// Step 1: Initialize donation on backend
+async function initializeDonation() {
+    setLoadingState(true);
     
-    if (typeof PaystackPop === 'undefined') {
-        const script = document.createElement('script');
-        script.src = PAYSTACK_CONFIG.SCRIPT_URL;
-        script.onload = openPaystackCheckout;
-        document.body.appendChild(script);
-    } else {
-        openPaystackCheckout();
+    try {
+        console.log('[v0] Initializing donation with backend:', {
+            amount: donationState.amount,
+            email: donationState.email,
+            type: donationState.type,
+            purpose: donationState.purpose
+        });
+        
+        const response = await fetch(`${API_CONFIG.BACKEND_URL}/api/donations/initialize`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: donationState.amount,
+                email: donationState.email,
+                name: donationState.name,
+                purpose: donationState.purpose,
+                type: donationState.type,
+                frequency: donationState.frequency,
+                startingDate: donationState.startingDate,
+                anonymous: donationState.anonymous
+            })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to initialize donation');
+        }
+        
+        const data = await response.json();
+        console.log('[v0] Donation initialized, opening Paystack:', {
+            reference: data.data.reference,
+            authorizationUrl: data.data.authorizationUrl
+        });
+        
+        // Store reference for verification later
+        donationState.reference = data.data.reference;
+        
+        // Now open Paystack with the authorization URL
+        openPaystackCheckout(data.data.authorizationUrl);
+        
+    } catch (error) {
+        console.error('[v0] Error initializing donation:', error);
+        showErrorModal('Error: ' + error.message);
+        setLoadingState(false);
     }
 }
 
-function openPaystackCheckout() {
+// Step 2: Open Paystack popup with authorization URL
+function openPaystackCheckout(authorizationUrl) {
+    console.log('[v0] Opening Paystack popup');
+    
+    if (typeof PaystackPop === 'undefined') {
+        const script = document.createElement('script');
+        script.src = API_CONFIG.PAYSTACK_SCRIPT_URL;
+        script.onload = () => {
+            openPaystackWithUrl(authorizationUrl);
+        };
+        script.onerror = () => {
+            showErrorModal('Failed to load Paystack. Please check your connection and try again.');
+            setLoadingState(false);
+        };
+        document.body.appendChild(script);
+    } else {
+        openPaystackWithUrl(authorizationUrl);
+    }
+}
+
+function openPaystackWithUrl(authorizationUrl) {
     const handler = PaystackPop.setup({
-        key: PAYSTACK_CONFIG.PUBLIC_KEY,
+        key: API_CONFIG.PUBLIC_KEY,
         email: donationState.email,
         amount: Math.round(donationState.amount * 100),
         currency: 'KES',
-        ref: generateReference(),
-        metadata: {
-            donor_name: donationState.anonymous ? 'Anonymous Donor' : donationState.name,
-            donation_purpose: donationState.purpose,
-            donation_type: donationState.type,
-            frequency: donationState.frequency,
-            is_anonymous: donationState.anonymous,
-            starting_date: donationState.startingDate
-        },
+        ref: donationState.reference,
         onClose: function() {
-            console.log('Payment window closed');
+            console.log('[v0] Payment window closed by user');
+            setLoadingState(false);
         },
         onSuccess: function(response) {
-            console.log('[v0] Payment successful:', response.reference);
+            console.log('[v0] Paystack payment successful:', response.reference);
             handlePaymentSuccess(response);
         }
     });
@@ -288,12 +362,12 @@ function openPaystackCheckout() {
 }
 
 function handlePaymentSuccess(response) {
-    console.log('Processing successful payment');
+    console.log('[v0] Processing successful payment');
     
     const donationData = {
         reference: response.reference,
         amount: donationState.amount,
-        currency: 'USD',
+        currency: 'KES',
         email: donationState.email,
         name: donationState.anonymous ? 'Anonymous Donor' : donationState.name,
         purpose: donationState.purpose,
@@ -307,17 +381,43 @@ function handlePaymentSuccess(response) {
     verifyPayment(response.reference, donationData);
 }
 
-function verifyPayment(reference, donationData) {
-    console.log('Verifying payment reference:', reference);
-    
-    // TODO: Implement backend verification
-    // const response = await fetch('/api/donations/verify', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ reference, ...donationData })
-    // });
-    
-    showSuccessModal(donationData);
+async function verifyPayment(reference, donationData) {
+    try {
+        console.log('[v0] Verifying payment with backend:', reference);
+        
+        const response = await fetch(`${API_CONFIG.BACKEND_URL}/api/donations/verify`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                reference,
+                ...donationData
+            })
+        });
+        
+        const data = await response.json();
+        
+        console.log('[v0] Backend verification response:', data);
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'Verification failed');
+        }
+        
+        if (data.success) {
+            console.log('[v0] Payment verified successfully');
+            showSuccessModal(donationData);
+            resetForm();
+        } else {
+            throw new Error(data.message || 'Payment verification failed');
+        }
+        
+    } catch (error) {
+        console.error('[v0] Verification error:', error);
+        showErrorModal(`Payment verification error: ${error.message}. Please contact support with reference: ${reference}`);
+    } finally {
+        setLoadingState(false);
+    }
 }
 
 // ============================================
@@ -476,24 +576,23 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('[v0] Giving page initialization complete');
 });
 
-
 function goToNextStep() {
-    const amountInput = document.getElementById("donationAmountInput");
-    const error = document.getElementById("amountError");
+    const amountInput = document.getElementById('donationAmountInput');
+    const error = document.getElementById('amountError');
 
-    if (amountInput.value.trim() === "" || Number(amountInput.value) <= 0) {
-        error.textContent = "Please enter a donation amount.";
+    if (amountInput.value.trim() === '' || Number(amountInput.value) <= 0) {
+        error.textContent = 'Please enter a donation amount.';
 
         amountInput.focus();
         amountInput.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
+            behavior: 'smooth',
+            block: 'center'
         });
 
         return;
     }
 
-    error.textContent = "";
+    error.textContent = '';
 
     // Move to the next step
     nextStep();

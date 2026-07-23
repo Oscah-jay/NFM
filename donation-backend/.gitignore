@@ -11,3 +11,10 @@ node_modules/
 # Logs
 logs
 *.log
+
+.DS_Store
+# Documentation files
+*.md
+*.txt
+!README.md
+!backend/README.md

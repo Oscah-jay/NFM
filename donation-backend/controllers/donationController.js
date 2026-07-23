@@ -10,6 +10,95 @@ const paystackService = require('../services/paystackService');
 const donationService = require('../services/donationService');
 
 /**
+ * Generate unique payment reference
+ */
+function generateReference() {
+  return 'DONATION_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+/**
+ * POST /api/donations/initialize
+ * Initialize a donation - create pending record and get Paystack authorization URL
+ */
+async function initializeDonation(req, res) {
+  try {
+    const {
+      amount,
+      email,
+      name,
+      purpose,
+      type = 'onetime',
+      frequency,
+      startingDate,
+      anonymous = false,
+    } = req.body;
+
+    // Validate required fields
+    if (!amount || !email) {
+      logger.warn('Missing required fields for donation initialization', { amount, email });
+      return sendValidationError(res, 'Amount and email are required');
+    }
+
+    if (amount < 10) {
+      logger.warn('Amount too low', { amount });
+      return sendValidationError(res, 'Minimum donation is 10 KES');
+    }
+
+    // Generate unique reference
+    const reference = generateReference();
+
+    // Create pending donation record
+    const pendingDonation = await donationService.createPendingDonation({
+      reference,
+      amount,
+      email,
+      name: name || 'Anonymous',
+      purpose: purpose || '',
+      type,
+      frequency,
+      startingDate,
+      anonymous,
+      metadata: { initialized_at: new Date().toISOString() },
+    });
+
+    // Initialize Paystack transaction
+    const paystackInit = await paystackService.initializeTransaction({
+      email,
+      amount,
+      reference,
+      metadata: {
+        donor_name: anonymous ? 'Anonymous' : name,
+        donation_purpose: purpose,
+        donation_type: type,
+        frequency,
+        is_anonymous: anonymous,
+        starting_date: startingDate,
+      },
+    });
+
+    if (!paystackInit.success) {
+      logger.error('Paystack initialization failed', { reference });
+      return sendError(res, 'Failed to initialize payment', 400);
+    }
+
+    logger.info('Donation initialized', {
+      reference,
+      amount,
+      email,
+    });
+
+    return sendSuccess(res, {
+      reference,
+      authorizationUrl: paystackInit.data.authorizationUrl,
+      donation: pendingDonation,
+    }, 'Donation initialized successfully', 200);
+  } catch (error) {
+    logger.error('Error initializing donation', { error: error.message });
+    return sendError(res, 'Error initializing donation', 500, error);
+  }
+}
+
+/**
  * POST /api/donations/verify
  * Verify a payment with Paystack
  */
@@ -228,6 +317,7 @@ function getDonation(req, res) {
 }
 
 module.exports = {
+  initializeDonation,
   verifyPayment,
   handleWebhook,
   getDonationStats,

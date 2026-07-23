@@ -1,45 +1,73 @@
 /**
  * Donation Service
- * Handles donation business logic
+ * Handles donation business logic with PostgreSQL database
  */
 
 const logger = require('../utils/logger');
-
-// In-memory storage (replace with database in production)
-const donations = [];
+const donationModel = require('../models/donationModel');
 
 /**
- * Record a donation
+ * Create pending donation (before payment)
+ * 
+ * @param {object} donationData - Donation information
+ * @returns {object} - Pending donation record
+ */
+async function createPendingDonation(donationData) {
+  try {
+    const donation = await donationModel.createPendingDonation({
+      reference: donationData.reference,
+      amount: donationData.amount,
+      email: donationData.email,
+      name: donationData.anonymous ? 'Anonymous Donor' : donationData.name,
+      purpose: donationData.purpose,
+      type: donationData.type,
+      frequency: donationData.frequency,
+      startingDate: donationData.startingDate,
+      anonymous: donationData.anonymous,
+      metadata: donationData.metadata || {},
+    });
+
+    logger.info('Pending donation created', {
+      id: donation.id,
+      reference: donation.reference,
+      amount: `${donation.amount} KES`,
+      email: donation.email,
+      status: 'pending',
+    });
+
+    return donation;
+  } catch (error) {
+    logger.error('Error creating pending donation', { error: error.message });
+    throw error;
+  }
+}
+
+/**
+ * Record a donation in the database
  * 
  * @param {object} donationData - Donation information
  * @returns {object} - Recorded donation
  */
-function recordDonation(donationData) {
+async function recordDonation(donationData) {
   try {
-    const donation = {
-      id: generateDonationId(),
+    const donation = await donationModel.createDonation({
       reference: donationData.reference,
       amount: donationData.amount,
-      amountInKES: donationData.amountInKES,
       email: donationData.email,
       name: donationData.anonymous ? 'Anonymous Donor' : donationData.name,
-      anonymous: donationData.anonymous,
       purpose: donationData.purpose,
-      type: donationData.type, // 'onetime' or 'recurring'
-      frequency: donationData.frequency, // 'monthly', 'yearly'
+      type: donationData.type,
+      frequency: donationData.frequency,
       startingDate: donationData.startingDate,
+      anonymous: donationData.anonymous,
       status: 'completed',
       metadata: donationData.metadata || {},
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    donations.push(donation);
+    });
 
     logger.info('Donation recorded', {
       id: donation.id,
       reference: donation.reference,
-      amount: `${donation.amountInKES} KES`,
+      amount: `${donation.amount} KES`,
       email: donation.email,
     });
 
@@ -56,8 +84,13 @@ function recordDonation(donationData) {
  * @param {string} reference - Payment reference
  * @returns {object|null} - Donation or null
  */
-function getDonationByReference(reference) {
-  return donations.find(d => d.reference === reference) || null;
+async function getDonationByReference(reference) {
+  try {
+    return await donationModel.getDonationByReference(reference);
+  } catch (error) {
+    logger.error('Error fetching donation by reference', { error: error.message });
+    throw error;
+  }
 }
 
 /**
@@ -66,32 +99,30 @@ function getDonationByReference(reference) {
  * @param {string} id - Donation ID
  * @returns {object|null} - Donation or null
  */
-function getDonationById(id) {
-  return donations.find(d => d.id === id) || null;
+async function getDonationById(id) {
+  try {
+    return await donationModel.getDonationById(id);
+  } catch (error) {
+    logger.error('Error fetching donation by ID', { error: error.message });
+    throw error;
+  }
 }
 
 /**
- * Get all donations
+ * Get all donations with pagination
  * 
  * @param {object} filters - Filter options
- * @returns {array} - Array of donations
+ * @param {number} page - Page number
+ * @param {number} limit - Results per page
+ * @returns {object} - Donations with pagination info
  */
-function getAllDonations(filters = {}) {
-  let result = [...donations];
-
-  if (filters.anonymous !== undefined) {
-    result = result.filter(d => d.anonymous === filters.anonymous);
+async function getAllDonations(filters = {}, page = 1, limit = 50) {
+  try {
+    return await donationModel.getAllDonations(filters, page, limit);
+  } catch (error) {
+    logger.error('Error fetching donations', { error: error.message });
+    throw error;
   }
-
-  if (filters.type) {
-    result = result.filter(d => d.type === filters.type);
-  }
-
-  if (filters.status) {
-    result = result.filter(d => d.status === filters.status);
-  }
-
-  return result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 
 /**
@@ -99,43 +130,30 @@ function getAllDonations(filters = {}) {
  * 
  * @returns {object} - Statistics
  */
-function getDonationStats() {
-  const total = donations.length;
-  const totalAmount = donations.reduce((sum, d) => sum + d.amount, 0);
-  const averageAmount = total > 0 ? totalAmount / total : 0;
-  const onetimeDonations = donations.filter(d => d.type === 'onetime').length;
-  const recurringDonations = donations.filter(d => d.type === 'recurring').length;
-  const anonymousDonations = donations.filter(d => d.anonymous).length;
+async function getDonationStats() {
+  try {
+    const { stats, purposes } = await donationModel.getDonationStats();
 
-  return {
-    total,
-    totalAmount,
-    averageAmount: Math.round(averageAmount * 100) / 100,
-    onetimeDonations,
-    recurringDonations,
-    anonymousDonations,
-    topPurposes: getTopPurposes(),
-  };
-}
-
-/**
- * Get top donation purposes
- * 
- * @returns {array} - Top purposes with counts
- */
-function getTopPurposes() {
-  const purposes = {};
-
-  donations.forEach(d => {
-    if (d.purpose) {
-      purposes[d.purpose] = (purposes[d.purpose] || 0) + 1;
-    }
-  });
-
-  return Object.entries(purposes)
-    .map(([purpose, count]) => ({ purpose, count }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 5);
+    return {
+      total: stats.total_donations || 0,
+      totalAmount: stats.onetime_total ? parseFloat(stats.onetime_total) : 0,
+      recurringMonthlyTotal: stats.recurring_monthly_total ? parseFloat(stats.recurring_monthly_total) : 0,
+      averageAmount: stats.avg_donation ? parseFloat(stats.avg_donation) : 0,
+      minAmount: stats.min_donation ? parseFloat(stats.min_donation) : 0,
+      maxAmount: stats.max_donation ? parseFloat(stats.max_donation) : 0,
+      anonymousDonations: stats.anonymous_count || 0,
+      namedDonations: stats.named_count || 0,
+      purposeCount: stats.purpose_count || 0,
+      topPurposes: purposes.map(p => ({
+        purpose: p.purpose,
+        count: p.count,
+        total: parseFloat(p.total) || 0,
+      })),
+    };
+  } catch (error) {
+    logger.error('Error fetching donation stats', { error: error.message });
+    throw error;
+  }
 }
 
 /**
@@ -145,40 +163,67 @@ function getTopPurposes() {
  * @param {string} status - New status
  * @returns {object|null} - Updated donation or null
  */
-function updateDonationStatus(reference, status) {
-  const donation = getDonationByReference(reference);
+async function updateDonationStatus(reference, status) {
+  try {
+    const updated = await donationModel.updateDonationStatus(reference, status);
 
-  if (!donation) {
-    return null;
+    if (updated) {
+      logger.info('Donation status updated', {
+        reference,
+        status,
+      });
+    }
+
+    return updated;
+  } catch (error) {
+    logger.error('Error updating donation status', { error: error.message });
+    throw error;
   }
-
-  donation.status = status;
-  donation.updatedAt = new Date().toISOString();
-
-  logger.info('Donation status updated', {
-    reference,
-    status,
-  });
-
-  return donation;
 }
 
 /**
- * Generate unique donation ID
+ * Get recurring donations
  * 
- * @returns {string} - Donation ID
+ * @returns {array} - Array of recurring donations
  */
-function generateDonationId() {
-  return `DON_${Date.now()}_${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+async function getRecurringDonations() {
+  try {
+    return await donationModel.getRecurringDonations();
+  } catch (error) {
+    logger.error('Error fetching recurring donations', { error: error.message });
+    throw error;
+  }
+}
+
+/**
+ * Cancel recurring donation
+ * 
+ * @param {string} reference - Payment reference
+ * @returns {object|null} - Cancelled donation or null
+ */
+async function cancelRecurringDonation(reference) {
+  try {
+    const cancelled = await donationModel.cancelRecurringDonation(reference);
+
+    if (cancelled) {
+      logger.info('Recurring donation cancelled', { reference });
+    }
+
+    return cancelled;
+  } catch (error) {
+    logger.error('Error cancelling recurring donation', { error: error.message });
+    throw error;
+  }
 }
 
 module.exports = {
+  createPendingDonation,
   recordDonation,
   getDonationByReference,
   getDonationById,
   getAllDonations,
   getDonationStats,
-  getTopPurposes,
   updateDonationStatus,
-  generateDonationId,
+  getRecurringDonations,
+  cancelRecurringDonation,
 };

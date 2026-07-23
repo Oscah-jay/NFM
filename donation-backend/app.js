@@ -20,6 +20,8 @@ const cors = require('cors');
 const logger = require('./utils/logger');
 const { config, corsOptions } = require('./config/server');
 const { validatePaystackConfig } = require('./config/paystack');
+const { testConnection, closePool } = require('./config/database');
+const { createDonationsTable } = require('./migrations/001_create_donations_table');
 
 // Middleware
 const requestLogger = require('./middleware/requestLogger');
@@ -89,17 +91,42 @@ app.use(errorHandler);
 // START SERVER
 // ========================================
 
-function startServer() {
+async function initializeDatabase() {
+  try {
+    logger.info('Initializing database...');
+    await createDonationsTable();
+    logger.info('Database initialization completed');
+    return true;
+  } catch (error) {
+    logger.error('Database initialization failed:', error.message);
+    return false;
+  }
+}
+
+async function startServer() {
   try {
     // Validate Paystack configuration
     validatePaystackConfig();
     logger.info('Paystack configuration validated');
 
+    // Test database connection
+    const connected = await testConnection();
+    if (!connected) {
+      throw new Error('Failed to connect to database. Please check DATABASE_URL environment variable.');
+    }
+
+    // Initialize database (create tables, indexes)
+    const initialized = await initializeDatabase();
+    if (!initialized) {
+      throw new Error('Database initialization failed');
+    }
+
     // Start listening
-    app.listen(config.port, () => {
+    const server = app.listen(config.port, () => {
       logger.info(`Server started on port ${config.port}`);
       logger.info(`Environment: ${config.env}`);
       logger.info(`Frontend URL: ${config.frontendUrl}`);
+      logger.info('Database: Connected and initialized');
       logger.info('');
       logger.info('Available endpoints:');
       logger.info('  POST   /api/donations/verify   - Verify payment');
@@ -111,6 +138,9 @@ function startServer() {
       logger.info('  GET    /api/status             - API status');
       logger.info('');
     });
+
+    // Store server reference for graceful shutdown
+    global.server = server;
   } catch (error) {
     logger.error('Failed to start server', { error: error.message });
     process.exit(1);
@@ -118,15 +148,29 @@ function startServer() {
 }
 
 // Handle graceful shutdown
-process.on('SIGTERM', () => {
-  logger.warn('SIGTERM signal received: closing HTTP server');
-  process.exit(0);
-});
+async function gracefulShutdown(signal) {
+  logger.warn(`${signal} signal received: closing HTTP server`);
+  
+  if (global.server) {
+    global.server.close(async () => {
+      logger.info('HTTP server closed');
+      await closePool();
+      process.exit(0);
+    });
 
-process.on('SIGINT', () => {
-  logger.warn('SIGINT signal received: closing HTTP server');
-  process.exit(0);
-});
+    // Force shutdown after 30 seconds
+    setTimeout(() => {
+      logger.error('Forced shutdown after 30 seconds');
+      process.exit(1);
+    }, 30000);
+  } else {
+    await closePool();
+    process.exit(0);
+  }
+}
+
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Only start server if this file is run directly
 if (require.main === module) {

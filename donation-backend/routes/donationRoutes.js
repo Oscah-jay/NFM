@@ -10,6 +10,42 @@ const donationController = require('../controllers/donationController');
 const webhookValidator = require('../middleware/webhookValidator');
 
 /**
+ * POST /api/donations/initialize
+ * Initialize a donation - creates pending record and gets Paystack authorization URL
+ * 
+ * Body:
+ * {
+ *   amount: number (in KES),
+ *   email: string (donor email),
+ *   name: string (donor name),
+ *   purpose: string (donation purpose),
+ *   type: string ('onetime' or 'recurring'),
+ *   frequency: string ('month' or 'year'),
+ *   startingDate: string (ISO date for recurring),
+ *   anonymous: boolean
+ * }
+ * 
+ * Returns:
+ * {
+ *   authorizationUrl: string (Paystack popup URL),
+ *   reference: string (payment reference),
+ *   donation: object (pending donation record)
+ * }
+ */
+router.post('/initialize', donationController.initializeDonation);
+
+/**
+ * GET /api/donations/initialize
+ * Prevent GET requests from being caught by /:id route
+ */
+router.get('/initialize', (req, res) => {
+  res.status(405).json({
+    success: false,
+    message: 'Method not allowed. Use POST /api/donations/initialize'
+  });
+});
+
+/**
  * POST /api/donations/verify
  * Verify a payment with Paystack
  * 
@@ -26,6 +62,17 @@ const webhookValidator = require('../middleware/webhookValidator');
  * }
  */
 router.post('/verify', donationController.verifyPayment);
+
+/**
+ * GET /api/donations/verify
+ * Prevent GET requests from being caught by /:id route
+ */
+router.get('/verify', (req, res) => {
+  res.status(405).json({
+    success: false,
+    message: 'Method not allowed. Use POST /api/donations/verify'
+  });
+});
 
 /**
  * POST /api/donations/webhook
