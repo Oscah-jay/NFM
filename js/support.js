@@ -4,7 +4,7 @@
 
 // Configuration
 const API_CONFIG = {
-    BACKEND_URL: 'http://localhost:5000', // Change to your deployed backend URL in production
+    BACKEND_URL: 'https://nfm-qlid.onrender.com',
     PUBLIC_KEY: 'pk_test_745a86335b6e3a7bd1861b7531505c64fc3ddbf7',
     PAYSTACK_SCRIPT_URL: 'https://js.paystack.co/v1/inline.js'
 };
