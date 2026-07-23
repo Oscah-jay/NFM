@@ -10,7 +10,14 @@ const config = {
   isDevelopment: process.env.NODE_ENV !== 'production',
   isProduction: process.env.NODE_ENV === 'production',
   logLevel: process.env.LOG_LEVEL || 'info',
+  
 };
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 /**
  * CORS Configuration
