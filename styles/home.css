@@ -332,7 +332,7 @@ h1 {
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #193b0a;
+    color: orange;
     margin-left: 20px;
 }
 
@@ -358,8 +358,7 @@ h1 {
 
 .read-more-btn {
     display: inline-block;
-    background-color: #193b0a;
-    border: 0.5px solid ;
+    background-color: orange;
     color: #ffffff;
     text-decoration: none;
     padding: 12px 30px;
@@ -737,7 +736,7 @@ icon, .text{
 
 /* Charity Services Section */
 .charity-services {
-    background-color: white;
+    background-color: black;
     padding: 60px 20px;
     min-height: auto;
 }
@@ -765,7 +764,7 @@ icon, .text{
     margin-bottom: 16px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--primary-teal);
+    color: white;
     letter-spacing: 0.5px;
 }
 
@@ -776,7 +775,7 @@ icon, .text{
 .services-title {
     font-size: clamp(32px, 6vw, 56px);
     font-weight: 700;
-    color: var(--text-dark);
+    color: orange;
     margin-bottom: 16px;
     line-height: 1.2;
     animation: fadeInDown 0.8s ease-out 0.1s both;
@@ -784,7 +783,7 @@ icon, .text{
 
 .services-subtitle {
     font-size: clamp(14px, 2vw, 16px);
-    color: var(--text-light);
+    color: white;
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
@@ -808,8 +807,8 @@ icon, .text{
     align-items: center;
     text-align: center;
     padding: 40px 30px;
-    background-color: white;
-    border: 3px solid var(--card-border);
+    background-color: black;
+    border: 2px solid orange;
     border-radius: 30px;
     position: relative;
     transition: all 0.3s ease;
@@ -835,7 +834,7 @@ icon, .text{
 }
 
 .service-card:hover .card-icon-wrapper {
-    background-color: var(--primary-teal);
+    background-color: orange;
     transform: scale(1.1);
 }
 
@@ -855,14 +854,14 @@ icon, .text{
 .card-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--primary-teal);
+    color: orange;
     margin-bottom: 12px;
 }
 
 /* Card Description */
 .card-description {
     font-size: 14px;
-    color: var(--text-light);
+    color: white;
     line-height: 1.6;
 }
 
@@ -873,9 +872,8 @@ icon, .text{
     justify-content: center;
     gap: 8px;
     padding: 12px 32px;
-    background-color: var(--accent-green);
-    color: var(--text-dark);
-    border: 2px solid var(--accent-green);
+    background-color: orange;
+    color: white;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
@@ -885,7 +883,7 @@ icon, .text{
 }
 
 .services-cta:hover {
-    background-color: transparent;
+    background-color: #e1b62f;
     transform: translateX(4px);
 }
 
@@ -1015,7 +1013,7 @@ icon, .text{
 
     .service-card {
         padding: 24px 18px;
-        border: 2px solid var(--card-border);
+        border: 2px solid orange;
         border-radius: 20px;
     }
 
@@ -1051,7 +1049,7 @@ icon, .text{
 
 /* Gallery Section */
 .gallery-section {
-  background-color: white;
+  background-color: black;
   padding: 60px 20px;
 }
 
@@ -1070,7 +1068,7 @@ icon, .text{
   display: inline-block;
   font-size: 14px;
   font-weight: 600;
-  color: #0d7377;
+  color: white;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 12px;
@@ -1080,12 +1078,12 @@ icon, .text{
 .gallery-title {
   font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
-  color: #1a1a1a;
+  color: white;
   line-height: 1.2;
 }
 
 .accent-text {
-  color: #0d7377;
+  color: orange;
 }
 
 /* Gallery Carousel Wrapper */
@@ -1118,8 +1116,8 @@ icon, .text{
 
 .gallery-frame {
   position: relative;
-  border: 8px solid #0d4f4f;
-  border-radius: 4px;
+  border: 2px solid #e1b62f;
+  border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background-color: #fff;
@@ -1154,7 +1152,7 @@ icon, .text{
 }
 
 .gallery-text {
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
@@ -1165,8 +1163,8 @@ icon, .text{
   position: absolute;
   top: 106%;
   transform: translateY(-50%);
-  background-color: #0d4f4f;
-  color: #ffffff;
+  background-color: #e1b62f;
+  color: black;
   border: none;
   width: 50px;
   height: 50px;
@@ -1181,7 +1179,7 @@ icon, .text{
 }
 
 .gallery-arrow:hover {
-  background-color: #0d7377;
+  background-color: orange;
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -1263,6 +1261,7 @@ icon, .text{
   .gallery-frame {
     border-width: 5px;
     aspect-ratio: 16 / 10;
+    border: 2px solid #e1b62f;
   }
 
   .gallery-overlay {
@@ -1323,6 +1322,7 @@ icon, .text{
   .gallery-frame {
     border-width: 4px;
     aspect-ratio: 4 / 3;
+    border: 2px solid #e1b62f;
   }
 
   .gallery-overlay {
@@ -1371,7 +1371,7 @@ icon, .text{
     position: relative;
     width: 100%;
     padding: 80px 20px;
-    background-color: #f9f8f6;
+    background-color: black;
     overflow: hidden;
 }
 
@@ -1387,7 +1387,7 @@ icon, .text{
     display: inline-block;
     width: 80px;
     height: 4px;
-    background-color: #0d4f4f;
+    background-color: orange;
     margin-bottom: 24px;
     animation: slideInLeft 0.8s ease-out;
 }
@@ -1396,7 +1396,7 @@ icon, .text{
 .impact-title {
     font-size: clamp(28px, 6vw, 56px);
     font-weight: 900;
-    color: #1a1a1a;
+    color: orange;
     margin-bottom: 60px;
     line-height: 1.2;
     letter-spacing: -1px;
@@ -1445,7 +1445,7 @@ icon, .text{
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    color: #0d4f4f;
+    color: #e1b62f;
     transition: transform 0.3s ease;
 }
 
@@ -1461,7 +1461,7 @@ icon, .text{
 .stat-number {
     font-size: clamp(32px, 8vw, 64px);
     font-weight: 900;
-    color: #1a1a1a;
+    color: orange;
     margin-bottom: 8px;
     line-height: 1;
     letter-spacing: -2px;
@@ -1470,7 +1470,7 @@ icon, .text{
 /* Stat Label */
 .stat-label {
     font-size: clamp(14px, 2vw, 18px);
-    color: #666;
+    color: white;
     font-weight: 500;
     letter-spacing: 0.5px;
 }
@@ -1483,7 +1483,7 @@ icon, .text{
     top: 170px;
     width: 300px;
     height: 300px;
-    background-color: #1b7070;
+    background-color: #e1b62f;
     border-radius: 0 300px 0 0;
     opacity: 0.15;
     z-index: 0;
@@ -2135,7 +2135,7 @@ icon, .text{
 /* Causes Section */
 .causes-section {
   padding: 60px 20px;
-  background-color: #f9f9f9;
+  background-color: black;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica', 'Arial', sans-serif;
 }
@@ -2161,14 +2161,14 @@ icon, .text{
 .causes-title {
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 700;
-  color: #1a1a1a;
+  color: orange;
   margin-bottom: 15px;
   line-height: 1.2;
 }
 
 .causes-description {
   font-size: clamp(14px, 2vw, 18px);
-  color: #555;
+  color: white;
   line-height: 1.6;
   max-width: 400px;
 }
@@ -2184,9 +2184,9 @@ icon, .text{
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid #17a697;
+  border: 2px solid orange;
   background-color: white;
-  color: #17a697;
+  color: black;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2197,7 +2197,7 @@ icon, .text{
 }
 
 .causes-nav-btn:hover:not(:disabled) {
-  background-color: #17a697;
+  background-color: orange;
   color: white;
   transform: scale(1.05);
 }
@@ -2238,12 +2238,12 @@ icon, .text{
 }
 
 .causes-carousel::-webkit-scrollbar-thumb {
-  background: #17a697;
+  background: #e1b62f;
   border-radius: 10px;
 }
 
 .causes-carousel::-webkit-scrollbar-thumb:hover {
-  background: #0f8073;
+  background: #c49c2e;
 }
 
 /* Cause Card */
@@ -2342,7 +2342,7 @@ icon, .text{
 
 .progress-fill {
   height: 100%;
-  background-color: #17a697;
+  background-color: #e1b62f;
   transition: width 0.6s ease;
   border-radius: 3px;
 }
@@ -2394,14 +2394,14 @@ icon, .text{
 }
 
 .cause-donate-btn-active {
-  background-color: #17a697;
+  background-color: #e1b62f;
   color: white;
-  border-color: #17a697;
+  border-color: #e1b62f;
 }
 
 .cause-donate-btn-active:hover {
-  background-color: #0f8073;
-  border-color: #0f8073;
+  background-color: orange;
+  border-color: orange;
 }
 
 /* Responsive Design */
@@ -5027,7 +5027,7 @@ body {
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
-    background: #193b0a;
+    background: orange;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -5035,14 +5035,13 @@ body {
 
 .section-subtitle {
     font-size: 1.2rem;
-    color: #333;
+    color: #e1b62f;
     margin-bottom: 1.5rem;
-    font-weight: 600;
 }
 
 .section-description {
     font-size: 1.1rem;
-    color: #333;
+    color: white;
     margin-bottom: 2rem;
     line-height: 1.8;
 }
@@ -5060,25 +5059,27 @@ body {
     align-items: flex-start;
     padding: 1rem;
     background: rgba(99, 102, 241, 0.05);
-    border-left: 3px solid var(--primary-color);
+    border-left: 3px solid orange;
     border-radius: 8px;
     transition: var(--transition);
 }
 
 .feature-item:hover {
-    background: rgba(99, 102, 241, 0.1);
+    background: white;
     transform: translateX(8px);
+    color: black;
 }
 
 .feature-icon {
     font-size: 1.8rem;
     min-width: 50px;
+    color: orange;
 }
 
 .feature-text h3 {
     font-size: 1rem;
     margin-bottom: 0.3rem;
-    color: var(--text-dark);
+    color: orange;
 }
 
 .feature-text p {
@@ -5089,7 +5090,7 @@ body {
 .care-button {
     display: inline-block;
     padding: 1rem 2rem;
-    background: #193b0a;
+    background: orange;
     color: white;
     text-decoration: none;
     border-radius: 50px;
@@ -5100,7 +5101,7 @@ body {
 .care-button:hover {
     transform: translateY(-1px);
     background-color: #e1b62f;
-    color: #193b0a;
+    color: black;
 }
 
 .care-intro-image {
@@ -5147,7 +5148,7 @@ body {
 }
 
 .why-card {
-    background: var(--card-dark);
+    background: orange;
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--border-color);
@@ -5170,11 +5171,11 @@ body {
 .why-card h3 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: var(--text-dark);
+    color: black;
 }
 
 .why-card p {
-    color: #94a3b8;
+    color: white;
     font-size: 0.95rem;
 }
 
@@ -5184,7 +5185,7 @@ body {
 
 .cta-section {
     padding: 6rem 2rem;
-    background: linear-gradient(135deg, #f3f4f6 0%, #ede9fe 100%);
+    background: orange;
     text-align: center;
 }
 
@@ -5196,13 +5197,13 @@ body {
 .cta-section h2 {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #193b0a;
+    color: black;
     margin-bottom: 1rem;
 }
 
 .cta-section p {
     font-size: 1.1rem;
-    color: #333;
+    color: white;
     margin-bottom: 2rem;
 }
 
@@ -5215,7 +5216,7 @@ body {
 
 .primary-cta {
     padding: 1rem 2.5rem;
-    background: #193b0a;
+    background: black;
     color: #fff;
     text-decoration: none;
     border-radius: 50px;
@@ -5231,11 +5232,11 @@ body {
 .secondary-cta {
     padding: 1rem 2.5rem;
     background: rgba(255, 255, 255, 0.2);
-    color: #193b0a;
+    color: black;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    border: 2px solid #193b0a;
+    border: 2px solid black;
     transition: var(--transition);
 }
 
