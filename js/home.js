@@ -1,1178 +1,158 @@
-const navbarToggle = document.getElementById("navbarToggle");
-const navbarMenu = document.getElementById("navbarMenu");
+(() => {
+  "use strict";
 
-if (navbarToggle && navbarMenu) {
-    navbarToggle.addEventListener("click", () => {
-        navbarMenu.classList.toggle("active");
-    });
-}
+  const toggleButton = document.querySelector(".navbar-toggle");
+  const navigationMenu = document.querySelector(".navbar-menu");
+  const navigationLinks = document.querySelectorAll(".navbar-menu a");
+  const pageSections = document.querySelectorAll("main section[id]");
+  const causeCarousel = document.querySelector(".causes-carousel");
+  const causeCards = Array.from(document.querySelectorAll(".cause-card"));
+  const causeControls = document.querySelectorAll(".causes-nav button");
 
-const $list=document.querySelectorAll('li');
-
-function activeLink() {
-    $list.forEach(($li) => {
-        $li.classList.remove('active')
-    });
-    this.classList.add('active');
-}
-$list.forEach(($li) => {
-    $li.addEventListener(
-        'click',
-         activeLink,
-         );
-});
-
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.animationPlayState = 'paused';
-        });
-    });
-
-    card.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.animationPlayState = 'running';
-        });
-    });
-});
-
-
-function goToLeadersPage() {
-    window.location.href = 'leaders.html';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    // Add hover effect
-    timelineItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-            this.style.zIndex = '10';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.zIndex = '2';
-        });
-    });
-    
-    // Handle mobile view
-    function handleResponsiveLayout() {
-        const timeline = document.querySelector('.timeline');
-        const isMobile = window.innerWidth <= 480;
-        
-        if (isMobile) {
-            // Calculate height for vertical timeline
-            let totalHeight = 0;
-            timelineItems.forEach(item => {
-                totalHeight += item.offsetHeight + 40; // item height + margin
-            });
-            timeline.style.height = (totalHeight + 50) + 'px';
-        } else {
-            timeline.style.height = window.innerWidth <= 768 ? '350px' : '400px';
-        }
-    }
-    
-    // Run on load and resize
-    window.addEventListener('resize', handleResponsiveLayout);
-    handleResponsiveLayout();
-    
-    // For touch devices
-    if ('ontouchstart' in window) {
-        document.querySelector('.timeline-container').style.overflowX = 'scroll';
-    }
-});
-
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the hero content element
-    const heroContent = document.querySelector('.hero-content');
-    const video = document.getElementById('background-video');
-    
-    // Ensure video plays
-    video.play().catch(function(error) {
-        console.log("Video play failed:", error);
-        
-        // If autoplay fails (common on mobile), add a play button
-        if (error.name === "NotAllowedError") {
-            const playButton = document.createElement('button');
-            playButton.textContent = "Click to Play";
-            playButton.className = "video-play-button";
-            document.querySelector('.hero-section').appendChild(playButton);
-            
-            playButton.addEventListener('click', function() {
-                video.play();
-                playButton.style.display = 'none';
-            });
-        }
-    });
-    
-    // Simple fade-in animation for content
-    setTimeout(() => {
-        heroContent.style.transition = 'opacity 1.5s ease-in-out';
-        heroContent.style.opacity = '1';
-    }, 300);
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Fade-in animation for content
-    const aboutContent = document.querySelector('.about-content');
-    const aboutImage = document.querySelector('.about-image');
-    
-    // Set initial opacity
-    aboutContent.style.opacity = 0;
-    aboutImage.style.opacity = 0;
-    
-    // Add transition property
-    aboutContent.style.transition = 'opacity 1s ease, transform 1s ease';
-    aboutImage.style.transition = 'opacity 1s ease, transform 1s ease';
-    
-    // Set initial transform for slide-in effect
-    aboutContent.style.transform = 'translateX(-20px)';
-    aboutImage.style.transform = 'translateX(20px)';
-    
-    // Trigger animation after a short delay
-    setTimeout(() => {
-        aboutContent.style.opacity = 1;
-        aboutContent.style.transform = 'translateX(0)';
-        
-        setTimeout(() => {
-            aboutImage.style.opacity = 1;
-            aboutImage.style.transform = 'translateX(0)';
-        }, 300);
-    }, 300);
-    
-    // Optional: Add hover effect to the Read More button
-    const readMoreBtn = document.querySelector('.read-more-btn');
-    
-    readMoreBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05)';
-    });
-    
-    readMoreBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Fade-in animation for content
-    const leadershipContent = document.querySelector('.leadership-content');
-    const leadershipImage = document.querySelector('.leadership-image');
-    
-    // Set initial opacity
-    leadershipContent.style.opacity = 0;
-    leadershipImage.style.opacity = 0;
-    
-    // Add transition property
-    leadershipContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    leadershipImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    
-    // Set initial transform for slide-in effect
-    leadershipContent.style.transform = 'translateY(20px)';
-    leadershipImage.style.transform = 'translateY(20px)';
-    
-    // Trigger animation after a short delay
-    setTimeout(() => {
-        leadershipContent.style.opacity = 1;
-        leadershipContent.style.transform = 'translateY(0)';
-        
-        setTimeout(() => {
-            leadershipImage.style.opacity = 1;
-            leadershipImage.style.transform = 'translateY(0)';
-        }, 200);
-    }, 300);
-    
-    // Navigation arrows functionality
-    // This is a placeholder for actual slider functionality
-    // You would need to add more leaders to make this work
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
-    
-    prevButton.addEventListener('click', function() {
-        console.log('Previous leader');
-        // Add your slider functionality here
-        alert('Navigate to previous leader');
-    });
-    
-    nextButton.addEventListener('click', function() {
-        console.log('Next leader');
-        // Add your slider functionality here
-        alert('Navigate to next leader');
-    });
-    
-    // Button hover effect
-    const leadershipBtn = document.querySelector('.leadership-btn');
-    
-    leadershipBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-        this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-    });
-    
-    leadershipBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-        this.style.boxShadow = 'none';
-    });
-});
-
-//footer
-
-document.addEventListener('DOMContentLoaded', function() {
-    const backToTopButton = document.getElementById('backToTop');
-    
-    // Show/hide back to top button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
-    });
-    
-    // Scroll to top when button is clicked
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Add hover effect to footer links
-    const footerLinks = document.querySelectorAll('.footer-column ul li a');
-    footerLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.paddingLeft = '5px';
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            this.style.paddingLeft = '0';
-        });
-    });
-    
-    // Mobile menu toggle for responsive design
-    const footerHeadings = document.querySelectorAll('.footer-column h3');
-    
-    if (window.innerWidth < 768) {
-        footerHeadings.forEach(heading => {
-            heading.addEventListener('click', function() {
-                const columnContent = this.nextElementSibling;
-                
-                if (columnContent.style.display === 'none' || columnContent.style.display === '') {
-                    columnContent.style.display = 'block';
-                    this.style.color = '#f7941d';
-                } else {
-                    columnContent.style.display = 'none';
-                    this.style.color = '#333';
-                }
-            });
-        });
-    }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Parallax effect for sermon section background
-    function handleSermonsParallax() {
-      const sermonsSection = document.querySelector(".sermons-preview-section")
-      if (!sermonsSection) return
-  
-      const parallaxBg = sermonsSection.querySelector(".parallax-bg")
-      if (!parallaxBg) return
-  
-      const scrollPosition = window.pageYOffset
-      const sectionTop = sermonsSection.offsetTop
-      const sectionHeight = sermonsSection.offsetHeight
-  
-      // Only apply parallax if section is in view
-      if (scrollPosition > sectionTop - window.innerHeight && scrollPosition < sectionTop + sectionHeight) {
-        const speed = 0.4 // Adjust for faster/slower parallax
-        const yPos = (scrollPosition - sectionTop) * speed
-        parallaxBg.style.transform = `translateY(${yPos}px)`
-      }
-    }
-  
-    // Call on scroll and on initial load
-    window.addEventListener("scroll", handleSermonsParallax)
-    handleSermonsParallax()
-  
-    // Animate sermon cards on hover
-    const sermonCards = document.querySelectorAll(".sermon-card")
-  
-    sermonCards.forEach((card) => {
-      card.addEventListener("mouseenter", function () {
-        const image = this.querySelector(".sermon-image")
-        if (image) {
-          image.style.transform = "scale(1.1)"
-        }
-      })
-  
-      card.addEventListener("mouseleave", function () {
-        const image = this.querySelector(".sermon-image")
-        if (image) {
-          image.style.transform = "scale(1)"
-        }
-      })
-    })
-  })
-
-  document.addEventListener("DOMContentLoaded", () => {
-    // Countdown Timer for Conference
-    let countdownInterval // Declare countdownInterval
-    function updateCountdown() {
-      // Set the date we're counting down to (November 24, 2023)
-      const countdownDate = new Date("June 24, 2025 09:00:00").getTime()
-      const now = new Date().getTime()
-      const distance = countdownDate - now
-  
-      // Time calculations for days, hours, minutes and seconds
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24))
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000)
-  
-      // Display the result
-      document.getElementById("countdown-days").textContent = days.toString().padStart(2, "0")
-      document.getElementById("countdown-hours").textContent = hours.toString().padStart(2, "0")
-      document.getElementById("countdown-minutes").textContent = minutes.toString().padStart(2, "0")
-      document.getElementById("countdown-seconds").textContent = seconds.toString().padStart(2, "0")
-  
-      // If the countdown is finished, display a message
-      if (distance < 0) {
-        clearInterval(countdownInterval)
-        document.getElementById("countdown-days").textContent = "00"
-        document.getElementById("countdown-hours").textContent = "00"
-        document.getElementById("countdown-minutes").textContent = "00"
-        document.getElementById("countdown-seconds").textContent = "00"
-  
-        const countdownContainer = document.querySelector(".countdown-container")
-        if (countdownContainer) {
-          countdownContainer.innerHTML = '<h3 class="event-live">Event In Progress!</h3>'
-        }
-      }
-    }
-  
-    // Update the countdown every 1 second
-    if (document.getElementById("conference-countdown")) {
-      updateCountdown() // Run once immediately
-      countdownInterval = setInterval(updateCountdown, 1000)
-    }
-  
-    // Newsletter form submission
-    const newsletterForm = document.querySelector(".newsletter-form")
-    if (newsletterForm) {
-      newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault()
-  
-        const emailInput = this.querySelector('input[type="email"]')
-        const email = emailInput.value
-  
-        // Simulate form submission
-        const subscribeBtn = this.querySelector(".subscribe-btn")
-        const originalText = subscribeBtn.textContent
-  
-        subscribeBtn.textContent = "Subscribing..."
-        subscribeBtn.disabled = true
-  
-        // Simulate API call with timeout
-        setTimeout(() => {
-          // Reset form
-          newsletterForm.reset()
-  
-          // Show success message
-          const formGroup = document.querySelector(".form-group")
-          const successMessage = document.createElement("div")
-          successMessage.classList.add("success-message")
-          successMessage.innerHTML = "<p>Thank you for subscribing! You will now receive our weekly updates.</p>"
-  
-          formGroup.innerHTML = ""
-          formGroup.appendChild(successMessage)
-  
-          // Hide consent checkbox
-          document.querySelector(".form-consent").style.display = "none"
-        }, 1500)
-      })
-    }
-  
-    // Animate elements on scroll
-    const fadeElements = document.querySelectorAll(".fade-in")
-  
-    const fadeObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible")
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
-      },
-    )
-  
-    fadeElements.forEach((element) => {
-      fadeObserver.observe(element)
-    })
-  })
-
-// ============================================
-// DONATION SECTION - VANILLA JAVASCRIPT
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    const donateButton = document.getElementById('donateBtn');
-    const donationSection = document.getElementById('donationSection');
-
-    if (!donateButton) return;
-
-    // Button Click Handler
-    donateButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Add ripple effect
-        createRipple(e, donateButton);
-        
-        // Donate action - Replace with your actual donation link
-        handleDonation('./support.html');
-    });
-
-    // Keyboard Accessibility
-    donateButton.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            donateButton.click();
-        }
-    });
-
-    // Create ripple effect on button click
-    function createRipple(event, element) {
-        const ripple = document.createElement('span');
-        const rect = element.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = event.clientX - rect.left - size / 2;
-        const y = event.clientY - rect.top - size / 2;
-
-        ripple.style.position = 'absolute';
-        ripple.style.width = size + 'px';
-        ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-        ripple.style.borderRadius = '50%';
-        ripple.style.pointerEvents = 'none';
-        ripple.style.animation = 'rippleAnimation 0.6s ease-out';
-        ripple.style.transformOrigin = 'center';
-
-        element.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
+  const setMenuState = (isOpen) => {
+    if (!toggleButton || !navigationMenu) {
+      return;
     }
 
-    // Handle donation action
-    function handleDonation() {
-        // Option 1: Show alert (for demo)
-        console.log('Donation button clicked!');
-
-        window.location.href = './support.html'; // Redirect to donation page
-
-        
-        // Option 3: Open in new tab (uncomment below)
-        // window.open('https://your-donation-page.com', '_blank');
-        
-        // Option 4: Trigger custom event for external handling (uncomment below)
-        // const event = new CustomEvent('donationInitiated', { detail: { timestamp: new Date() } });
-        // window.dispatchEvent(event);
-    }
-
-    // Add ripple animation keyframes to document if not already present
-    if (!document.getElementById('rippleStyles')) {
-        const style = document.createElement('style');
-        style.id = 'rippleStyles';
-        style.innerHTML = `
-            @keyframes rippleAnimation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // Intersection Observer for scroll animations (optional)
-    if ('IntersectionObserver' in window) {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeIn 0.6s ease-out';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        if (donationSection) {
-            observer.observe(donationSection);
-        }
-    }
-});
-
-// Strip Section - Progress Bar Animation
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Animate progress bar on page load
-  const progressBar = document.querySelector('.progress-bar-fill');
-  
-  if (progressBar) {
-    // Trigger animation by ensuring the element is in the DOM first
-    setTimeout(() => {
-      progressBar.style.transition = 'width 1.2s ease-out';
-    }, 100);
-  }
-
-  // Intersection Observer for scroll-triggered animation
-  const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px'
+    navigationMenu.classList.toggle("is-open", isOpen);
+    toggleButton.setAttribute("aria-expanded", String(isOpen));
+    toggleButton.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const progressBar = entry.target.querySelector('.progress-bar-fill');
-        if (progressBar && !progressBar.classList.contains('animated')) {
-          progressBar.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
+  const closeMenu = () => {
+    setMenuState(false);
+  };
+
+  toggleButton?.addEventListener("click", () => {
+    const isOpen = toggleButton.getAttribute("aria-expanded") === "true";
+    setMenuState(!isOpen);
+  });
+
+  navigationLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      closeMenu();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!navigationMenu || !toggleButton) {
+      return;
+    }
+
+    const clickedInsideNavigation = navigationMenu.contains(event.target);
+    const clickedToggle = toggleButton.contains(event.target);
+
+    if (!clickedInsideNavigation && !clickedToggle) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      toggleButton?.focus();
+    }
+  });
+
+  const updateActiveNavigationLink = () => {
+    const currentPosition = window.scrollY + 160;
+    let activeSectionId = "top";
+
+    pageSections.forEach((section) => {
+      if (currentPosition >= section.offsetTop) {
+        activeSectionId = section.id;
       }
     });
-  }, observerOptions);
 
-  const stripSection = document.querySelector('.strip-section');
-  if (stripSection) {
-    observer.observe(stripSection);
-  }
-});
+    navigationLinks.forEach((link) => {
+      const isActive = link.getAttribute("href") === `#${activeSectionId}`;
+      link.classList.toggle("active", isActive);
 
-// Optional: Add click handlers for badges or other interactions
-document.addEventListener('DOMContentLoaded', function() {
-  const badge = document.querySelector('.campaign-badge');
-  
-  if (badge) {
-    badge.addEventListener('click', function() {
-      console.log('Healthcare campaign selected');
-      // Add your custom logic here
-    });
-
-    badge.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.click();
-      }
-    });
-  }
-});
-
-// Charity Services Section JavaScript
-
-// Get quote button functionality
-const quoteBtn = document.getElementById('quoteBtn');
-
-if (quoteBtn) {
-    quoteBtn.addEventListener('click', () => {
-        // Replace with your actual quote/contact page URL
-        console.log('Support Our Mission clicked');
-        window.location.href = './support.html';
-        // Or open a modal, form, etc.
-    });
-
-    // Keyboard accessibility for button
-    quoteBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            quoteBtn.click();
-        }
-    });
-}
-
-// Intersection Observer for scroll-based animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = entry.target.dataset.animation || 'fadeInUp 0.8s ease-out forwards';
-        }
-    });
-}, observerOptions);
-
-// Observe service cards for animation on scroll
-const charityServices = document.getElementById('charityServices');
-if (charityServices) {
-    const cards = charityServices.querySelectorAll('.service-card');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.animation = `fadeInUp 0.8s ease-out ${0.3 + index * 0.1}s forwards`;
-    });
-}
-
-// Gallery Carousel Functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const galleryTrack = document.getElementById('galleryTrack');
-  const prevBtn = document.getElementById('galleryPrevBtn');
-  const nextBtn = document.getElementById('galleryNextBtn');
-  
-  let currentPosition = 0;
-  let itemWidth = 0;
-  let gap = 24;
-  let visibleItems = 2;
-  let totalItems = 0;
-
-  // Initialize gallery
-  function initGallery() {
-    const items = galleryTrack.querySelectorAll('.gallery-item');
-    totalItems = items.length;
-    
-    if (items.length > 0) {
-      itemWidth = items[0].offsetWidth;
-    }
-    
-    updateResponsiveness();
-  }
-
-  // Update responsiveness based on screen size
-  function updateResponsiveness() {
-    const screenWidth = window.innerWidth;
-    
-    if (screenWidth <= 480) {
-      visibleItems = 1;
-      gap = 12;
-    } else if (screenWidth <= 768) {
-      visibleItems = 1;
-      gap = 16;
-    } else if (screenWidth <= 1024) {
-      visibleItems = 2;
-      gap = 20;
-    } else {
-      visibleItems = 2;
-      gap = 24;
-    }
-
-    // Recalculate item width
-    const items = galleryTrack.querySelectorAll('.gallery-item');
-    if (items.length > 0) {
-      itemWidth = items[0].offsetWidth;
-    }
-
-    // Reset position if needed
-    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
-    if (currentPosition > maxScroll) {
-      currentPosition = maxScroll;
-      updateGalleryPosition();
-    }
-
-    updateButtonStates();
-  }
-
-  // Update gallery position
-  function updateGalleryPosition() {
-    const offset = -currentPosition;
-    galleryTrack.style.transform = `translateX(${offset}px)`;
-  }
-
-  // Update button states
-  function updateButtonStates() {
-    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
-    
-    prevBtn.disabled = currentPosition === 0;
-    nextBtn.disabled = currentPosition >= maxScroll;
-    
-    prevBtn.style.opacity = currentPosition === 0 ? '0.5' : '1';
-    nextBtn.style.opacity = currentPosition >= maxScroll ? '0.5' : '1';
-  }
-
-  // Scroll to next
-  function scrollNext() {
-    const maxScroll = Math.max(0, (totalItems - visibleItems) * (itemWidth + gap));
-    const nextPosition = Math.min(
-      currentPosition + (itemWidth + gap),
-      maxScroll
-    );
-    
-    if (nextPosition !== currentPosition) {
-      currentPosition = nextPosition;
-      updateGalleryPosition();
-      updateButtonStates();
-    }
-  }
-
-  // Scroll to previous
-  function scrollPrev() {
-    const prevPosition = Math.max(0, currentPosition - (itemWidth + gap));
-    
-    if (prevPosition !== currentPosition) {
-      currentPosition = prevPosition;
-      updateGalleryPosition();
-      updateButtonStates();
-    }
-  }
-
-  // Event listeners
-  nextBtn.addEventListener('click', scrollNext);
-  prevBtn.addEventListener('click', scrollPrev);
-
-  // Handle keyboard navigation
-  nextBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      scrollNext();
-    }
-  });
-
-  prevBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      scrollPrev();
-    }
-  });
-
-  // Handle window resize
-  window.addEventListener('resize', () => {
-    updateResponsiveness();
-  });
-
-  // Initialize on load
-  initGallery();
-  updateButtonStates();
-});
-
-// Testimonials Data
-const testimonials = [
-  {
-    id: 1,
-    name: 'Gertrude Bartell',
-    title: 'Lead Brand Coordinator',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-    text: 'By turning away from fleeting pleasures and embracing pain, Saidul was born—a complete being, a great explorer of truth, and a master-builder of meaning.',
-    rating: 5
-  },
-  {
-    id: 2,
-    name: 'Sarah Johnson',
-    title: 'Community Manager',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-    text: 'The organization transformed our community. Their dedication and compassion have made a real difference in so many lives. Truly inspiring work.',
-    rating: 5
-  },
-  {
-    id: 3,
-    name: 'Michael Chen',
-    title: 'Program Director',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
-    text: 'Working with this foundation has been a privilege. Their impact extends far beyond what numbers can show. A true beacon of hope.',
-    rating: 5
-  },
-  {
-    id: 4,
-    name: 'Amanda Rodriguez',
-    title: 'Education Specialist',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-    text: 'Their commitment to excellence and human dignity is unwavering. Every interaction reflects their deep passion for creating positive change.',
-    rating: 5
-  }
-];
-
-// Initialize
-let currentIndex = 0;
-
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const testimonialImage = document.getElementById('testimonialImage');
-const authorAvatar = document.getElementById('authorAvatar');
-const authorName = document.getElementById('authorName');
-const authorTitle = document.getElementById('authorTitle');
-const testimonialText = document.getElementById('testimonialText');
-
-// Update testimonial display
-function updateTestimonial(index) {
-  const testimonial = testimonials[index];
-  
-  // Update image
-  testimonialImage.style.opacity = '0';
-  setTimeout(() => {
-    testimonialImage.src = testimonial.image;
-    testimonialImage.style.opacity = '1';
-  }, 150);
-
-  // Update card content with fade animation
-  const card = document.querySelector('.testimonial-card');
-  card.style.opacity = '0';
-  
-  setTimeout(() => {
-    authorAvatar.src = testimonial.avatar;
-    authorName.textContent = testimonial.name;
-    authorTitle.textContent = testimonial.title;
-    testimonialText.textContent = testimonial.text;
-    card.style.opacity = '1';
-  }, 150);
-
-  // Update button states
-  updateNavButtons();
-}
-
-function updateNavButtons() {
-  prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex === testimonials.length - 1;
-}
-
-// Next testimonial
-function nextTestimonial() {
-  if (currentIndex < testimonials.length - 1) {
-    currentIndex++;
-    updateTestimonial(currentIndex);
-  }
-}
-
-// Previous testimonial
-function prevTestimonial() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateTestimonial(currentIndex);
-  }
-}
-
-// Event listeners
-nextBtn.addEventListener('click', nextTestimonial);
-prevBtn.addEventListener('click', prevTestimonial);
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') {
-    nextTestimonial();
-  } else if (e.key === 'ArrowLeft') {
-    prevTestimonial();
-  }
-});
-
-// Touch/swipe support for mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-const testimonialsSection = document.getElementById('testimonialsSection');
-
-testimonialsSection.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-}, false);
-
-testimonialsSection.addEventListener('touchend', (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-}, false);
-
-function handleSwipe() {
-  if (touchStartX - touchEndX > 50) {
-    nextTestimonial();
-  }
-  if (touchEndX - touchStartX > 50) {
-    prevTestimonial();
-  }
-}
-
-// Add CSS transition for smooth fades
-const style = document.createElement('style');
-style.textContent = `
-  #testimonialImage,
-  .testimonial-card {
-    transition: opacity 0.3s ease;
-  }
-`;
-document.head.appendChild(style);
-
-// Initialize on load
-updateTestimonial(currentIndex);
-
-document.addEventListener('DOMContentLoaded', () => {
-  const carousel = document.getElementById('causesCarousel');
-  const prevBtn = document.getElementById('causesPrev');
-  const nextBtn = document.getElementById('causesNext');
-  const cards = document.querySelectorAll('.cause-card');
-  const donateButtons = document.querySelectorAll('.cause-donate-btn');
-
-  if (!carousel || !prevBtn || !nextBtn) return;
-
-  // Calculate single card width
-  function getCardWidth() {
-    const cardElement = document.querySelector('.cause-card');
-    if (cardElement) {
-      return cardElement.offsetWidth;
-    }
-    return carousel.clientWidth;
-  }
-
-  // Update button states
-  function updateButtons() {
-    const scrollLeft = carousel.scrollLeft;
-    const scrollWidth = carousel.scrollWidth;
-    const clientWidth = carousel.clientWidth;
-
-    prevBtn.disabled = scrollLeft <= 0;
-    nextBtn.disabled = scrollLeft >= scrollWidth - clientWidth - 10;
-  }
-
-  // Scroll carousel by one card
-  function scroll(direction) {
-    const cardWidth = getCardWidth();
-    const gap = 30; // Gap between cards
-    const scrollAmount = cardWidth + gap;
-
-    if (direction === 'next') {
-      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    } else {
-      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    }
-
-    // Update buttons after a short delay to account for smooth scrolling
-    setTimeout(updateButtons, 300);
-  }
-
-  // Event listeners
-  prevBtn.addEventListener('click', () => scroll('prev'));
-  nextBtn.addEventListener('click', () => scroll('next'));
-
-  carousel.addEventListener('scroll', updateButtons);
-  window.addEventListener('resize', updateButtons);
-
-  // Donate button handlers
-  donateButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      const cause = btn.getAttribute('data-cause');
-      handleDonate(cause);
-    });
-
-    // Keyboard support
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const cause = btn.getAttribute('data-cause');
-        handleDonate(cause);
-      }
-    });
-  });
-
-  // Donation handler
-  function handleDonate(cause) {
-    window.location.href = `support.html?cause=${cause}`;
-  }
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      prevBtn.click();
-    } else if (e.key === 'ArrowRight') {
-      nextBtn.click();
-    }
-  });
-
-  // Touch/Swipe support for mobile
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  carousel.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  carousel.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        nextBtn.click();
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
       } else {
-        prevBtn.click();
+        link.removeAttribute("aria-current");
       }
+    });
+  };
+
+  let scrollFrame;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollFrame) {
+        return;
+      }
+
+      scrollFrame = window.requestAnimationFrame(() => {
+        updateActiveNavigationLink();
+        scrollFrame = null;
+      });
+    },
+    { passive: true }
+  );
+
+  updateActiveNavigationLink();
+
+  const updateCauseOrder = (direction) => {
+    if (!causeCarousel || causeCards.length < 2) {
+      return;
     }
+
+    const currentOrders = causeCards.map((card) => Number(card.dataset.order || 0));
+    const nextOrders = currentOrders.map((order) => {
+      return (order - direction + causeCards.length) % causeCards.length;
+    });
+
+    causeCards.forEach((card, index) => {
+      card.dataset.order = String(nextOrders[index]);
+      card.style.order = String(nextOrders[index]);
+    });
+  };
+
+  causeCards.forEach((card, index) => {
+    card.dataset.order = String(index);
+    card.style.order = String(index);
+  });
+
+  causeControls.forEach((button) => {
+    button.addEventListener("click", () => {
+      const direction = Number(button.dataset.direction || 0);
+      updateCauseOrder(direction);
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+      const targetId = anchor.getAttribute("href");
+      const target = targetId ? document.querySelector(targetId) : null;
+
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", targetId);
+    });
+  });
+})();
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 900) {
+    const menu = document.querySelector(".navbar-menu");
+    const toggle = document.querySelector(".navbar-toggle");
+
+    menu?.classList.remove("is-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Open navigation");
   }
-
-  // Initial button state
-  setTimeout(updateButtons, 100);
 });
 
-// Updates Section Functionality
-
-document.addEventListener('DOMContentLoaded', function() {
-  const readMoreLinks = document.querySelectorAll('.read-more-link');
-  const viewAllLink = document.querySelector('.view-all-link');
-
-  // Handle Read More links
-  readMoreLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const articleTitle = this.closest('.update-card').querySelector('.update-card-title').textContent;
-      console.log('[v0] Read More clicked for:', articleTitle);
-      // Replace with your actual article page URL
-      // window.location.href = `/article/${articleTitle.toLowerCase().replace(/\s+/g, '-')}`;
-    });
-
-    // Keyboard accessibility
-    link.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.click();
-      }
-    });
-  });
-
-  // Handle View All Resources link
-  viewAllLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log('[v0] View all resources clicked');
-    // Replace with your actual resources page URL
-    // window.location.href = '/resources';
-  });
-
-  viewAllLink.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      this.click();
-    }
-  });
-
-  // Intersection Observer for scroll animation
-  const updateCards = document.querySelectorAll('.update-card');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  updateCards.forEach(card => {
-    observer.observe(card);
-  });
-
-  // Add fade-in animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `;
-  document.head.appendChild(style);
+window.addEventListener("load", () => {
+  document.documentElement.classList.add("page-ready");
 });
-
-// Counter animation function
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-    const startTime = Date.now();
-
-    function update() {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        // Easing function for smooth animation
-        const easeOutQuad = 1 - (1 - progress) * (1 - progress);
-
-        const current = Math.floor(start + increment * duration * easeOutQuad / 16);
-        element.textContent = formatNumber(current);
-
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        } else {
-            element.textContent = formatNumber(target);
-        }
-    }
-
-    update();
-}
-
-// Format number with commas
-function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-// Intersection Observer for scroll-triggered animations
-function initializeCounterAnimation() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.dataset.animated) {
-                    const target = parseInt(entry.target.dataset.target);
-                    animateCounter(entry.target, target);
-                    entry.target.dataset.animated = 'true';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.5,
-            rootMargin: '0px'
-        });
-
-        statNumbers.forEach(number => observer.observe(number));
-    } else {
-        // Fallback for browsers without IntersectionObserver
-        statNumbers.forEach(number => {
-            const target = parseInt(number.dataset.target);
-            animateCounter(number, target);
-        });
-    }
-}
-
-// Keyboard accessibility
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        const focusedElement = document.activeElement;
-        if (focusedElement.classList.contains('stat-card')) {
-            focusedElement.focus();
-        }
-    }
-});
-
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-    initializeCounterAnimation();
-});
-
-// Also initialize if script loads after DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeCounterAnimation);
-} else {
-    initializeCounterAnimation();
-}
-  
-  
-  

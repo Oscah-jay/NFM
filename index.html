@@ -1,829 +1,400 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Newlife Fountain Ministries — transforming lives through faith, compassion, and service.">
     <title>Newlife Fountain Ministries</title>
     <link rel="stylesheet" href="./styles/home.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome for icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-</head>
+  </head>
 
-<body>
-        <header class="navbar-container">
-            <nav class="navbar">
-                <div class="navbar-logo">
-                    <a href="#"> <img src="./Assets/images/logos/logo.png" alt="logo" width="300px" height="300px"></a>
-                </div>
-                
-                <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
-                    <span class="toggle-icon"></span>
-                </button>
-                
-                <ul class="navbar-menu" id="navbarMenu">
-                    <li class="navbar-item"><a href="#" class="navbar-link active">Home</a></li>
-                    <li class="navbar-item"><a href="./aboutus.html" class="navbar-link">About Us</a></li>
-                    <li class="navbar-item"><a href="./projects.html" class="navbar-link">Projects</a></li>
-                    <li class="navbar-item"><a href="./care.html" class="navbar-link">Care</a></li>
-                    <li class="navbar-item"><a href="./support.html" class="navbar-link">Support</a></li>
-                    <li class="navbar-item"><a href="./contacts.html" class="navbar-link">Contact Us</a></li>
-                    <li class="navbar-item"><a href="./blog.html" class="navbar-link">Blog</a></li>
-                </ul>
-            </nav>
-        </header>
+  <body>
+    <main class="site-shell">
+      <header class="navbar-container">
+        <nav class="navbar" aria-label="Main navigation">
+          <a class="brand" href="#top" aria-label="Newlife Fountain Ministries home">
+            <span class="brand-mark" aria-hidden="true">✦</span>
+            <span>NEWLIFE <b>FOUNTAIN</b></span>
+          </a>
 
+          <button
+            class="navbar-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="main-menu"
+            aria-label="Toggle navigation"
+          >
+            <span aria-hidden="true">☰</span>
+          </button>
 
-    <section class="hero-section">
-        <div class="hero-background">
-            <img src="Assets/images/Hero.png" alt=" Hero">
-        </div>
-        <div class="overlay"></div>
+          <ul class="navbar-menu" id="main-menu">
+            <li><a class="active" href="./index.html">Home</a></li>
+            <li><a href="./aboutus.html">About Us</a></li>
+            <li><a href="./projects.html">Projects</a></li>
+            <li><a href="./care.html">Care</a></li>
+            <li><a href="./support.html">Support</a></li>
+            <li><a href="./contacts.html">Contact Us</a></li>
+            <li><a href="./blog.html">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section id="top" class="hero-section" aria-labelledby="hero-title">
+        <div
+          class="hero-background"
+          role="img"
+          aria-label="Community members supporting one another"
+          style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1800&q=85')"
+        ></div>
+
         <div class="hero-content">
-            <h1>WE ARE</h1>
-            <h1>NEWLIFE FOUNTAIN MINISTRIES</h1>
+          <p class="eyebrow">Faith · Compassion · Service</p>
+          <h1 id="hero-title">
+            WE ARE<br>
+            <span>NEWLIFE FOUNTAIN</span><br>
+            MINISTRIES
+          </h1>
+          <p class="hero-copy">
+            A Christ-centered community serving with open hands and hopeful hearts.
+          </p>
+          <a class="button button-gold" href="#support">
+            Support our mission
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
-    </section>
+      </section>
 
-    <section class="about-section">
+      <section id="about-us" class="about-section section-pad" aria-labelledby="about-title">
+        <div class="container split-grid">
+          <div class="about-content">
+            <p class="section-kicker">Who we are</p>
+            <h2 id="about-title">ABOUT US</h2>
+            <div class="divider" aria-hidden="true"></div>
+
+            <p>
+              <u>FIND YOUR PLACE AT NEWLIFE FOUNTAIN MINISTRIES</u>
+              <br><br>
+              At Newlife Fountain Ministries, we are a Christ-centered church dedicated to sharing the Gospel and demonstrating God’s love through compassion, service, and community outreach. Through education, healthcare, charitable initiatives, and support for vulnerable families, we strive to bring hope and transform lives.
+              <br><br>
+              Whether you’re seeking faith, healing, purpose, or a place to belong, you are welcome here.
+            </p>
+
+            <p class="highlight">
+              You are loved. You are valued. You are welcome. Together, let’s transform lives through faith, compassion, and service.
+            </p>
+
+            <a class="text-link" href="#projects">
+              READ MORE
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div
+            class="about-image image-frame"
+            role="img"
+            aria-label="People gathered together in community"
+            style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1400&q=85')"
+          ></div>
+        </div>
+      </section>
+
+      <section id="projects" class="charity-services section-pad" aria-labelledby="services-title">
         <div class="container">
-            <div class="about-content">
-                <h1>ABOUT US</h1>
-                <div class="divider"></div>
-                <p>
-                    <u>FIND YOUR PLACE AT NEWLIFE FOUNTAIN MINISTRIES</u>  <br><br>
-                    At Newlife Fountain Ministries, we are a Christ-centered church dedicated
-                    to sharing the Gospel and demonstrating God's love through compassion, 
-                    service, and community outreach. Through education, healthcare, charitable 
-                    initiatives, and support for vulnerable families, we strive to bring hope 
-                    and transform lives. <br>
-                    Whether you're seeking faith, healing, purpose, or a place to belong, 
-                    you are welcome here. Together, we are making a lasting difference <br>
-                    <span class="highlight">one life, one family, and one relationship at a time. 
-                    You are loved. You are valued. You are welcome. Together, let's transform 
-                    lives through faith, compassion, and service.</span>
-                </p>
-                <a href="./aboutus.html" class="read-more-btn">READ MORE</a>
-            </div>
-            <div class="about-image">
-                <img src="./Assets/images/1.jpeg" alt="Church worship service with raised hands">
-            </div>
-        </div>
-    </section>
+          <div class="services-header">
+            <p class="section-kicker">✦ All The Charity We Provide</p>
+            <h2 id="services-title">A Different Kind of Community</h2>
+            <p>
+              Join our monthly giving program to provide consistent support to our initiatives. Regular contributions, no matter the size, help us plan and sustain long-term projects.
+            </p>
+          </div>
 
-    <!-- Charity Services Section -->
-<section class="charity-services" id="charityServices">
-    <div class="services-container">
-        <!-- Header -->
-        <div class="services-header">
-            <div class="services-label">
-                <span class="label-icon"><i class="fas fa-crown"></i></span>
-                <span class="label-text">All The Charity We Provide</span>
-            </div>
-            <h2 class="services-title">A Different Kind of Community</h2>
-            <p class="services-subtitle">Join our monthly giving program to provide consistent support to our initiatives. Regular contributions, no matter the size, help us plan and sustain long-term projects.</p>
-        </div>
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">▣</div>
+              <h3>Quality Education</h3>
+              <p>Empowering children and communities through access to quality education, learning resources, mentorship, and opportunities that unlock lifelong potential.</p>
+            </article>
 
-        <!-- Services Cards Grid -->
-        <div class="services-grid">
-            <!-- Card 1: Quality Education -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-book"></i></div>
-                </div>
-                <h3 class="card-title">Quality Education</h3>
-                <p class="card-description">Empowering children and communities through access to quality education, learning resources, mentorship, and opportunities that unlock lifelong potential.</p>
-            </div>
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">♨</div>
+              <h3>Nutritious Food</h3>
+              <p>Fighting hunger by delivering nutritious meals and food assistance to families and communities facing food insecurity.</p>
+            </article>
 
-            <!-- Card 2: Nutritious Food -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-utensils"></i></div>
-                </div>
-                <h3 class="card-title">Nutritious Food</h3>
-                <p class="card-description">Fighting hunger by delivering nutritious meals and food assistance to families and communities facing food insecurity.</p>
-            </div>
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">♡</div>
+              <h3>Healthcare Services</h3>
+              <p>Providing accessible and quality healthcare services to underserved communities, ensuring that everyone has the opportunity to receive the medical care they need.</p>
+            </article>
 
-            <!-- Card 3: Healthcare Services -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
-                </div>
-                <h3 class="card-title">Healthcare Services</h3>
-                <p class="card-description">Providing accessible and quality healthcare services to underserved communities, ensuring that everyone has the opportunity to receive the medical care they need.</p>
-            </div>
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">◌</div>
+              <h3>Clean Water</h3>
+              <p>Ensuring access to safe and clean water for all communities, particularly those in need, by implementing sustainable water solutions and infrastructure.</p>
+            </article>
 
-            <!-- Card 4: Clean Water -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-tint"></i></div>
-                </div>
-                <h3 class="card-title">Clean Water</h3>
-                <p class="card-description">Ensuring access to safe and clean water for all communities, particularly those in need, by implementing sustainable water solutions and infrastructure.</p>
-            </div>
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">◉</div>
+              <h3>Women Empowerment</h3>
+              <p>Supporting and empowering women in our community through education, mentorship, and leadership development opportunities.</p>
+            </article>
 
-            <!-- Card 5: Women Empowerment -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-female"></i></div>
-                </div>
-                <h3 class="card-title">Women Empowerment</h3>
-                <p class="card-description">Supporting and empowering women in our community through education, mentorship, and leadership development opportunities.</p>
-            </div>
+            <article class="service-card">
+              <div class="card-icon" aria-hidden="true">◇</div>
+              <h3>Skills Development</h3>
+              <p>Offering vocational training and practical skills that empower individuals to secure employment, start businesses, and build brighter futures.</p>
+            </article>
+          </div>
 
-            <!-- Card 6: Skills Development -->
-            <div class="service-card">
-                <div class="card-icon-wrapper">
-                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-                </div>
-                <h3 class="card-title">Skills Development</h3>
-                <p class="card-description">Offering vocational training and practical skills that empower individuals to secure employment, start businesses, and build brighter futures.</p>
-            </div>
-        </div>
-
-        <!-- CTA Button -->
-        <button class="services-cta" id="quoteBtn" aria-label="Support Our Mission">
+          <a class="button button-dark" href="#support">
             Support Our Mission
-            <span class="arrow-icon">→</span>
-        </button>
-    </div>
-</section>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
 
-<!-- Impact Statistics Section -->
-<section class="impact-stats-section" id="impactStatsSection">
-    <div class="impact-container">
-        <!-- Decorative accent line -->
-        <div class="accent-line"></div>
+      <section id="care" class="impact-stats-section" aria-labelledby="impact-title">
+        <div class="container">
+          <div class="accent-line" aria-hidden="true"></div>
+          <p class="section-kicker">Measured in lives, not numbers</p>
+          <h2 id="impact-title">Our Impact For the Community: <span>2025 In Numbers</span></h2>
 
-        <!-- Section Title -->
-        <h2 class="impact-title">Our Impact For the community: 2025 In Numbers</h2>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <!-- Stat 1: Total Direct Reach -->
+          <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-number" data-target="500">0</div>
-                <div class="stat-label">Total Direct Reach</div>
+              <span class="stat-icon" aria-hidden="true">♙</span>
+              <div class="stat-number">500<sup>+</sup></div>
+              <div class="stat-label">Total Direct Reach</div>
             </div>
 
-            <!-- Stat 2: Health and Nutrition -->
             <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <div class="stat-number" data-target="700">0</div>
-                <div class="stat-label">Health and Nutrition</div>
+              <span class="stat-icon" aria-hidden="true">♨</span>
+              <div class="stat-number">700<sup>+</sup></div>
+              <div class="stat-label">Health and Nutrition</div>
             </div>
 
-            <!-- Stat 3: Child Protection -->
             <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="stat-number" data-target="50">0</div>
-                <div class="stat-label">Child Protection</div>
+              <span class="stat-icon" aria-hidden="true">▣</span>
+              <div class="stat-number">50<sup>+</sup></div>
+              <div class="stat-label">Child Protection</div>
             </div>
 
-            <!-- Stat 4: Education -->
             <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="stat-number" data-target="100">0</div>
-                <div class="stat-label">Education</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="causes-section">
-  <div class="causes-container">
-    <!-- Header -->
-    <div class="causes-header">
-      <div class="causes-title-group">
-        <h2 class="causes-title">Our Ongoing Causes</h2>
-        <p class="causes-description">Providing support, care, and hope to build a brighter future for communities in need.</p>
-      </div>
-
-      <!-- Navigation Arrows -->
-      <div class="causes-nav">
-        <button class="causes-nav-btn causes-nav-prev" id="causesPrev" aria-label="Previous causes">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
-        <button class="causes-nav-btn causes-nav-next" id="causesNext" aria-label="Next causes">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Causes Carousel -->
-    <div class="causes-carousel-wrapper">
-      <div class="causes-carousel" id="causesCarousel">
-        <!-- Cause Card 1 -->
-        <div class="cause-card">
-          <div class="cause-image">
-            <img src="Assets/images/kids.jpeg" alt="Education initiative">
-          </div>
-          <div class="cause-content">
-            <h3 class="cause-title">Bring hope through education</h3>
-            <p class="cause-description">Providing children and youth with access to quality education and learning resources.</p>
-            
-            <div class="cause-progress-section">
-              <div class="progress-header">
-                <span class="progress-label">Goal</span>
-                <span class="progress-percentage">50%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 50%;"></div>
-              </div>
-              <div class="progress-amounts">
-                <div class="progress-amount">
-                  <span class="amount-label">Goal</span>
-                  <span class="amount-value">$50,000</span>
-                </div>
-                <div class="progress-amount">
-                  <span class="amount-label">Raised money</span>
-                  <span class="amount-value">$25,000</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="support.html"><button class="cause-donate-btn" data-cause="education">Donate now</button></a>
-          </div>
-        </div>
-
-        <!-- Cause Card 2 -->
-        <div class="cause-card">
-          <div class="cause-image">
-            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop" alt="Health and research">
-          </div>
-          <div class="cause-content">
-            <h3 class="cause-title">Promote health and research</h3>
-            <p class="cause-description">Offering immediate aid and support to families affected by natural disasters and crises.</p>
-            
-            <div class="cause-progress-section">
-              <div class="progress-header">
-                <span class="progress-label">Goal</span>
-                <span class="progress-percentage">50%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 50%;"></div>
-              </div>
-              <div class="progress-amounts">
-                <div class="progress-amount">
-                  <span class="amount-label">Goal</span>
-                  <span class="amount-value">$40,000</span>
-                </div>
-                <div class="progress-amount">
-                  <span class="amount-label">Raised money</span>
-                  <span class="amount-value">$20,000</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="support.html"><button class="cause-donate-btn cause-donate-btn-active" data-cause="health">Donate now</button></a>
-          </div>
-        </div>
-
-        <!-- Cause Card 3 -->
-        <div class="cause-card">
-          <div class="cause-image">
-            <img src="https://images.unsplash.com/photo-1559027615-cd2628902d4a?w=600&h=400&fit=crop" alt="Uganda support">
-          </div>
-          <div class="cause-content">
-            <h3 class="cause-title">Supporting progress in Uganda</h3>
-            <p class="cause-description">Providing children and youth with access to quality education and learning resources.</p>
-            
-            <div class="cause-progress-section">
-              <div class="progress-header">
-                <span class="progress-label">Goal</span>
-                <span class="progress-percentage">40%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 40%;"></div>
-              </div>
-              <div class="progress-amounts">
-                <div class="progress-amount">
-                  <span class="amount-label">Goal</span>
-                  <span class="amount-value">$70,000</span>
-                </div>
-                <div class="progress-amount">
-                  <span class="amount-label">Raised money</span>
-                  <span class="amount-value">$30,000</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="support.html"><button class="cause-donate-btn" data-cause="uganda">Donate now</button></a>
-          </div>
-        </div>
-
-        <!-- Cause Card 4 (Extra for carousel) -->
-        <div class="cause-card">
-          <div class="cause-image">
-            <img src="https://images.unsplash.com/photo-1469571486292-846bc9a6d5a9?w=600&h=400&fit=crop" alt="Community support">
-          </div>
-          <div class="cause-content">
-            <h3 class="cause-title">Building stronger communities</h3>
-            <p class="cause-description">Creating sustainable initiatives that empower families and build long-term development.</p>
-            
-            <div class="cause-progress-section">
-              <div class="progress-header">
-                <span class="progress-label">Goal</span>
-                <span class="progress-percentage">65%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 65%;"></div>
-              </div>
-              <div class="progress-amounts">
-                <div class="progress-amount">
-                  <span class="amount-label">Goal</span>
-                  <span class="amount-value">$60,000</span>
-                </div>
-                <div class="progress-amount">
-                  <span class="amount-label">Raised money</span>
-                  <span class="amount-value">$39,000</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="support.html"><button class="cause-donate-btn cause-donate-btn-active" data-cause="community">Donate now</button></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <section class="strip-section">
-  <!-- Left Column: Fund Progress -->
-  <div class="strip-left">
-    <h2 class="strip-title">Total Raised Fund</h2>
-    <div class="progress-wrapper">
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" style="width: 10%"></div>
-      </div>
-      <span class="progress-percentage">10%</span>
-    </div>
-    <div class="fund-stats">
-      <div class="stat-item">
-        <div class="stat-label">Raised</div>
-        <div class="stat-value">10,000$</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Goal</div>
-        <div class="stat-value">100,000$</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right Column: Campaign Info -->
-  <div class="strip-right">
-    <span class="campaign-badge">Healthcare</span>
-    <h3 class="campaign-title">Building a Better World Together</h3>
-    <p class="campaign-description">Every act of kindness creates a ripple of hope. Together, we can empower communities, respond to humanitarian needs, and create lasting positive change for people around the world.</p>
-  </div>
-</section>
-
-  <!-- Gallery Section -->  
-  <section class="gallery-section">
-  <div class="gallery-container">
-    <!-- Header -->
-    <div class="gallery-header">
-      <span class="gallery-label">What We Do</span>
-      <h2 class="gallery-title">View Our <span class="accent-text">Gallery</span></h2>
-    </div>
-
-    <!-- Gallery Carousel -->
-    <div class="gallery-carousel-wrapper">
-      <!-- Left Arrow -->
-      <button class="gallery-arrow gallery-arrow-left" id="galleryPrevBtn" aria-label="Previous images">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <path d="M25 10L15 20L25 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <!-- Gallery Track -->
-      <div class="gallery-track-container">
-        <div class="gallery-track" id="galleryTrack">
-          <!-- Gallery Item 1 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 1" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Denouncing pleasure and praising pain was born and will give you saidful complete great explorer of the truth the master-builder.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gallery Item 2 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 2" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Creating lasting impact through education and community support programs.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gallery Item 3 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 3" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Building stronger communities through sustainable healthcare initiatives.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gallery Item 4 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 4" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Empowering young minds with quality education and mentorship.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gallery Item 5 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 5" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Bringing hope and support to families in need of assistance.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gallery Item 6 -->
-          <div class="gallery-item">
-            <div class="gallery-frame">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Gallery image 6" class="gallery-image">
-              <div class="gallery-overlay">
-                <p class="gallery-text">Making a difference one community at a time through dedicated service.</p>
-              </div>
+              <span class="stat-icon" aria-hidden="true">◇</span>
+              <div class="stat-number">100<sup>+</sup></div>
+              <div class="stat-label">Education</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Right Arrow -->
-      <button class="gallery-arrow gallery-arrow-right" id="galleryNextBtn" aria-label="Next images">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <path d="M15 10L25 20L15 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-</section>
-    
- <!-- Care Ministry Introduction Section -->
-    <section id="care-intro" class="care-intro-section">
-        <div class="care-intro-container">
-            <div class="care-intro-content">
-                <div class="care-intro-text">
-                    <h2 class="section-title">Our Care Ministry</h2>
-                    <p class="section-subtitle">Supporting Your Journey with Faith and Compassion</p>
-                    <p class="section-description">
-                        Our Care Ministry is dedicated to bringing spiritual comfort, emotional support, and practical assistance to individuals and families in our community. Whether you're facing a challenging time, celebrating a special moment, or simply seeking prayer and guidance, we're here for you.
-                    </p>
-                    <div class="care-features">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-praying-hands"></i></div>
-                            <div class="feature-text">
-                                <h3>Spiritual Guidance</h3>
-                                <p>Professional counseling rooted in faith</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-heart"></i></div>
-                            <div class="feature-text">
-                                <h3>Compassionate Care</h3>
-                                <p>Support during life's greatest challenges</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
-                            <div class="feature-text">
-                                <h3>Community Support</h3>
-                                <p>Practical help when you need it most</p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="care.html" class="care-button">Access Care Ministry</a>
-                </div>
-                <div class="care-intro-image">
-                    <div class="image-placeholder">
-                        <img src="Assets/images/w3.jpeg"
-                    </div>
-                </div>
+      <section class="causes-section section-pad" aria-labelledby="causes-title">
+        <div class="container">
+          <div class="causes-header">
+            <div>
+              <p class="section-kicker">Give with purpose</p>
+              <h2 id="causes-title">Our Ongoing Causes</h2>
+              <p>Providing support, care, and hope to build a brighter future for communities in need.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Why Choose Our Care Ministry -->
-    <section id="why-care" class="why-section">
-        <div class="why-container">
-            <h2 class="section-title">Why Choose Our Care Ministry?</h2>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-card-icon"><i class="fas fa-user-md"></i></div>
-                    <h3>Professional & Caring</h3>
-                    <p>Trained counselors combining expertise with genuine compassion</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-card-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Always Available</h3>
-                    <p>24/7 prayer support and emergency pastoral care</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-card-icon"><i class="fas fa-box"></i></div>
-                    <h3>Practical Support</h3>
-                    <p>Care packages and meal coordination for life's transitions</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-card-icon"><i class="fas fa-dove"></i></div>
-                    <h3>Faith-Based</h3>
-                    <p>All services rooted in Christian values and scripture</p>
-                </div>
+            <div class="causes-nav" aria-label="Causes carousel controls">
+              <button type="button" data-direction="-1" aria-label="Previous causes">←</button>
+              <button type="button" data-direction="1" aria-label="Next causes">→</button>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- Call to Action -->
-    <section id="cta" class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Experience Spiritual Care and Community Support?</h2>
-            <p>Join our Care Ministry community and discover the peace that comes through faith and fellowship.</p>
-            <div class="cta-buttons">
-                <a href="care.html" class="primary-cta">Visit Care Ministry</a>
-                <a href="contact.html" class="secondary-cta">Learn More</a>
-            </div>
-        </div>
-    </section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section" id="testimonialsSection">
-  <div class="testimonials-container">
-    <!-- Left Side: Image Carousel -->
-    <div class="testimonials-left">
-      <div class="image-frame-wrapper">
-        <!-- Decorative circles background -->
-        <div class="decorative-circle circle-1"></div>
-        <div class="decorative-circle circle-2"></div>
-        
-        <!-- Image Frame with Layers -->
-        <div class="image-frame-container">
-          <div class="frame-outer">
-            <div class="frame-middle">
-              <div class="frame-inner">
-                <div class="frame-content">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop" alt="Testimonial 1" class="testimonial-image" id="testimonialImage">
+          <div class="causes-carousel">
+            <article class="cause-card">
+              <div
+                class="cause-image"
+                role="img"
+                aria-label="Students learning together"
+                style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85')"
+              ></div>
+              <div class="cause-content">
+                <h3>Bring hope through education</h3>
+                <p>Providing children and youth with access to quality education and learning resources.</p>
+                <div class="progress-header"><span>Goal</span><strong>50%</strong></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Education cause progress">
+                  <div class="progress-fill" style="width: 50%"></div>
                 </div>
+                <div class="progress-amounts">
+                  <span><small>Goal</small>$50,000</span>
+                  <span><small>Raised money</small>$25,000</span>
+                </div>
+                <a class="cause-donate-btn" href="#support">Donate now</a>
               </div>
-            </div>
-          </div>
-          
-          <!-- Quotation Mark Icon -->
-          <div class="quotation-mark">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="32" font-weight="bold" fill="white">❝</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
+            </article>
 
-    <!-- Right Side: Testimonials Content -->
-    <div class="testimonials-right">
-      <!-- Header -->
-      <div class="testimonials-header">
-        <div class="testimony-label">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="8" stroke="#1a9b8e" stroke-width="2"/>
-            <path d="M6 10L9 13L14 8" stroke="#1a9b8e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Testimony
-        </div>
-        <h2 class="testimonials-title">
-          Stories From Our <span class="highlight">Supporters</span>
-        </h2>
-      </div>
-
-      <!-- Testimonial Card -->
-      <div class="testimonial-card">
-        <div class="testimonial-author">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Author" class="author-avatar" id="authorAvatar">
-          <div class="author-info">
-            <h4 class="author-name" id="authorName">Gertrude Bartell</h4>
-            <p class="author-title" id="authorTitle">Lead Brand Coordinator</p>
-          </div>
-        </div>
-
-        <p class="testimonial-text" id="testimonialText">
-          By turning away from fleeting pleasures and embracing pain, Saidul was born—a complete being, a great explorer of truth, and a master-builder of meaning.
-        </p>
-
-        <div class="testimonial-rating">
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-        </div>
-      </div>
-
-      <!-- Navigation Arrows -->
-      <div class="testimonials-nav">
-        <button class="nav-arrow prev-arrow" id="prevBtn" aria-label="Previous testimonial">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 16L6 10L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button class="nav-arrow next-arrow" id="nextBtn" aria-label="Next testimonial">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 16L14 10L8 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="updates-section">
-  <div class="updates-container">
-    <!-- Left Sidebar -->
-    <aside class="updates-sidebar">
-      <h2 class="updates-title">Latest updates from NFM</h2>
-      <a href="#" class="view-all-link">View all resources</a>
-    </aside>
-
-    <!-- Right Content Area -->
-    <div class="updates-content">
-      <div class="updates-grid">
-        <!-- Update Card 1 -->
-        <article class="update-card">
-          <div class="update-image-wrapper">
-            <img 
-              src="Assets/images/kids.jpeg" 
-              alt="Transforming Lives with Education - Children in green uniforms smiling at camera"
-              class="update-image"
-            />
-          </div>
-          <h3 class="update-card-title">Transforming Lives with Education</h3>
-          <p class="update-card-description">Providing children and youth with access to quality education and learning resources.</p>
-          <div class="update-footer">
-            <time class="update-date" datetime="2024-05-20">May 20, 2024</time>
-            <a href="#" class="read-more-link">Read More</a>
-          </div>
-        </article>
-
-        <!-- Update Card 2 -->
-        <article class="update-card">
-          <div class="update-image-wrapper">
-            <img 
-              src="Assets/images/w3.jpeg" 
-              alt="Fighting Hunger, Spreading Hope - Volunteers distributing food items"
-              class="update-image"
-            />
-          </div>
-          <h3 class="update-card-title">Fighting Hunger, Spreading Hope</h3>
-          <p class="update-card-description">Providing children and youth with access to quality education and learning resources.</p>
-          <div class="update-footer">
-            <time class="update-date" datetime="2024-05-20">May 20, 2024</time>
-            <a href="#" class="read-more-link">Read More</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-        <!-- Donation Section -->
-<section class="donation-section" id="donationSection">
-    <div class="donation-overlay"></div>
-    
-    <div class="donation-container">
-        <!-- Left Content -->
-        <div class="donation-left">
-            <div class="get-started-badge">
-                <span class="badge-heart"><i class="fas fa-dove"></i></span>
-                <span class="badge-text">Start Making an Impact</span>
-            </div>
-            
-            <h1 class="donation-headline">Ready to contribute to our mission ?</h1>
-        </div>
-        
-        <!-- Right CTA -->
-        <div class="donation-right">
-            <button class="donate-button" id="donateBtn" aria-label="Donate Now">
-                DONATE NOW
-                <span class="button-heart"><i class="fas fa-heart"></i></span>
-            </button>
-        </div>
-    </div>
-</section>
-
-<footer class="footer">
-    <div class="torn-paper"></div>
-    <div class="footer-content">
-        <div class="footer-logo-section">
-            <div class="logo">
-                <img src="./Assets/images/logos/3.png" alt="Logo" class="logo-img" width="600" height="600">
-            </div>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-spotify"></i></a>
-                <a href="#" class="social-icon"><i class="fas fa-mobile-alt"></i></a>
-            </div>
-        </div>
-        
-        <div class="footer-links">
-            <div class="footer-column">
-                <h3>ABOUT</h3>
-                <ul>
-                    <li><a href="#">Our Values</a></li>
-                    <li><a href="#">What We Do</a></li>
-                    <li><a href="./leaders.html">Church Leadership</a></li>
-                    <li><a href="#">What We Believe</a></li>
-                    <li><a href="#">Ministry Expansion</a></li>
-                    <li><a href="#">Help for Churches</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>CONNECT</h3>
-                <ul>
-                    <li><a href="#">Visit</a></li>
-                    <li><a href="#">Kids</a></li>
-                    <li><a href="#">Youth</a></li>
-                    <li><a href="#">Get Connected</a></li>
-                    <li><a href="#">Small Groups</a></li>
-                    <li><a href="#">Serve</a></li>
-                    <li><a href="#">Internships</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Give</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>MEDIA</h3>
-                <ul>
-                    <li><a href="#">Watch Live</a></li>
-                    <li><a href="#">Previous Messages</a></li>
-                    <li><a href="#">Blog + Articles</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>CONTACT</h3>
-                <div class="contact-info">
-                    <h4>Email Address</h4>
-                    <p>contact@newlifefountainministries.church</p>
-                    <p>support@newlifefountainministries.church</p>
-                    <p>projects@newlifefountainministries.church</p>
-                    
-                    <h4>Service Times</h4>
-                    <p>Sundays | 9:30Am to 12:30 Pm</p>
-                    
-                    <h4>Headquarters</h4>
-                    <p>Trans-Nzoia</p>
-                    
-                    <div class="cta-buttons">
-                        <a href="./contacts.html" class="cta-button">CONTACT US <i class="fas fa-arrow-right"></i></a>
-                        <a href="#" class="cta-button">OUR LOCATIONS <i class="fas fa-arrow-right"></i></a>
-                    </div>
+            <article class="cause-card">
+              <div
+                class="cause-image"
+                role="img"
+                aria-label="Healthcare and research team working together"
+                style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=85')"
+              ></div>
+              <div class="cause-content">
+                <h3>Promote health and research</h3>
+                <p>Offering immediate aid and support to families affected by natural disasters and crises.</p>
+                <div class="progress-header"><span>Goal</span><strong>50%</strong></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Healthcare cause progress">
+                  <div class="progress-fill" style="width: 50%"></div>
                 </div>
-            </div>
+                <div class="progress-amounts">
+                  <span><small>Goal</small>$40,000</span>
+                  <span><small>Raised money</small>$20,000</span>
+                </div>
+                <a class="cause-donate-btn" href="#support">Donate now</a>
+              </div>
+            </article>
+
+            <article class="cause-card">
+              <div
+                class="cause-image"
+                role="img"
+                aria-label="Community members supporting progress in Uganda"
+                style="background-image: url('https://images.unsplash.com/photo-1559027615-cd2628902d4a?auto=format&fit=crop&w=1000&q=85')"
+              ></div>
+              <div class="cause-content">
+                <h3>Supporting progress in Uganda</h3>
+                <p>Providing children and youth with access to quality education and learning resources.</p>
+                <div class="progress-header"><span>Goal</span><strong>40%</strong></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Uganda cause progress">
+                  <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <div class="progress-amounts">
+                  <span><small>Goal</small>$70,000</span>
+                  <span><small>Raised money</small>$30,000</span>
+                </div>
+                <a class="cause-donate-btn" href="#support">Donate now</a>
+              </div>
+            </article>
+          </div>
         </div>
-    </div>
-    
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>Walking in Faith, Growing in Love, Serving with Joy. Join Us on the Journey!</p>
-    </div>
-</footer>
+      </section>
 
+      <section id="support" class="support-strip" aria-labelledby="support-title">
+        <div class="container support-content">
+          <div>
+            <p class="section-kicker">Every act matters</p>
+            <h2 id="support-title">Be part of something bigger.</h2>
+          </div>
+          <a class="button button-dark" href="mailto:hello@newlifefountain.org">
+            Get involved
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
 
-    <script src="./js/home.js"></script>
-    <script src="./js/navbar.js"></script>
-</body>
+      <section id="contact-us" class="expect-section section-pad" aria-labelledby="expect-title">
+        <div class="container">
+          <div class="expect-header">
+            <p class="section-kicker">What to expect</p>
+            <h2 id="expect-title">Come as you are. Leave with hope.</h2>
+            <p>Our doors are open to everyone. Join a growing family that worships, serves, learns, and celebrates together.</p>
+          </div>
+
+          <div class="expect-content">
+            <div class="expect-item">
+              <div>
+                <h3>A place to belong</h3>
+                <p>Find meaningful connection through worship, small groups, and practical care for one another.</p>
+              </div>
+              <div
+                class="expect-image image-frame"
+                role="img"
+                aria-label="People gathering for worship"
+                style="background-image: url('https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=1400&q=85')"
+              ></div>
+            </div>
+
+            <article class="sermon-card">
+              <div class="sermon-info">
+                <p class="section-kicker">Latest message</p>
+                <h3>Faith that moves us forward</h3>
+                <p>Discover encouragement for the week ahead through our latest teaching.</p>
+                <a class="button button-outline" href="#blog">
+                  Watch sermon
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+              <div
+                class="sermon-image image-frame"
+                role="img"
+                aria-label="Open Bible and sermon notes"
+                style="background-image: url('https://images.unsplash.com/photo-1472173148041-00294f0814a2?auto=format&fit=crop&w=1400&q=85')"
+              ></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" class="gallery-section section-pad" aria-labelledby="gallery-title">
+        <div class="container">
+          <div class="gallery-header">
+            <div>
+              <p class="section-kicker">Life at Newlife</p>
+              <h2 id="gallery-title">Stories from our community</h2>
+            </div>
+            <a class="text-link" href="#top">
+              View all stories
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="gallery-grid">
+            <div
+              class="gallery-large image-frame"
+              role="img"
+              aria-label="Children enjoying time together"
+              style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1400&q=85')"
+            ></div>
+            <div
+              class="gallery-small image-frame"
+              role="img"
+              aria-label="Community landscape"
+              style="background-image: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85')"
+            ></div>
+            <div
+              class="gallery-small image-frame"
+              role="img"
+              aria-label="Community members sharing a moment"
+              style="background-image: url('https://images.unsplash.com/photo-1494386346843-e12284507169?auto=format&fit=crop&w=1000&q=85')"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer-grid">
+          <div>
+            <a class="brand" href="#top">
+              <span class="brand-mark" aria-hidden="true">✦</span>
+              <span>NEWLIFE <b>FOUNTAIN</b></span>
+            </a>
+            <p>Transforming lives through faith, compassion, and service.</p>
+          </div>
+
+          <div>
+            <h3>Explore</h3>
+            <a href="#about-us">About us</a>
+            <a href="#projects">Projects</a>
+            <a href="#care">Care</a>
+          </div>
+
+          <div>
+            <h3>Connect</h3>
+            <a href="mailto:hello@newlifefountain.org">hello@newlifefountain.org</a>
+            <a href="#support">Support our work</a>
+          </div>
+        </div>
+
+        <div class="container footer-bottom">
+          <span>© 2025 Newlife Fountain Ministries</span>
+          <span>Made with purpose.</span>
+        </div>
+      </footer>
+    </main>
+
+    <script src="./js/home.js" defer></script>
+  </body>
 </html>
